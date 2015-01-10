@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="shift_jis" />
+<script type="text/javascript" src="../../../msie.js"></script>
+<script type="text/javascript">
+<!--
+window.onload = function()
+{
+	msiedom();
+}
+-->
+</script>
+<link rel="stylesheet" type="text/css" href="../../../rayout.css">
+<style>
+span.code { font-family:monospace; white-space:pre; }
+span.delete { text-decoration:line-through; }
+span.warning { color:#ff0000; }
+</style>
+<title>シェルの作り方</title>
+
+</head>
+<body>
+<div class="page_title">シェルの作り方</div>
+<div class="caption">
+
+<div class="title">目次</div>
+<div class="content">
+<p>
+<a href="#summary">概要</a><br>
+<a href="#file">最低限必要なファイル</a><br>
+<a href="#descript">descript.txtの書き方</a><br>
+<a href="#surfaces">surfaces.txtについて</a><br>
+<a href="#image">サンプル画像</a><br>
+<a href="#collision">領域作成</a><br>
+<a href="#animation">アニメーション</a><br>
+<a href="#element">サーフェスの合成</a><br>
+<a href="#error">よくあるエラーと原因</a><br>
+<a href="#sample">記述内容全文</a><br>
+</p>
+</div>
+
+<div class="title" id="summary">概要</div>
+<div class="content">
+<p>
+ゴースト作りたくて絵を用意したけど、設定がよくわからない！という人向けのメモです。<br>
+フォルダ構成や基本的なゴーストの知識は、<a href="http://ssp.shillest.net/ukadoc">ukadoc</a>の「全体の構成」に詳しい説明があります。<br>
+</p>
+<p>
+ここでは、「詳しい書き方よりも、ともかく最低限の動作をするシェルを作りたい」という方を対象としています。<br>
+さらに、<a href="http://ssp.shillest.net/">SSP</a>を使うことを想定しており、<span class="emphasis">SSPでのみ実装されている機能を使用します</span>。<br>
+<a href="http://usada.sakura.vg/">materia</a>や<a href="http://crow.aqrs.jp/">C.R.O.W</a>など他ベースウェアでは動作しないこともあります。<br>
+上記ベースウェアの対応も考える場合は、このメモは参考になりません。<br>
+materiaに対応させる場合は、<a href="http://usada.sakura.vg/contents/specification.html">materia本家の仕様書</a>の「Shell」「SERIKO / MAYUNA」を確認してください。<br>
+また、surfaces.txtの書き方は、古い書き方と新しい書き方（SERIKO/1.xとSERIKO/2.0）がありますが、新しい書き方で記述しています。<br>
+古い書き方は2001年頃、新しい書き方は2002年頃に整備されました。<br>
+別の資料と矛盾が見られた場合は、古い書き方の資料を見ている可能性があります。<br>
+</p>
+<div class="title innerdiv1">補足</div>
+<div class="content innerdiv1">
+<p>
+2015年現在では上記のうち開発が続いているのはSSPのみです。<br>
+SSPでのみ動作確認したゴーストも多く配布されている点を留意してください。<br>
+（materiaの最終更新は2002年、C.R.O.Wの最終更新は2005年）<br>
+</p>
+</div>
+<p>
+着せ替えなど、設定の手順が複雑なものは<a href="https://dl.dropboxusercontent.com/u/68134572/ghost/pages/etc/shell/animations.html">着せ替えやアニメーションの作り方</a>に説明があります。
+</p>
+</div>
+
+<div class="title" id="file">最低限必要なファイル</div>
+<div class="content">
+<p>
+最低限のファイルは、以下の3つです。<br>
+</p>
+<ul>
+<li>descript.txt</li>
+<li>surface0.png</li>
+<li>surface10.png</li>
+</ul>
+<p>
+descript.txtがシェルの情報を記入するファイルで、シェルの名前や作者の名前などを記入します。<br>
+surface0.pngはメインキャラの基本ポーズ、surface10.pngはサブキャラの基本ポーズです。<br>
+</p>
+<p>
+これだけでサーフェス0番とサーフェス10番を表示出来るようになります。<br>
+ゴーストのトーク辞書でサーフェス0番を指定するとsurface0.pngが、サーフェス10番を指定するとsurface10.pngが表示されます。<br>
+</p>
+<p>
+また、0と10だけでなく、任意のsurface????.pngを使用出来ます。<br>
+「?」は半角数字なら何桁でも良いですが、頭の0は無視されます。<br>
+例えば<span class="emphasis">surface0000.pngとsurface0.pngは両方ともサーフェス0番に表示される画像となる</span>ので注意してください。<br>
+このようなサーフェス番号が重複するファイルが無いようにしてください。<br>
+なお、透過色が適用されるので、<span class="emphasis">pngファイルは半透明の画像なども使用できます</span>。<br>
+</p>
+<div class="title innerdiv1">補足</div>
+<div class="content innerdiv1">
+<p>
+必須であるsurface0.pngとsurface10.pngを除き、jpgファイルなども使用することができます。<br>
+SSPではsurface0.pngとsurface10.pngがなくても動きますが、伺かの仕様では必須です。<br>
+必須ファイルが足りない場合、他サービスを受ける時に不具合が起こる可能性があります。<br>
+</p>
+</div>
+</div>
+
+<div class="title" id="descript">descript.txtの書き方</div>
+<div class="content">
+<p>
+詳細な項目の説明は<a href="http://ssp.shillest.net/ukadoc/manual/descript_shell.html">ukadocのShell設定</a>に譲り、ここではサンプルを記載します。<br>
+----ここから----
+<span class="code">
+charset,Shift_JIS
+craftman,sakusha_no_namae
+craftmanw,作者のなまえ
+craftmanurl,http://www.xxxxxxxxxxxxxxxx.co.jp/
+id,master
+name,master
+type,shell
+seriko.use_self_alpha,1
+</span>
+----ここまで----<br>
+メモ帳などを開き、上記をそのままコピーし、descriptと名前をつけて保存すれば使えます。<br>
+</p>
+<p>
+最下段のseriko.use_self_alpha,1という記述は、ファイルのアルファチャンネル（透過情報）を利用するという設定です。<br>
+</p>
+<div class="title innerdiv1">補足</div>
+<div class="content innerdiv1">
+<p>
+seriko.use_self_alpha,1の記述がない場合は、左上のpixelのRGB値が透明色として扱われます。<br>
+ファイルの透過情報は全て無視されます。<br>
+これはmateriaの動作と互換です。<br>
+</p>
+</div>
+<p>
+保存したdescript.txtの下記の太字の部分を自分の名前および自分のサイトに変更してください。<br>
+空欄でも可ですが、craftmanwは最低限書いておいた方がよいでしょう。<br>
+----ここから----
+<span class="code">
+craftman,<span class="emphasis">sakusha_no_namae</span>
+craftmanw,<span class="emphasis">作者のなまえ</span>
+craftmanurl,<span class="emphasis">http://www.xxxxxxxxxxxxxxxx.co.jp/</span>
+</span>
+----ここまで----<br>
+</p>
+<div class="title innerdiv1">補足</div>
+<div class="content innerdiv1">
+<p>
+idとnameが「master」であるのは通例です。<br>
+ゴーストはシェルを複数持つことができますが、メインとなるシェルには「master」とつけることが多いです。<br>
+idは半角の英数字のみ、nameは好きな名前をつけることが出来ます。<br>
+ですが、半角のカンマやスラッシュなどの記号はゴースト側で問題を起こすことがあるので避けた方が無難です。<br>
+idはSSPが内部的に管理するもので、nameがユーザーの目に見えるシェルの名前です。<br>
+例：<br><span class="code">
+id,addshell
+name,追加シェル
+</span>
+</p>
+<div class="title innerdiv2">追加シェルに関して</div>
+<div class="content innerdiv2">
+<p>
+ゴーストのマスターシェルではなく、追加シェルとして配布する場合は、<a href="http://ssp.shillest.net/ukadoc/manual/descript_install.html">install.txt</a>が必要となります。<br>
+install.txtの書き方の例：<br>
+----ここから----<span class="code">
+charset,Shift_JIS
+type,shell
+name,追加シェル（シェルの名前）
+directory,addshell（インストール時に作られるフォルダ名）
+accept,さくら（追加シェルを作るゴーストの\0側の名前）
+</span>
+----ここまで----<br>
+上記install.txtを、descript.txtと同じフォルダに置きます。<br>
+構成は以下のようになります。
+</p>
+<ul>
+<li>フォルダ
+<ul>
+<li>install.txt</li>
+<li>descript.txt</li>
+<li>readme.txt</li>
+<li>surface0.png</li>
+<li>surface10.png</li>
+<li>surfaces.txt</li>
+</ul>
+</li>
+</ul>
+<p>
+「profile」というフォルダがある場合、フォルダごと削除してください。<br>
+上記をフォルダに格納しzip圧縮すれば、追加シェルとして扱われるファイルの完成です。<br>
+解凍時に、フォルダが入れ子にならないように注意してください。<br>
+拡張子を.narに変えると、伺か関連ファイルと認識されるので、アップ先に拡張子制限がなければ変更しておきましょう。
+</p>
+</div>
+</div>
+</div>
+
+<div class="title" id="surfaces">surfaces.txtについて</div>
+<div class="content">
+<p>
+上記のdescript.txtと、任意のsurface????.pngがあれば、シェルとしては動作すると説明しました。<br>
+しかし、これだけではただ絵が出るだけです。<br>
+まばたきなどのアニメーションはしませんし、頭など体の部位指定もされていません。<br>
+それを設定するのがsurfaces.txtです。<br>
+説明はukadocが詳しいため、ここではサンプルコードの表示と最低限の解説のみを行います。<br>
+</p>
+<p>
+今回、surfaces.txtに書くものを以下に示します。
+</p>
+<ul>
+<li>メインキャラの部位、「head」「hand」</li>
+<li>メインキャラのまばたきアニメーション</li>
+</ul>
+<p>
+ここでheadはキャラクターの頭部を指定する部位、handは手の部位とします。<br>
+</p>
+</div>
+
+<div class="title" id="image">サンプル画像</div>
+<div class="content">
+<p>
+サンプルとして以下の絵を用意しました。<br>
+元の画像は、<a href="http://catbottle.sakura.ne.jp/">ボトル猫</a>様が公開されているフリーシェルです。<br>
+<img src="surfaces/files.jpg" alt="用意したファイル"><br>
+pngファイルの白い部分は、透過色に設定しています。<br>
+main_blink1.pngはまばたき用の半目、main_blink2.pngは目閉じです。<br>
+surface0.pngとsurface10.pngを除く画像ファイルは、名称を好きなようにつけてかまいません。<br>
+surface????.pngという名前のファイルのみが特別な扱いを受けます。<br>
+</p>
+<div class="title innerdiv1">補足</div>
+<div class="content innerdiv1">
+<p>
+特別な扱いとは、element0指定がない場合に、「element0,base,surface????.png,0,0」が補完されるようになることです。<br>
+（上記の書き方については「領域作成」の段で記述しています）<br>
+element0指定の記述を省略出来ますが、記述しておいた方がよいです。<br>
+</p>
+</div>
+<p>
+上記まばたき用ファイルは、目閉じのみを用意したり、半目のパターンを増やしたりすることもできます。<br>
+ですが、ここでは最低限の構成として上記のようにしました。<br>
+また、メインキャラとサブキャラに、差分を1枚ずつ用意しました。<br>
+</p>
+<p>
+readme.txtには、必要に応じて好きな情報を記入しておきましょう。<br>
+フリーシェルを使用した場合は、フリーシェルに同梱されていたreadme.txtをそのまま同梱することが多いです。<br>
+</p>
+<div class="title innerdiv1">補足</div>
+<div class="content innerdiv1">
+<p>
+自分で絵を用意する場合は、<a href="http://rakudaya.sakura.tv/sai_pna.html">シェル作成支援文書</a>を参考にしてみてください。<br>
+このメモでは、透過pngを使う前提で記述しています。<br>
+</p>
+</div>
+</div>
+
+<div class="title" id="collision">領域作成</div>
+<div class="content">
+<p>
+ここでは、部位判定の領域を設定します。<br>
+まずは、キャラクターの頭部を設定してみることにします。<br>
+そのためには、どこからどこまでが頭なのかを指定する必要があります。<br>
+基本的に、<span class="emphasis">部位判定の領域は四角形で表され、左上と右下の座標を指定</span>します。<br>
+楕円や多角形でも指定できますが、ここでは触れません。<br>
+</p>
+<div class="title innerdiv1">補足</div>
+<div class="content innerdiv1">
+<p>
+フリーソフトウェアとして、判定定義の支援ソフトも存在します。<br>
+</p>
+<ul>
+<li><a href="http://www.geocities.jp/poskoma/#content_1_11">Coordin</a></li>
+<li><a href="http://ccm.sherry.jp/koropeta/">ころぺた</a></li>
+<li><a href="http://wikiwiki.jp/satolist/">さとりすと</a>（本来は里々記述支援ソフト）</li>
+</ul>
+<p>
+上記ソフトウェアの使い方などはここでは説明を省きます。<br>
+必要に応じて調べてください。<br>
+</p>
+</div>
+<p>
+ここでは、Windows付属のペイントで座標を取得する方法を示します。<br>
+</p>
+<ol type="1">
+<li>ペイントで画像を開く</li>
+<li>上部メニューから選択ツールを使用</li>
+<li>左上→右下の順で四角形を選択</li>
+</ol>
+<p>
+上記を行うと、選択中に下部ステータスバーに座標が表示されます。<br>
+<img src="surfaces/range.jpg" alt="座標設定操作例"><br>
+この例では、「横76縦60の位置から、横81縦37の範囲を選択した」という情報が表示されています。<br>
+最初の位置に、選択した範囲をそれぞれ加算すれば、右下の位置が取得出来ます。<br>
+上記画像では、左上が76,60、右下が157,97です。<br>
+この範囲をheadと指定するsurfaces.txtを以下に示します。<br>
+----ここから----
+<span class="code">
+charset,Shift_JIS
+
+descript
+{
+	version,1
+}
+
+surface0
+{
+	element0,base,surface0.png,0,0
+	collision0,76,60,157,97,head
+}
+
+surface1
+{
+	element0,base,surface1.png,0,0
+	collision0,76,60,157,97,head
+}
+
+surface10
+{
+	element0,base,surface10.png,0,0
+}
+
+surface11
+{
+	element0,base,surface11.png,0,0
+}
+</span>
+----ここまで----<br>
+最初のcharset,Shift_JISとdescript{ version,1 }は、必ずファイルの先頭に書いてください。<br>
+<span class="code">element0,base,????.png,0,0</span>で始まる表記は、表示する画像の指定です。<br>
+1枚の画像を表示するだけの場合は、上記のように記述し、????.pngを使用する画像の名称に置き換えてください。<br>
+これで、サーフェス0、1、10、11が使用可能となりました。<br>
+ゴーストを起動させると、サーフェス0と1が頭部に判定を持っており、カーソルの形状が変わるのを確認出来ます。<br>
+</p>
+<div class="title innerdiv1">補足</div>
+<div class="content innerdiv1">
+<p>
+カーソルの形状は、自由に設定出来ます。<br>
+以下は、hipという部位を作った場合、hipの上では手のひらカーソルを表示する記述です。<br>
+surfaces.txtの任意の場所に記述すると有効になります。<br>
+----ここから----
+<span class="code">
+sakura.cursor
+{
+	mouseup0,hip,system:hand
+	mousedown0,hip,system:hand
+}
+</span>
+----ここまで----<br>
+mouseup?では、マウスを載せた時のカーソルの形状、mousedown?では、マウスをクリックした時のカーソルの形状を指定します。<br>
+?は数字で、上記例の通り、mouseupとmousedownで一組です。<br>
+別の部位も変更したい場合は、mouseup1～とmousedown1～を記述してください。<br>
+上記は、メインキャラ側でしか適用されません。<br>
+サブキャラでも適用する場合、以下をsurfaces.txtに追加してください。<br>
+----ここから----
+<span class="code">
+<span class="emphasis">kero</span>.cursor
+{
+	mouseup0,hip,system:hand
+	mousedown0,hip,system:hand
+}
+</span>
+----ここまで----<br>
+sakura、keroはそれぞれchar0、char1と書くこともできます。<br>
+3人目のキャラクターの場合はchar2と記述します。<br>
+</p>
+<div class="title innerdiv2">キャラクター</div>
+<div class="content innerdiv2">
+<p>
+メインキャラやサブキャラというのは、ゴーストのトークを書く時に必要になってきます。<br>
+基本的に二人一組（1人や3人以上も可能）で喋るため、どっち側にどのサーフェスを表示するかを考える必要があります。<br>
+トークを書く時は重要ですが、シェルを作る時はほとんど気にする必要はありません。<br>
+この設定は例外的にキャラクター指定が必要です。<br>
+sakura.cursorのみを記述しておくと、メインキャラ側とサブキャラ側に同じサーフェスを表示した場合、メインキャラのみカーソルが変わります。<br>
+</p>
+</div>
+<p>
+また、自分で作ったカーソルファイルを適用することもできます。<br>
+カーソルファイルは、シェル画像と同じように、shell\master（現在作っているシェルのフォルダ）内に置いてください。<br>
+以下は、サブキャラのheadという部位に、自作のカーソルを表示する例です。<br>
+----ここから----
+<span class="code">
+kero.cursor
+{
+	mouseup0,head,mycursor.cur
+	mousedown0,head,mycursor.cur
+}
+</span>
+----ここまで----<br>
+</p>
+<div class="title innerdiv2">特殊な領域名</div>
+<div class="content innerdiv2">
+<p>
+領域名を「bust」または「Bust」にすると特殊な処理が行われます。<br>
+全キャラクター分の<span class="code">mouseup0,bust,system:hand</span>と<span class="code">mouseup0,bust,system:grip</span>が自動的に設定されます。<br>
+</p>
+</div>
+</div>
+<p>
+上記のheadの設定と同様のことを行えば、色々な部位を設定できます。<br>
+以下に、handという手の部位を設定した例を示します。<br>
+変更の無い部分は省いていますので、上記と照らしあわせて補完してください。<br>
+----ここから----
+<span class="code">
+surface0
+{
+	element0,base,surface0.png,0,0
+	collision0,76,60,157,97,head
+	collision1,97,263,127,316,hand
+}
+
+surface1
+{
+	element0,base,surface1.png,0,0
+	collision0,76,60,157,97,head
+	collision1,97,263,127,316,hand
+}
+</span>
+----ここまで----<br>
+</p>
+<p>
+今回、画像が2枚なので楽ですが、もしこれが10枚、20枚となったら設定や修正が大変です。<br>
+まとめて複数のサーフェスに一括設定する方法を以下に示します。<br>
+表情のみが違うサーフェスなどにまとめて設定することができます。<br>
+----ここから----
+<span class="code">
+surface0
+{
+	element0,base,surface0.png,0,0
+	<span class="delete">collision0,76,60,157,97,head</span>
+	<span class="delete">collision1,97,263,127,316,hand</span>
+}
+
+surface1
+{
+	element0,base,surface1.png,0,0
+	<span class="delete">collision0,76,60,157,97,head</span>
+	<span class="delete">collision1,97,263,127,316,hand</span>
+}
+
+surface.append0-1
+{
+	collision0,76,60,157,97,head
+	collision1,97,263,127,316,hand
+}
+</span>
+----ここまで----<br>
+<span class="emphasis">surface.append????</span>という表記は、surface????に追加記述するという意味です。<br>
+そのため、<span class="emphasis">先にsurface????が設定されていない場合は、無効化</span>されます。<br>
+この書き方をすると、既に<span class="emphasis">記述済みのサーフェスに、追加で何かを設定</span>できます。<br>
+上記の例では、surface0と1に、ベースになる画像のみを定義しています。<br>
+その後、領域をまとめて追加しています。<br>
+このように、共通部分だけをまとめて追加するという形にすると、後々、追加や修正が楽になります。<br>
+surface.append0-1と記述すると、surface0とsurface1の両方に追加する記述となります。<br>
+</p>
+<div class="title innerdiv1">補足</div>
+<div class="content innerdiv1">
+<p>
+surface0-1と記述すると、surface0とsurface1自体を同時に定義する記述となります。<br>
+また、指定範囲に関してはsurface0-2,5-6,8と記述すると、surface0,1,2,5,6,8の6つの定義となります。<br>
+ハイフンで繋ぐとその間の数字を全て含む指定となり、カンマで区切ることで複数の指定が出来ます。<br>
+</p>
+</div>
+</div>
+
+<div class="title" id="animation">アニメーション</div>
+<div class="content">
+<p>
+サーフェス0にまばたきをするアニメーションを記述します。<br>
+ここでは、サンプルにあるmain_blink1.png（半目）とmain_blink2.png（目閉じ）を使用します。<br>
+目を開いている→半目→目閉じ→半目→目を開く、と素早く画像を切り替え、まばたきのように見えるアニメーションを作成します。<br>
+----ここから----
+<span class="code">
+surface.append0
+{
+	animation0.interval,random,2
+	animation0.pattern0,overlay,1000,50,0,0
+	animation0.pattern1,overlay,1001,50,0,0
+	animation0.pattern2,overlay,1000,50,0,0
+	animation0.pattern3,overlay,-1,50,0,0
+}
+
+surface1000
+{
+	element0,base,main_blink1.png,0,0
+}
+
+surface1001
+{
+	element0,base,main_blink2.png,0,0
+}
+</span>
+----ここまで----<br>
+surfaces.txt末尾に上記を追加してください。<br>
+以下の解説は、改変するつもりがないのであれば、読む必要はありません。<br>
+</p>
+<div class="content_separation innerdiv1">
+<p>
+<span class="code">surface1000
+{
+	element0,base,main_blink1.png,0,0
+}
+</span>上記ではsurface1000を定義していますが、surface1000.pngという名前でない画像も使用できます。<br>
+ファイル名で分かりやすいため、surface????.pngという名前がよく使われていますが、好きな名前をつけられます。<br>
+</p>
+</div>
+<div class="content_separation innerdiv1">
+<p>
+<span class="code">animation0.interval,random,2
+</span>上記「animation0.interval,～」は、「これ以降はアニメーション0番の設定をする」という宣言です。<br>
+これ以降の行では、アニメーション0番の動作を指定します。<br>
+「～,random,2」は、まばたきする頻度を表しています。<br>
+「random,?」と書くと、毎秒?分の1の確率でアニメーションを発動させることができます。<br>
+また、random,2は「sometimes」、random,4は「rarely」と書いても同じ動きをします。<br>
+「periodic,?」と書くと、?秒ごとにアニメーションを発動させることができます。<br>
+必ず一定タイミングでまばたきさせたい場合にはperiodicを使ってください。<br>
+人のまばたき回数は1分に15～20回と言われるため、random,3かrandom,4、periodic,3かperiodic,4が人に近いです。<br>
+まばたきが多いと不安、緊張状態を表すため、random,2にすることで気弱なキャラという表現もできるでしょう。<br>
+</p>
+<div class="title innerdiv2">補足</div>
+<div class="content innerdiv2">
+アニメーション番号は、同じサーフェス内で重複してはいけませんが、別サーフェスなら重複してもOKです。<br>
+「サーフェス0番の、アニメーション0番」という管理をされているため、両方が重複しなければ問題ありません。<br>
+ただ、surface.appendなどを使用して記述すると、予想外のところで重複することがあるので、注意してください。<br>
+アニメーション0番の設定が全て終わったら、「animation1.interval,～」として記述をすることで、いくつでもアニメーションを追加できます。<br>
+</div>
+</div>
+<div class="content_separation innerdiv1">
+<p>
+<span class="code">animation0.pattern0,overlay,1000,50,0,0
+animation0.pattern1,overlay,1001,50,0,0
+animation0.pattern2,overlay,1000,50,0,0
+animation0.pattern3,overlay,-1,50,0,0
+</span>これは、アニメーションの動作部分です。<br>
+上の行で「animation0.interval,～」と書いたので、ここでアニメーション0番の実際の動作を記述しています。<br>
+animation0.pattern0,overlay,1000,50,0,0は、「アニメーション0番のパターン0でサーフェス1000を0.05秒（50ミリ秒）後に座標0,0に上から重ねて表示する」という意味です。<br>
+座標指定は非常に面倒なので、全く同じサイズの画像を用意したり、今回のように上半身部分のみを切り取った画像を用意すると手軽です。<br>
+こうすることで、座標0,0の指定でピタリと画像を重ねることが出来ます。<br>
+最後の「animation0.pattern3,overlay,-1,50,0,0」で今まで重ねた画像を全て消去しています。<br>
+サーフェスに-1を指定すると、今まで重ねた画像を全て消去することができます。<br>
+</p>
+<div class="title innerdiv2">補足</div>
+<div class="content innerdiv2">
+シェルのアニメーションは、いわゆる「パラパラ漫画」のようなものです。<br>
+「pattern0」という表記は、パラパラ漫画の1枚目、という表示だと思ってください。<br>
+始まりが1からではなく、0からということに注意してください。<br>
+</div>
+</div>
+<div class="content_separation innerdiv1">
+<p>
+アニメーションの時間は、ランダムにすることも出来ます。<br>
+例えば、pattern2を以下のように書くと、目を閉じている時間が0.05秒～0.2秒の間からランダムとなります。<br>
+<span class="code">animation0.pattern2,overlay,1000,50-200,0,0</span>
+</p>
+</div>
+</div>
+
+<div class="title" id="element">サーフェスの合成</div>
+<div class="content">
+<p>
+先ほど、まばたきするアニメーションを作りました。<br>
+その画像の中に、目を閉じた上半身のみの画像がありました。<br>
+せっかく画像があるので、ずっと目をつむったままのサーフェスを作ろうと思います。<br>
+ただし上半身の部位しかないため、画像単体では表示できません。<br>
+そこで、複数枚の画像を合成してサーフェスとする記述を以下に記述します。<br>
+----ここから----
+<span class="code">
+surface0
+{
+	element0,base,surface0.png,0,0
+}
+
+surface1
+{
+	element0,base,surface1.png,0,0
+}
+
+<span class="emphasis">surface2
+{
+	element0,base,surface0.png,0,0
+	element1,overlay,main_blink2.png,0,0
+}</span>
+
+surface.append0-<span class="warning">2</span>
+{
+	collision0,76,60,157,97,head
+	collision1,97,263,127,316,hand
+}
+</span>
+----ここまで----<br>
+surface.append0-2の部分は既存部分の書き換えです。<br>
+surface2が新しく追加した部分です。<br>
+目を開いた基本ポーズのsurface0.pngに、上から目を閉じたmain_blink2.pngを重ねています。<br>
+これで、サーフェス2に目を閉じた画像を追加することが出来ました。<br>
+surface.append0-2と記述を変更したことで、サーフェス2には頭と手の判定もついています。<br>
+</p>
+<p>
+element?～と記述することで、画像を重ねて1枚のサーフェスに出来ます。<br>
+「element0,base,????.png,0,0」という表記は、基本（base）とする下地の画像です。<br>
+「element1,overlay,????.png,0,0」は、基本の画像に被せる（overlay）画像を指定しています。<br>
+baseとoverlay以外の画像貼り付け方法は、ukadocにまとめられています。<br>
+後ろの「0,0」は貼り付ける位置（左上座標）です。<br>
+また、elementで指定する場合は、アニメーション時と違い、画像ファイルを直接指定できます。<br>
+</p>
+</div>
+
+<div class="title" id="error">よくあるエラーと原因</div>
+<div class="content">
+<p>
+ここではsurfaces.txtを作成している時に出してしまいがちなエラーと、その原因を示します。
+</p>
+<div class="content_separation innerdiv1">
+<p>
+<span class="code emphasis">[SERIKO]Surface=0/Animation=0/Pattern=0 二重定義されています。
+</span>
+アニメーションに記述ミスがあります。<br>
+メッセージの通り、surface0のアニメーション0番が間違っています。
+<span class="code">
+surface.append0
+{
+	animation0.interval,random,2
+	animation0.pattern<span class="warning">0</span>,overlay,1000,50,0,0
+	animation0.pattern<span class="warning">0</span>,overlay,1001,50,0,0
+	animation0.pattern2,overlay,1000,50,0,0
+	animation0.pattern3,overlay,-1,50,0,0
+}
+</span>
+pattern0が2つあるため、エラーを起こしています。<br>
+下のpattern0を、pattern1と書き換えれば解決します。<br>
+patternは原則0から順番に1ずつ増やし、重複してはいけません。<br>
+</p>
+</div>
+<div class="content_separation innerdiv1">
+<p>
+<span class="code emphasis">[SERIKO]Surface=0/Animation=0 二重定義されています。
+</span>
+サーフェス0のアニメーションの番号指定が間違っています。<br>
+<span class="code">
+surface.append0
+{
+	animation0.interval,random,6
+	animation0.pattern0,overlay,1000,50,0,0
+	animation0.pattern1,overlay,1001,50,0,0
+	animation0.pattern2,overlay,1000,50,0,0
+	animation0.pattern3,overlay,-1,50,0,0
+	
+	animation<span class="warning">0</span>.interval,random,6
+	animation<span class="warning">0</span>.pattern0,overlay,1000,50,0,0
+	animation<span class="warning">0</span>.pattern1,overlay,1001,50,0,0
+	animation<span class="warning">0</span>.pattern2,overlay,1000,100-200,0,0
+	animation<span class="warning">0</span>.pattern3,overlay,-1,50,0,0
+}
+</span>
+上記は1つのサーフェスにアニメーションを2つ設定していますが、両方0番を指定してしまっています。<br>
+下のアニメーション番号を1番にすることでエラーが出なくなります。<br>
+</p>
+</div>
+<div class="content_separation innerdiv1">
+<p>
+<span class="code emphasis">[SERIKO]Surface=2/Element=0 二重定義されています。
+</span>
+サーフェス2の画像合成の指定が間違っています。
+<span class="code">
+surface2
+{
+	element0,base,surface0.png,0,0
+	element<span class="warning">0</span>,overlay,main_blink2.png,0,0
+}
+</span>
+element0を2つ指定してしまっています。<br>
+下のelement0をelement1とすることでエラーが出なくなります。<br>
+この例は、surfaceの記述部分とsurface.appendでの追加記述部分に重複していることもあるので、調べてみてください。<br>
+</p>
+</div>
+<div class="content_separation innerdiv1">
+<p>
+<span class="code emphasis">[SERIKO]Line=22:Animation=1-&gt;0
+</span>
+animation番号を間違えた場合は上記の様なメッセージが出ます。
+<span class="code">
+surface.append0
+{
+	animation0.interval,random,2
+	animation0.pattern0,overlay,1000,50,0,0
+	animation<span class="warning">1</span>.pattern1,overlay,1001,50,0,0
+	animation0.pattern2,overlay,1000,50,0,0
+	animation0.pattern3,overlay,-1,50,0,0
+}
+</span>
+上記は0番アニメーションの中に、1つだけ1番が混じっています。<br>
+animation0にして番号を揃えることでエラーが出なくなります。<br>
+</p>
+</div>
+<div class="content_separation innerdiv1">
+<p>
+<span class="code emphasis">[SERIKO]Line=22 新定義を使用しているのに、旧い定義方法が使われています。
+</span>
+冒頭で述べたように、surfaces.txtは古い書き方と新しい書き方の2種類があります。<br>
+主にアニメーション関係で書き方が大きく変わっているので、このあたりでエラーが出やすいです。<br>
+----新しい書き方----
+<span class="code">
+surface0
+{
+	animation0.interval,sometimes
+	animation0.pattern0,overlay,1000,50,0,0
+	animation0.pattern1,overlay,1001,50,0,0
+	animation0.pattern2,overlay,1000,50,0,0
+	animation0.pattern3,overlay,-1,50,0,0
+}
+</span>
+----古い書き方----
+<span class="code">
+surface0
+{
+	0interval,sometimes
+	0pattern0,1000,5,overlay,0,0
+	0pattern1,1001,5,overlay,0,0
+	0pattern2,1000,5,overlay,0,0
+	0pattern3,-1,5,overlay,0,0
+}
+</span>
+上記はまったく同じ動きをするアニメーションです。<br>
+修正する場合、旧定義では時間単位が0.01秒単位、新定義では時間単位が0.001秒単位ということも注意してください。<br>
+このような、数字から始まるアニメーション定義がないか探してみてください。<br>
+materiaなど別ベースウェアで動かす場合を除き、SSPのサポートが受けられる新しい書き方をした方がよいでしょう。<br>
+</p>
+</div>
+<div class="content_separation innerdiv1">
+<p>
+<span class="code emphasis">[SERIKO]Surface=11 どこからも使われていません。
+</span>
+surfaces.txtの記述が不足しています。<br>
+上記メッセージであれば、surface11.pngがあるのにsurfaces.txtに記述されていません。<br>
+以下を追加することでエラーが出なくなります。<br>
+<span class="code">
+surface11
+{
+}
+</span>
+または、以下のように書いてもOKです。<br>
+上記は中身が空っぽで後に見返した時に混乱することもあるので、以下の書き方を推奨します。<br>
+<span class="code">
+surface11
+{
+	element0,base,surface11.png,0,0
+}
+</span>
+</p>
+</div>
+<div class="content_separation innerdiv1">
+<p>
+<span class="code emphasis">[SERIKO]Surface=0/Animation=0/Pattern=0-&gt;Surface=1000 存在していません。
+</span>
+アニメーションで指定しているサーフェスがありません。<br>
+<span class="code">animation0.pattern0,overlay,1000,50,0,0</span>など、アニメーション0のパターン0でサーフェス1000を指定しています。<br>
+しかし、surface1000がsurfaces.txtに記述されていない、またはsurface1000.pngが存在していません。<br>
+必要な画像（以下の例ではsurface1000.png）を用意し、以下を追加することでエラーが出なくなります。<br>
+<span class="code">
+surface1000
+{
+	element0,base,surface1000.png,0,0
+}
+</span>
+</p>
+</div>
+<div class="content_separation innerdiv1">
+<p>
+<span class="code emphasis">[SERIKO]Line=51:Surface=1000 Element 存在していません。:main_blink1.png
+</span>
+指定している画像がありません。<br>
+<span class="code">element0,base,main_blink1.png,0,0</span>など、画像ファイル名を指定していますが、そのファイルが存在していません。<br>
+必要な画像（今回の例ではmain_blink1.png）を用意することでエラーが出なくなります。<br>
+</p>
+</div>
+</div>
+
+<div class="title" id="sample">記述内容全文</div>
+<div class="content">
+<ul>
+<li>今回用意した画像ファイル<br>
+<img src="surfaces/files.jpg" alt="用意したファイル"></li>
+<li>今回作成したdescript.txt
+<span class="code">
+charset,Shift_JIS
+craftman,sakusha_no_namae
+craftmanw,作者のなまえ
+craftmanurl,http://www.xxxxxxxxxxxxxxxx.co.jp/
+id,master
+name,master
+type,shell
+seriko.use_self_alpha,1
+</span>
+<li>今回作成したsurfaces.txt
+<span class="code">
+charset,Shift_JIS
+
+descript
+{
+	version,1
+}
+
+surface0
+{
+	element0,base,surface0.png,0,0
+}
+
+surface1
+{
+	element0,base,surface1.png,0,0
+}
+
+surface2
+{
+	element0,base,surface0.png,0,0
+	element1,overlay,main_blink2.png,0,0
+}
+
+surface.append0-2
+{
+	collision0,76,60,157,97,head
+	collision1,97,263,127,316,hand
+}
+
+surface.append0
+{
+	animation0.interval,random,2
+	animation0.pattern0,overlay,1000,50,0,0
+	animation0.pattern1,overlay,1001,50,0,0
+	animation0.pattern2,overlay,1000,50,0,0
+	animation0.pattern3,overlay,-1,50,0,0
+}
+
+surface10
+{
+	element0,base,surface10.png,0,0
+}
+
+surface11
+{
+	element0,base,surface11.png,0,0
+}
+
+surface1000
+{
+	element0,base,main_blink1.png,0,0
+}
+
+surface1001
+{
+	element0,base,main_blink2.png,0,0
+}
+</span></li>
+</ul>
+<a href="https://dl.dropboxusercontent.com/u/68134572/ghost/pages/etc/shell/surfaces/master.zip">ファイル一式をダウンロード</a>
+</div>
+
+<div class="content_separation">
+<p>
+2013/11/14 作成<br>
+2013/11/15 修正<br>
+2013/12/16 修正<br>
+2014/02/01 追加シェルに関して加筆<br>
+2014/02/01 アニメーションの説明を修正<br>
+2014/02/09 レイアウト修正<br>
+2014/02/09 element0の二重定義エラーの対処を加筆<br>
+2014/03/06 SSP/2.3.20で上記が解消されたため削除、また同バージョンでエラーが出ない記述に修正<br>
+2014/03/07 一部表記に矛盾があったので修正<br>
+2014/03/17 段落「サーフェスの合成」の記述誤りを修正、surface????.pngの特別な扱いについて解説を加筆<br>
+2014/03/26 アニメーション定義の解説を加筆、「よくあるエラーと原因」加筆<br>
+2014/04/05 領域判定のカーソルの形状を変える方法を加筆<br>
+2014/04/06 段落「概要」に「着せ替えやアニメーションの作り方」へのリンク追加<br>
+2014/11/20 判定定義の支援ソフトにさとりすとを追加、分かりにくいと思われる記述に補足を追加<br>
+2014/12/18 ukadocリンク修正<br>
+2015/01/03 透過png使用の設定について加筆、一部分かりにくいと思われる記述を修正<br>
+2015/01/05 サンプルを修正<br>
+2015/01/10 html5の書式エラーを修正<br>
+</p>
+</div>
+
+<div class="content_separation">
+<p>
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/2.1/jp/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.1/jp/88x31.png" /></a><br />この 作品 は <a rel="license" href="http://creativecommons.org/licenses/by-sa/2.1/jp/">クリエイティブ・コモンズ 表示 - 継承 2.1 日本 ライセンスの下に提供されています。</a><br>
+</p>
+<p>
+「伺か」に関する資料集として引用する場合に限り、このメモの文章部分のみをパブリックドメインとして扱ってもかまいません。
+</p>
+</div>
+
+</div>
+&copy; 2013 あーるでぃー
+</body>
+</html>
