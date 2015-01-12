@@ -1,72 +1,72 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="Shift_JIS">
+<meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="rayout.css">
 <style>
 span.code { font-family:monospace; white-space:pre; }
 span.delete { text-decoration:line-through; }
 span.warning { color:#ff0000; }
 </style>
-<title>�����ւ���A�j���[�V�����̍���</title>
+<title>着せ替えやアニメーションの作り方</title>
 </head>
 
 <body>
-<div class="page_title">�����ւ���A�j���[�V�����̍���</div>
+<div class="page_title">着せ替えやアニメーションの作り方</div>
 <div class="caption">
 
-<div class="title">�ڎ�</div>
+<div class="title">目次</div>
 <div class="content">
 <p>
-<a href="#summary">�T�v</a><br>
-<a href="#init">�����ݒ�</a><br>
-<a href="#animation">�A�j���[�V����</a><br>
-<a href="#talk">���p�N</a><br>
-<a href="#bindbasic">�����ւ���{</a><br>
-<a href="#bindcollision">�����ւ��p�[�c�̗̈�ݒ�</a><br>
-<a href="#bindadvance">�J�e�S�����Ƃ̒����ւ��ݒ�</a><br>
-<a href="#bindanimation">�����ւ��̃A�j���[�V����</a><br>
-<a href="#sample">�T���v���_�E�����[�h</a><br>
-<a href="#etc">���̑����</a><br>
+<a href="#summary">概要</a><br>
+<a href="#init">初期設定</a><br>
+<a href="#animation">アニメーション</a><br>
+<a href="#talk">口パク</a><br>
+<a href="#bindbasic">着せ替え基本</a><br>
+<a href="#bindcollision">着せ替えパーツの領域設定</a><br>
+<a href="#bindadvance">カテゴリごとの着せ替え設定</a><br>
+<a href="#bindanimation">着せ替えのアニメーション</a><br>
+<a href="#sample">サンプルダウンロード</a><br>
+<a href="#etc">その他解説</a><br>
 </p>
 </div>
 
-<div class="title" id="summary">�T�v</div>
+<div class="title" id="summary">概要</div>
 <div class="content">
 <p>
-���̃����́A�u<a href="https://dl.dropboxusercontent.com/u/68134572/ghost/pages/etc/shell/surfaces.html">�V�F���̍���</a>�v�̒m����O��Ƃ��Ă��܂��B<br>
-���̏�ŁA�����ւ���A�j���[�V�����̐ݒ���T���v���������ĊȈՓI�ɉ�����܂��B<br>
-��{�I�Ȓm���́A<a href="http://ssp.shillest.net/ukadoc/manual/index.html">ukadoc</a>�ɏڂ�������������܂��B<br>
-SSP�̐�p�L�q��p���邽�߁A���̃����̋L�q���g���ƁA�S�[�X�g��<span class="emphasis">SSP�ł������삵�Ȃ��Ȃ�܂�</span>�B<br>
-�e��x�[�X�E�F�A�i<a href="http://ninix-aya.sourceforge.jp/">ninix-aya</a>�Ȃǁj�ŋN���ł��Ȃ��Ȃ�̂Œ��ӂ��Ă��������B<br>
+このメモは、「<a href="https://dl.dropboxusercontent.com/u/68134572/ghost/pages/etc/shell/surfaces.html">シェルの作り方</a>」の知識を前提としています。<br>
+その上で、着せ替えやアニメーションの設定をサンプルを交えて簡易的に解説します。<br>
+基本的な知識は、<a href="http://ssp.shillest.net/ukadoc/manual/index.html">ukadoc</a>に詳しい説明があります。<br>
+SSPの専用記述を用いるため、このメモの記述を使うと、ゴーストが<span class="emphasis">SSPでしか動作しなくなります</span>。<br>
+各種ベースウェア（<a href="http://ninix-aya.sourceforge.jp/">ninix-aya</a>など）で起動できなくなるので注意してください。<br>
 </p>
 <p>
-����g���摜�͈ȉ��ł��B<br>
-<img src="animations/picture.png" alt="�T���v���摜"><br>
-���̃����̉����̃����N����A�ꎮ�_�E�����[�h���邱�Ƃ��ł��܂��B
+今回使う画像は以下です。<br>
+<img src="animations/picture.png" alt="サンプル画像"><br>
+このメモの下部のリンクから、一式ダウンロードすることができます。
 </p>
 </div>
 
-<div class="title" id="init">�����ݒ�</div>
+<div class="title" id="init">初期設定</div>
 <div class="content">
 <p>
-�J�����ȈՂɂ��邽�߁ASSP�̊J���җp�@�\���g�p���܂��B<br>
-�i�S�[�X�g��ŉE�N���b�N���ݒ�(O)���{�̐ݒ�...(P)�Őݒ��ʕ\���j<br>
-<img src="animations/developer.png" alt="�J���ҋ@�\"><br>
+開発を簡易にするため、SSPの開発者用機能を使用します。<br>
+（ゴースト上で右クリック→設定(O)→本体設定...(P)で設定画面表示）<br>
+<img src="animations/developer.png" alt="開発者機能"><br>
 </p>
-<div class="title innerdiv1">�⑫</div>
+<div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-�J���ҋ@�\�͐F�X�֗��ł����A�����̃S�[�X�g�ȊO�Ŏg���Ɨ\�����Ȃ��o�O���N�����\�������邱�Ƃ��ӎ����Ă����Ă��������B<br>
-��F�u�X�N���v�g���O�v����ߋ��̃X�N���v�g�����s���邱�Ƃɂ��A�{���N���肦�Ȃ��������s���A�Z�[�u�f�[�^���j������<br>
-��L�̗�ł́A�t���O���Z�b�g�����肷�鏈�������s����邱�Ƃ�����A����ɂ���Ēv���I�ȃG���[�������N�����܂��B<br>
+開発者機能は色々便利ですが、自分のゴースト以外で使うと予期しないバグを起こす可能性があることを意識しておいてください。<br>
+例：「スクリプトログ」から過去のスクリプトを実行することにより、本来起こりえない処理が行われ、セーブデータが破損する<br>
+上記の例では、フラグをセットしたりする処理が実行されることがあり、それによって致命的なエラーを引き起こします。<br>
 </p>
 </div>
 <p>
-surfaces.txt�ɂ́A�ȉ����L�q����Ă����ԂƂ��܂��B<br>
-<span class="emphasis">//</span>����n�܂�s�͓ǂݍ��܂�܂���B�i���ۂ͏����Ⴂ�܂����A����Ƃ���//�𓪂ɕt���܂��j<br>
-�����Ƃ��ēK�؂ɏ����Ă����ƁA��X�C�����鎞�ɕ�����₷���Ȃ�܂��B<br>
-----��������----
+surfaces.txtには、以下が記述されている状態とします。<br>
+<span class="emphasis">//</span>から始まる行は読み込まれません。（実際は少し違いますが、慣例として//を頭に付けます）<br>
+メモとして適切に書いておくと、後々修正する時に分かりやすくなります。<br>
+----ここから----
 <span class="code">
 charset,Shift_JIS
 
@@ -75,44 +75,44 @@ descript
 	version,1
 }
 
-// �T�[�t�F�X�̉摜�w��
+// サーフェスの画像指定
 surface0
 {
-	element0,base,f��.png,0,0
-	element1,overlay,f��.png,0,0
-	element2,overlay,f��.png,0,0
-	element3,overlay,f�{�f�B.png,0,0
+	element0,base,f顔.png,0,0
+	element1,overlay,f口.png,0,0
+	element2,overlay,f目.png,0,0
+	element3,overlay,f青ボディ.png,0,0
 }
 
 surface1
 {
-	element0,base,f��.png,0,0
-	element1,overlay,f��.png,0,0
-	element2,overlay,f�ڕ�1.png,0,0
-	element3,overlay,f�{�f�B.png,0,0
+	element0,base,f顔.png,0,0
+	element1,overlay,f口.png,0,0
+	element2,overlay,f目閉じ1.png,0,0
+	element3,overlay,f青ボディ.png,0,0
 }
 
-// �̈�ݒ�
+// 領域設定
 surface.append0-1
 {
 	collision0,96,79,206,123,head
 }
 
-// �A�j���[�V�����p�T�[�t�F�X
+// アニメーション用サーフェス
 surface1000
 {
-	element0,base,f�ڕ�0.png,0,0
+	element0,base,f目閉じ0.png,0,0
 }
 
 surface1001
 {
-	element0,base,f�ڕ�1.png,0,0
+	element0,base,f目閉じ1.png,0,0
 }
 
-// �A�j���[�V�����ݒ�
+// アニメーション設定
 surface.append0
 {
-	// �A�j���[�V����0�� �u��
+	// アニメーション0番 瞬き
 	animation0.interval,rarely
 	animation0.pattern0,overlay,1000,0,0,0
 	animation0.pattern1,overlay,1001,50,0,0
@@ -120,46 +120,46 @@ surface.append0
 	animation0.pattern3,overlay,-1,50,0,0
 }
 </span>
-----�����܂�----<br>
+----ここまで----<br>
 </p>
 <p>
-descript.txt�ɂ́A�ȉ����L�q����Ă����ԂƂ��܂��B<br>
-<span class="emphasis">shell/master/descript.txt</span>�ł��B�imaster�͍쐬���̃V�F���̃t�H���_���ɓǂݑւ��j<br>
-ghost/master/descript.txt�ł͂Ȃ��̂Œ��ӂ��Ă��������B<br>
-----��������----
+descript.txtには、以下が記述されている状態とします。<br>
+<span class="emphasis">shell/master/descript.txt</span>です。（masterは作成中のシェルのフォルダ名に読み替え）<br>
+ghost/master/descript.txtではないので注意してください。<br>
+----ここから----
 <span class="code">
 charset,Shift_JIS
 craftman,sakusha_no_namae
-craftmanw,��҂̂Ȃ܂�
+craftmanw,作者のなまえ
 craftmanurl,http://www.xxxxxxxxxxxxxxxx.co.jp/
 id,tester
-name,�e�X�g�p
+name,テスト用
 type,shell
 seriko.use_self_alpha,1
 </span>
-----�����܂�----<br>
+----ここまで----<br>
 </p>
 </div>
 
-<div class="title" id="animation">�A�j���[�V����</div>
+<div class="title" id="animation">アニメーション</div>
 <div class="content">
 <p>
-�u�V�F���̍����v�ł͂܂΂������A�j���[�V�����ō��܂������A����͔����^�C�~���O�����܂��Ă��܂��B<br>
-�����ł́A�D���ȃ^�C�~���O�Ŕ����ł���A�j���[�V�������L�q���܂��B<br>
-�D���ȃ^�C�~���O�Ŕ�����������Ƃ��ẮA�X�J�[�g�߂��肪�������܂��B<br>
-<img src="animations/animation1.png" alt="�A�j���[�V�����T���v��"><br>
-��L�̂悤�ȓ���������A�j���[�V���������܂��B<br>
-����́A���[�U�[���}�E�X�z�C�[���ŃA�N�V�������N�������ꍇ�̂ݔ������������A�j���[�V�����ł��B<br>
-�������A�u�}�E�X�z�C�[������]�������v�Ƃ��������[�U�̃A�N�V�����ւ̔����́A�S�[�X�g���̎������S�������ł��B<br>
-���̂��߁A�V�F�����ł͔\���I�ɔ������Ȃ��A�j���[�V���������A<span class="emphasis">�S�[�X�g������Đ�</span>���s���܂��B<br>
-�A�j���[�V�����Đ�������X�N���v�g�ł���\i[????]�i????�͐����j���g�[�N�Ɋ܂߂邱�ƂŃA�j���[�V�������Đ�����܂��B<br>
-�ȉ��̃T���v���́A�i���u<a href="#init">��{�ݒ�</a>�v��surfaces.txt�ɒǉ�����Ɛ����������܂��B<br>
-----��������----
+「シェルの作り方」ではまばたきをアニメーションで作りましたが、これは発動タイミングが決まっています。<br>
+ここでは、好きなタイミングで発動できるアニメーションを記述します。<br>
+好きなタイミングで発動したい例としては、スカートめくりがあげられます。<br>
+<img src="animations/animation1.png" alt="アニメーションサンプル"><br>
+上記のような動きをするアニメーションを作ります。<br>
+これは、ユーザーがマウスホイールでアクションを起こした場合のみ発動させたいアニメーションです。<br>
+しかし、「マウスホイールを回転させた」といったユーザのアクションへの反応は、ゴースト側の辞書が担う部分です。<br>
+そのため、シェル側では能動的に発動しないアニメーションを作り、<span class="emphasis">ゴースト側から再生</span>を行います。<br>
+アニメーション再生さくらスクリプトである\i[????]（????は数字）をトークに含めることでアニメーションが再生されます。<br>
+以下のサンプルは、段落「<a href="#init">基本設定</a>」のsurfaces.txtに追加すると正しく動きます。<br>
+----ここから----
 <span class="code">
 surface.append0-1
 {
-	// �A�j���[�V����200�� �X�J�[�g�߂���
-	// �S�[�X�g�̃g�[�N��\i[200]���L�q����Ƃ��̃A�j���[�V�������Đ������
+	// アニメーション200番 スカートめくり
+	// ゴーストのトークで\i[200]を記述するとこのアニメーションが再生される
 	animation200.interval,<span class="emphasis">never</span>
 	animation200.pattern0,overlay,1020,0,0,0
 	animation200.pattern1,overlay,1021,150,0,0
@@ -167,47 +167,47 @@ surface.append0-1
 	animation200.pattern3,overlay,-1,150,0,0
 }
 
-// �A�j���[�V�����p�T�[�t�F�X
+// アニメーション用サーフェス
 surface1020
 {
-	element0,base,f�A�j��0.png,0,0
+	element0,base,fアニメ0.png,0,0
 }
 
 surface1021
 {
-	element0,base,f�A�j��1.png,0,0
+	element0,base,fアニメ1.png,0,0
 }
 </span>
-----�����܂�----<br>
-��L���L�q��A�S�[�X�g���N�����A�E�N���b�N���@�\(F)���J���p�p���b�g(D)���X�N���v�g���́A�܂���Ctrl + S�ő��M�{�b�N�X���J���܂��B<br>
-�����ɁA�����������Ƃ��̂܂�SSP��ōĐ�����܂��B<br>
-��L�ō�����A�j���[�V�������m�F���邽�߁A<span class="emphasis">\i[200]</span>�Ɠ��͂��Ă݂Ă��������B�̂��߂���܂��B<br>
+----ここまで----<br>
+上記を記述後、ゴーストを起動し、右クリック→機能(F)→開発用パレット(D)→スクリプト入力、またはCtrl + Sで送信ボックスを開きます。<br>
+ここに、文字をいれるとそのままSSP上で再生されます。<br>
+上記で作ったアニメーションを確認するため、<span class="emphasis">\i[200]</span>と入力してみてください。体がめくれます。<br>
 </p>
 <p>
-��L�A�j���[�V�����̍Đ����A�߂���オ�������Ԃ������������Ƃ��m�F�o���邩�Ǝv���܂��B<br>
-<img src="animations/animation2.png" alt="�X�J�[�g�߂���̓���"><br>
-�A�j���[�V�����p�^�[���̐ݒ�ł́A���������炸����Ԃ��߈Ӗ����݂͂Â炢�ł����A�ȉ��̏��ɋL�q���܂��B<br>
-<img src="animations/animation3.png" alt="�A�j���[�V�����p�^�[���̎w��"><br>
-�T�[�t�F�X��-1���w�肷��ƁA���܂ł̃A�j���[�V�������ʂ�S�ď������邱�Ƃ��ł��܂��B<br>
+上記アニメーションの再生時、めくれ上がった時間が少し長いことが確認出来るかと思います。<br>
+<img src="animations/animation2.png" alt="スカートめくりの動作"><br>
+アニメーションパターンの設定では、数字がずらずら並ぶため意味が掴みづらいですが、以下の順に記述します。<br>
+<img src="animations/animation3.png" alt="アニメーションパターンの指定"><br>
+サーフェスに-1を指定すると、今までのアニメーション効果を全て消去することができます。<br>
 </p>
 <p>
-�A�j���[�V�����^�C�~���Onever�͐F�X�ȏ�ʂŎg���܂��B<br>
-�Ⴆ�΁A�����v�����ē��ɓ��d���������ԁA���ߑ���f���ȂǁA����<a href="http://ms.shillest.net/" title="�܂�Ձ[�z�z��">�i�܂�Ձ[�z�z���A�y�[�W�����j</a>�����p���邱�Ƃ��l�����܂��B<br>
-�A�j���[�V�����œ������o�����Ƃ��o���܂��B<br>
+アニメーションタイミングneverは色々な場面で使えます。<br>
+例えば、何か思いついて頭に豆電球が浮かぶ、ため息を吐くなど、漫符<a href="http://ms.shillest.net/" title="まんぷー配布元">（まんぷー配布元、ページ下部）</a>を活用することが考えられます。<br>
+アニメーションで動きを出すことが出来ます。<br>
 </p>
 </div>
 
-<div class="title" id="talk">���p�N</div>
+<div class="title" id="talk">口パク</div>
 <div class="content">
 <p>
-�����ł́A�S�[�X�g���g�[�N����ƁA����ɍ��킹�Č����p�N�p�N�������A�j���[�V�����������@���L�q���܂��B<br>
-��{�I�ȃA�j���[�V�����̉���́A�i���u<a href="#animation">�A�j���[�V����</a>�v���Q�Ƃ��Ă��������B<br>
-�ȉ��̃T���v����i���u<a href="#init">��{�ݒ�</a>�v��surfaces.txt�ɒǉ�����ƁA�o���[���ɕ������\������鎞�ɍĐ�����A�j���[�V�����ƂȂ�܂��B<br>
-----��������----
+ここでは、ゴーストがトークすると、それに合わせて口をパクパク動かすアニメーションを作る方法を記述します。<br>
+基本的なアニメーションの解説は、段落「<a href="#animation">アニメーション</a>」を参照してください。<br>
+以下のサンプルを段落「<a href="#init">基本設定</a>」のsurfaces.txtに追加すると、バルーンに文字が表示される時に再生するアニメーションとなります。<br>
+----ここから----
 <span class="code">
 surface.append0-1
 {
-	// �A�j���[�V����1�� ���p�N
+	// アニメーション1番 口パク
 	animation1.interval,<span class="emphasis">talk</span>,1
 	animation1.pattern0,overlay,1010,0,0,0
 	animation1.pattern1,overlay,-1,150,0,0
@@ -215,347 +215,347 @@ surface.append0-1
 	animation1.pattern3,overlay,-1,150,0,0
 }
 
-// �A�j���[�V�����p�T�[�t�F�X
+// アニメーション用サーフェス
 surface1010
 {
-	element0,base,f���p�N0.png,0,0
+	element0,base,f口パク0.png,0,0
 }
 
 surface1011
 {
-	element0,base,f���p�N1.png,0,0
+	element0,base,f口パク1.png,0,0
 }
 </span>
-----�����܂�----<br>
-talk�̌��̐����i�����ł�1�j�́A�u�o���[���ɉ������\������邲�ƂɃA�j���[�V�������Đ����邩�v�ł��B<br>
-�g�[�N�́A��Ǔ_�ȂǂŃE�F�C�g�����邱�Ƃ�����A�܂��A�����̕\���X�s�[�h��SSP�{�̐ݒ�Ń��[�U�[���ύX���邱�Ƃ��o���܂��B<br>
-�]���āA�^�C�~���O�����̐����𒲐����邱�ƂŐ��䂷�邱�Ƃ͏o���܂���B<br>
-���p�N�A�j���[�V�����Đ����ł���΁A�A�j���[�V�������I������܂ł͏�L�ݒ�͖�������܂��B<br>
-���̂��߁A��{�I�ɂ�1�Œ�Ŗ�肠��܂���B<br>
-��L�̃A�j���[�V��������͈ȉ��摜�̂悤�ɂȂ�܂��B<br>
-<img src="animations/talk1.png" alt="�A�j���[�V�����p�^�[���̎w��"><br>
-�T�[�t�F�X��-1���w�肷��ƁA���܂ł̃A�j���[�V�������ʂ�S�ď������邱�Ƃ��ł��܂��B<br>
+----ここまで----<br>
+talkの後ろの数字（ここでは1）は、「バルーンに何文字表示されるごとにアニメーションを再生するか」です。<br>
+トークは、句読点などでウェイトが入ることがあり、また、文字の表示スピードをSSP本体設定でユーザーが変更することが出来ます。<br>
+従って、タイミングをこの数字を調整することで制御することは出来ません。<br>
+口パクアニメーション再生中であれば、アニメーションが終了するまでは上記設定は無視されます。<br>
+そのため、基本的には1固定で問題ありません。<br>
+上記のアニメーション動作は以下画像のようになります。<br>
+<img src="animations/talk1.png" alt="アニメーションパターンの指定"><br>
+サーフェスに-1を指定すると、今までのアニメーション効果を全て消去することができます。<br>
 </p>
 </div>
 
-<div class="title" id="bindbasic">�����ւ���{</div>
+<div class="title" id="bindbasic">着せ替え基本</div>
 <div class="content">
 <p>
-�����ł́A�E�N���b�N���j���[�ɒ����ւ���ǉ�������@���L�q���܂��B<br>
-�����ւ���surfaces.txt�����łȂ��Adescript.txt�ւ̋L�q���K�v�ƂȂ�܂��B<br>
+ここでは、右クリックメニューに着せ替えを追加する方法を記述します。<br>
+着せ替えはsurfaces.txtだけでなく、descript.txtへの記述も必要となります。<br>
 </p>
 <p>
-�T���v���Ƃ��Ē����ւ��ŖX�q����悤�ɂ��Ă݂܂��B<br>
-���s�C���[�W�͈ȉ��ł��B<br>
-<img src="animations/bind1.png" alt="�����ւ����s�C���[�W"><br>
-�ȉ��̃T���v����i���u<a href="#init">��{�ݒ�</a>�v��surfaces.txt�ɒǉ�����ƁA�V�F���ł̒����ւ��ݒ�ƂȂ�܂��B<br>
-----��������----
+サンプルとして着せ替えで帽子を被るようにしてみます。<br>
+実行イメージは以下です。<br>
+<img src="animations/bind1.png" alt="着せ替え実行イメージ"><br>
+以下のサンプルを段落「<a href="#init">基本設定</a>」のsurfaces.txtに追加すると、シェルでの着せ替え設定となります。<br>
+----ここから----
 <span class="code">
 surface.append0-1
 {
-	// �A�j���[�V����110�� �����ւ��X�q
+	// アニメーション110番 着せ替え帽子
 	animation110.interval,<span class="emphasis">bind</span>
 	animation110.pattern0,overlay,1040,0,0,0
 }
 
-// �A�j���[�V�����p�T�[�t�F�X
+// アニメーション用サーフェス
 surface1040
 {
-	element0,base,f�X�q.png,0,0
+	element0,base,f帽子.png,0,0
 }
 </span>
-----�����܂�----<br>
-�ȉ��̃T���v����i���u<a href="#init">��{�ݒ�</a>�v��descript.txt�ɒǉ�����ƁA�S�[�X�g�����琧�䂷�邽�߂̒����ւ��ݒ�ƂȂ�܂��B<br>
-----��������----
+----ここまで----<br>
+以下のサンプルを段落「<a href="#init">基本設定</a>」のdescript.txtに追加すると、ゴースト側から制御するための着せ替え設定となります。<br>
+----ここから----
 <span class="code">
-sakura.bindgroup110.name,�X�q,�n�b�g,�X�q�T���l�C��.png
+sakura.bindgroup110.name,帽子,ハット,帽子サムネイル.png
 
 sakura.menu,auto
 </span>
-----�����܂�----<br>
-��L��ݒ肷��ƁA�S�[�X�g���̒����ւ����g����悤�ɂȂ�܂��B
-descript.txt�ɒǉ�������̍s�̋L�q�̈Ӗ��͈ȉ��ł��B
-<img src="animations/bind2.png" alt="�����ւ��ݒ�"><br>
-��L�̒ʂ�Asurfaces.txt�̐ݒ肪�O��ƂȂ�܂��B<br>
+----ここまで----<br>
+上記を設定すると、ゴースト側の着せ替えが使えるようになります。
+descript.txtに追加した上の行の記述の意味は以下です。
+<img src="animations/bind2.png" alt="着せ替え設定"><br>
+上記の通り、surfaces.txtの設定が前提となります。<br>
 </p>
-<div class="title innerdiv1">�⑫</div>
+<div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-2�l�ڂ̃L�����́Asakura.�`��S��kero.�`�ɁA3�l�ڂ�char2.�`�ƋL�q���܂��B<br>
+2人目のキャラは、sakura.〜を全てkero.〜に、3人目はchar2.〜と記述します。<br>
 </p>
 </div>
 <p>
-descript.txt�ɒǉ��������̍s�ɂ��ẮA���j���[�ɒ����ւ���\������w���ł��B<br>
-���ꂪ�Ȃ��ƁA���j���[�́u�����ւ��v�ɉ����\�����ꂸ�A�����ւ����o���܂���B<br>
-�蓮�Őݒ肷����@�ɂ��ẮA�i���u<a href="#bindmenu">�����ւ��̃��j���[�\��</a>�v�Ő������܂��B<br>
+descript.txtに追加した下の行については、メニューに着せ替えを表示する指示です。<br>
+これがないと、メニューの「着せ替え」に何も表示されず、着せ替えが出来ません。<br>
+手動で設定する方法については、段落「<a href="#bindmenu">着せ替えのメニュー表示</a>」で説明します。<br>
 </p>
 <p>
-�����ւ��͂�����ł��B<br>
-����̗�ł���΁A�X�q�𒅂��ւ��ő�������ƁA�u�A�j���[�V����110�Ԃ𑕒����Ă���v�Ƃ�����񂪕ێ�����܂��B<br>
-���̌��ʁA�T�[�t�F�X��ύX���Ă��A�A�j���[�V����110�Ԃ������ւ��ݒ�ł���΁A������ԂƂȂ�܂��B<br>
-�T�[�t�F�X0�Ԃ̎��A�����ւ����s���ĖX�q�𑕒�������A�T�[�t�F�X��1�Ԃɕω����Ă��A�T�[�t�F�X0�ԂƓ������X�q�𑕒����Ă��܂��B<br>
-���̂��߁A�u����̃T�[�t�F�X�����Ή����钅���ւ��A�j���[�V�����������v�Ƃ����󋵂��ƁA�s���R�ł��B<br>
-�܂�A<span class="emphasis">�S�ẴT�[�t�F�X�ɒ����ւ��A�j���[�V�������L�q����K�v������A�����̃A�j���[�V�����ԍ��𓝈ꂷ��</span>�K�v������܂��B<br>
+着せ替えはやや特殊です。<br>
+今回の例であれば、帽子を着せ替えで装着すると、「アニメーション110番を装着している」という情報が保持されます。<br>
+その結果、サーフェスを変更しても、アニメーション110番が着せ替え設定であれば、装着状態となります。<br>
+サーフェス0番の時、着せ替えを行って帽子を装着した後、サーフェスが1番に変化しても、サーフェス0番と同じく帽子を装着しています。<br>
+そのため、「特定のサーフェスだけ対応する着せ替えアニメーションが無い」という状況だと、不自然です。<br>
+つまり、<span class="emphasis">全てのサーフェスに着せ替えアニメーションを記述する必要があり、かつそのアニメーション番号を統一する</span>必要があります。<br>
 </p>
-<div class="title innerdiv1">�⑫</div>
+<div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-�����e�i���X���邱�Ƃ��l���āA�ԍ����ӂ鎞�ɂ͎��O�Ƀ}�C���[��������Ă����ƁA�y�ɂȂ�܂��B<br>
-��F�A�j���[�V����100�`199�Ԃ͒����ւ��p�ɂ���<br>
+メンテナンスすることを考えて、番号をふる時には事前にマイルールを作っておくと、楽になります。<br>
+例：アニメーション100〜199番は着せ替え用にする<br>
 </p>
 </div>
 </div>
 
-<div class="title" id="bindcollision">�����ւ��p�[�c�̗̈�ݒ�</div>
+<div class="title" id="bindcollision">着せ替えパーツの領域設定</div>
 <div class="content">
 <p>
-�Ⴆ�΁A�b���Ȃǂ������ւ��Ƃ��Ă��ꍇ����������܂��B<br>
-����ȂƂ��A���������Ȃ̂ŗ̈���`���āA��p�̔������������Ǝv�����Ƃ����肦��Ǝv���܂��B<br>
-�����ݒ肷����@���L�q���܂��B<br>
-��L�i���u<a href="#bindbasic">�����ւ���{</a>�v���ݒ肳��Ă���Ƃ��āA�X�q�ɗ̈��ݒ肵�Ă݂邱�Ƃɂ��܂��B<br>
-----��������----
+例えば、獣耳などが着せ替えとしてつく場合が多くあります。<br>
+そんなとき、せっかくなので領域を定義して、専用の反応をしたいと思うこともありえると思います。<br>
+これを設定する方法を記述します。<br>
+上記段落「<a href="#bindbasic">着せ替え基本</a>」が設定されているとして、帽子に領域を設定してみることにします。<br>
+----ここから----
 <span class="code">
 surface.append0-1
 {
-	// �A�j���[�V����110�� �����ւ��X�q
+	// アニメーション110番 着せ替え帽子
 	animation110.interval,bind
 	animation110.pattern0,overlay,1040,0,0,0
 	<span class="emphasis">animation110.collision100,105,57,208,100,hat</span>
 }
 </span>
-----�����܂�----<br>
-�̈�ݒ�́A�u<a href="https://dl.dropboxusercontent.com/u/68134572/ghost/pages/etc/shell/surfaces.html">�V�F���̍���</a>�v�ŐG�ꂽ�̂Ƃقړ����ł��B<br>
-�Ⴂ�́A�擪�ɃA�j���[�V�����ԍ��̎w�肪�����Ƃł��B<br>
-���̂悤�ɂ���ƁA�A�j���[�V�������̂ݗL���ȐG��̈���쐬�ł��܂��B<br>
-��L���L�q��A�S�[�X�g���N�����A�E�N���b�N���@�\(F)���J���p�p���b�g(D)���T�[�t�B�X�e�X�g�A�܂���Ctrl + T�Ńe�X�g�{�b�N�X��\������ƁAhat�Ƃ����̈悪�ǉ�����Ă��邱�Ƃ��m�F�ł��܂��B<br>
-<img src="animations/bind6.png" alt="�̈�ǉ��̊m�F"><br>
-�Ȃ��A�A�j���[�V�����Őݒ肵���̈�́A�����̗̈����ɂ��܂��B<br>
-�Ⴆ�΁A����͍ŏ��ɐݒ�ς݂�head��hat���ꕔ�d�Ȃ��Ă��܂����A�d�Ȃ���������hat���D�悳��܂��B<br>
+----ここまで----<br>
+領域設定は、「<a href="https://dl.dropboxusercontent.com/u/68134572/ghost/pages/etc/shell/surfaces.html">シェルの作り方</a>」で触れたのとほぼ同じです。<br>
+違いは、先頭にアニメーション番号の指定がつくことです。<br>
+このようにすると、アニメーション中のみ有効な触り領域を作成できます。<br>
+上記を記述後、ゴーストを起動し、右クリック→機能(F)→開発用パレット(D)→サーフィステスト、またはCtrl + Tでテストボックスを表示すると、hatという領域が追加されていることが確認できます。<br>
+<img src="animations/bind6.png" alt="領域追加の確認"><br>
+なお、アニメーションで設定した領域は、既存の領域より上にきます。<br>
+例えば、今回は最初に設定済みのheadとhatが一部重なっていますが、重なった部分はhatが優先されます。<br>
 </p>
-<div class="title innerdiv1">�⑫</div>
+<div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-�ʏ�̗̈�ݒ�ł́A��i�t�@�C���̒��Ő擪�ɋ߂��A�t�@�C�����ł̍s�ԍ����������j�ɏ����������D�悳��܂��B<br>
-surfaces.txt�Ɉȉ����L�q���邱�ƂŁA�D����@��ύX���邱�Ƃ��ł��܂��B<br>
-----��������----
+通常の領域設定では、先（ファイルの中で先頭に近い、ファイル内での行番号が小さい）に書いた方が優先されます。<br>
+surfaces.txtに以下を記述することで、優先方法を変更することができます。<br>
+----ここから----
 <span class="code">
 descript
 {
 	version,1
-	// collision???�Őݒ肵��ID�̏���
+	// collision???で設定したIDの昇順
 	collision-sort,ascend
-	// ��L�̍~��
+	// 上記の降順
 	//collision-sort,descend
 }
 </span>
-----�����܂�----<br>
+----ここまで----<br>
 </p>
 </div>
 </div>
 
-<div class="title" id="bindadvance">�J�e�S�����Ƃ̒����ւ��ݒ�</div>
+<div class="title" id="bindadvance">カテゴリごとの着せ替え設定</div>
 <div class="content">
 <p>
-��L�i���u<a href="#bindbasic">�����ւ���{</a>�v�𓥂܂��āA���x��<span class="emphasis">�u��������I���\�A�������K��1�I�����Ȃ��Ă͂Ȃ�Ȃ��v�Ƃ��������ւ�</span>�����܂��B<br>
-����́A���̒����ւ��ȂǂŕK�v�ɂȂ邱�Ƃ������ł��B<br>
-�S�Ă̕����O�����Ƃ��o���Ă��܂��ƁA�\������摜�Ŗ�肪�o�Ă��܂���������܂���B<br>
-�ȉ��̃T���v����i���u<a href="#init">��{�ݒ�</a>�v��surfaces.txt�ɒǉ�����яC�����s���ƁA�̂̐F�𒅂��ւ��Őݒ�ł���悤�ɂȂ�܂��B<br>
-----��������----
+上記段落「<a href="#bindbasic">着せ替え基本</a>」を踏まえて、今度は<span class="emphasis">「複数から選択可能、ただし必ず1つ選択しなくてはならない」という着せ替え</span>を作ります。<br>
+これは、服の着せ替えなどで必要になることが多いです。<br>
+全ての服を外すことが出来てしまうと、表示する画像で問題が出てしまうかもしれません。<br>
+以下のサンプルを段落「<a href="#init">基本設定</a>」のsurfaces.txtに追加および修正を行うと、体の色を着せ替えで設定できるようになります。<br>
+----ここから----
 <span class="code">
 surface0
 {
-	element0,base,f��.png,0,0
-	element1,overlay,f��.png,0,0
-	element2,overlay,f��.png,0,0
-	<span class="delete">element3,overlay,f�{�f�B.png,0,0</span> // ���̍s���폜
+	element0,base,f顔.png,0,0
+	element1,overlay,f口.png,0,0
+	element2,overlay,f目.png,0,0
+	<span class="delete">element3,overlay,f青ボディ.png,0,0</span> // この行を削除
 }
 
 surface1
 {
-	element0,base,f��.png,0,0
-	element1,overlay,f��.png,0,0
-	element2,overlay,f�ڕ�1.png,0,0
-	<span class="delete">element3,overlay,f�{�f�B.png,0,0</span> // ���̍s���폜
+	element0,base,f顔.png,0,0
+	element1,overlay,f口.png,0,0
+	element2,overlay,f目閉じ1.png,0,0
+	<span class="delete">element3,overlay,f青ボディ.png,0,0</span> // この行を削除
 }
 
 surface.append0-1
 {
-	// �A�j���[�V����100�� �����ւ��{�f�B
+	// アニメーション100番 着せ替え青ボディ
 	animation100.interval,bind
 	animation100.pattern0,overlay,1130,0,0,0
 
-	// �A�j���[�V����101�� �����ւ��ԃ{�f�B
+	// アニメーション101番 着せ替え赤ボディ
 	animation101.interval,bind
 	animation101.pattern0,overlay,1131,0,0,0
 
-	// �A�j���[�V����102�� �����ւ��΃{�f�B
+	// アニメーション102番 着せ替え緑ボディ
 	animation102.interval,bind
 	animation102.pattern0,overlay,1132,0,0,0
 }
 
 surface1030
 {
-	element0,base,f�{�f�B.png,0,0
+	element0,base,f青ボディ.png,0,0
 }
 
 surface1031
 {
-	element0,base,f�ԃ{�f�B.png,0,0
+	element0,base,f赤ボディ.png,0,0
 }
 
 surface1032
 {
-	element0,base,f�΃{�f�B.png,0,0
+	element0,base,f緑ボディ.png,0,0
 }
 </span>
-----�����܂�----<br>
-�ȉ��̃T���v����i���u<a href="#init">��{�ݒ�</a>�v��descript.txt�ɒǉ�����ƁA�S�[�X�g���琧�䂷�邽�߂̒����ւ��ݒ�ƂȂ�܂��B<br>
-----��������----
+----ここまで----<br>
+以下のサンプルを段落「<a href="#init">基本設定</a>」のdescript.txtに追加すると、ゴーストから制御するための着せ替え設定となります。<br>
+----ここから----
 <span class="code">
-sakura.bindoption.group,�{�f�B,mustselect
-sakura.bindgroup100.name,�{�f�B,�{�f�B,
-sakura.bindgroup101.name,�{�f�B,�ԃ{�f�B,
-sakura.bindgroup102.name,�{�f�B,�΃{�f�B,
+sakura.bindoption.group,ボディ,mustselect
+sakura.bindgroup100.name,ボディ,青ボディ,
+sakura.bindgroup101.name,ボディ,赤ボディ,
+sakura.bindgroup102.name,ボディ,緑ボディ,
 sakura.bindgroup100.default,1
 
 sakura.menu,auto
 </span>
-----�����܂�----<br>
-<img src="animations/bind3.png" alt="�K��1�I�����钅���ւ��ݒ�"><br>
+----ここまで----<br>
+<img src="animations/bind3.png" alt="必ず1つ選択する着せ替え設定"><br>
 </p>
-<div class="title innerdiv1">�⑫</div>
+<div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-�f�t�H���g�́u�J�e�S������1�̂ݑ����A�S�ĊO�����Ƃ��v�́A�s���̂��ȗ��\�ł��B<br>
-�������A�����e�i���X���₷�����邽�߁A�Ⴆ�Έȉ��̂悤�ɋL�q���Ă����Ɨǂ��ł��B<br>
-<span class="code">sakura.bindoption.group,�X�q</span><br>
-���̂悤�ɋL�q���Ă����ƁA�u�L�q�Y��łȂ��A�Ӑ}�������Đݒ肵�Ă���v���Ƃ�������₷���Ȃ�A�ێ����y�ɂȂ�܂��B<br>
+デフォルトの「カテゴリ内の1つのみ装着可、全て外すことも可」は、行自体を省略可能です。<br>
+しかし、メンテナンスしやすくするため、例えば以下のように記述しておくと良いです。<br>
+<span class="code">sakura.bindoption.group,帽子</span><br>
+このように記述しておくと、「記述忘れでなく、意図があって設定している」ことが分かりやすくなり、維持が楽になります。<br>
 </p>
 </div>
 <p>
-��L�ݒ�ɂ��A�̂̐F��3�F���玩�R�ɐݒ�o����悤�ɂȂ�܂��B<br>
-�̂�S�Ď��O�����Ƃ͂ł��Ȃ��̂ŁA�炾�������V���Ă���󋵂ɂ͂Ȃ�܂���B<br>
+上記設定により、体の色を3色から自由に設定出来るようになります。<br>
+体を全て取り外すことはできないので、顔だけが浮遊している状況にはなりません。<br>
 </p>
 </div>
 
-<div class="title" id="bindmenu">�����ւ��̃��j���[�\��</div>
+<div class="title" id="bindmenu">着せ替えのメニュー表示</div>
 <div class="content">
 <p>
-�����ł́A�����ւ��ݒ�����j���[����I���o����悤�ɂ�����@���L�q���܂��B<br>
+ここでは、着せ替え設定をメニューから選択出来るようにする方法を記述します。<br>
 </p>
-<div class="title innerdiv1">�⑫</div>
+<div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-descript.txt�Ɂusakura.menu,auto�v�Ə����Ύ����I�Ƀ��j���[�𐶐����Ă����̂ŁA��{�I�ɂ͂��̒i���̐ݒ�͕s�v�ł��B<br>
-�����A���Ԃ����ւ�����A����̒����ւ������\���������Ȃ��ꍇ�ȂǂɁA���̐ݒ�͗L�p�ł��B<br>
+descript.txtに「sakura.menu,auto」と書けば自動的にメニューを生成してくれるので、基本的にはこの段落の設定は不要です。<br>
+ただ、順番を入れ替えたり、特定の着せ替えだけ表示したくない場合などに、この設定は有用です。<br>
 </p>
 </div>
 <p>
-�ȉ��̏C���y�ђǉ����i���u<a href="#init">��{�ݒ�</a>�v��surfaces.txt�ɍs���Ă�����̂Ƃ��܂��B<br>
-----��������----
+以下の修正及び追加が段落「<a href="#init">基本設定</a>」のsurfaces.txtに行われているものとします。<br>
+----ここから----
 <span class="code">
 surface0
 {
-	element0,base,f��.png,0,0
-	element1,overlay,f��.png,0,0
-	element2,overlay,f��.png,0,0
-	<span class="delete">element3,overlay,f�{�f�B.png,0,0</span> // ���̍s���폜
+	element0,base,f顔.png,0,0
+	element1,overlay,f口.png,0,0
+	element2,overlay,f目.png,0,0
+	<span class="delete">element3,overlay,f青ボディ.png,0,0</span> // この行を削除
 }
 
 surface1
 {
-	element0,base,f��.png,0,0
-	element1,overlay,f��.png,0,0
-	element2,overlay,f�ڕ�1.png,0,0
-	<span class="delete">element3,overlay,f�{�f�B.png,0,0</span> // ���̍s���폜
+	element0,base,f顔.png,0,0
+	element1,overlay,f口.png,0,0
+	element2,overlay,f目閉じ1.png,0,0
+	<span class="delete">element3,overlay,f青ボディ.png,0,0</span> // この行を削除
 }
 
 surface.append0-1
 {
-	// �A�j���[�V����100�� �����ւ��{�f�B
+	// アニメーション100番 着せ替え青ボディ
 	animation100.interval,bind
 	animation100.pattern0,overlay,1130,0,0,0
 
-	// �A�j���[�V����101�� �����ւ��ԃ{�f�B
+	// アニメーション101番 着せ替え赤ボディ
 	animation101.interval,bind
 	animation101.pattern0,overlay,1131,0,0,0
 
-	// �A�j���[�V����102�� �����ւ��΃{�f�B
+	// アニメーション102番 着せ替え緑ボディ
 	animation102.interval,bind
 	animation102.pattern0,overlay,1132,0,0,0
 
-	// �A�j���[�V����110�� �����ւ��X�q
+	// アニメーション110番 着せ替え帽子
 	animation110.interval,bind
 	animation110.pattern0,overlay,1040,0,0,0
 }
 
-// �A�j���[�V�����p�T�[�t�F�X
+// アニメーション用サーフェス
 surface1030
 {
-	element0,base,f�{�f�B.png,0,0
+	element0,base,f青ボディ.png,0,0
 }
 
 surface1031
 {
-	element0,base,f�ԃ{�f�B.png,0,0
+	element0,base,f赤ボディ.png,0,0
 }
 
 surface1032
 {
-	element0,base,f�΃{�f�B.png,0,0
+	element0,base,f緑ボディ.png,0,0
 }
 
 surface1040
 {
-	element0,base,f�X�q.png,0,0
+	element0,base,f帽子.png,0,0
 }
 </span>
-----�����܂�----<br>
-�ȉ��̒ǉ����i���u<a href="#init">��{�ݒ�</a>�v��descript.txt�ɍs���Ă�����̂Ƃ��܂��B<br>
-----��������----
+----ここまで----<br>
+以下の追加が段落「<a href="#init">基本設定</a>」のdescript.txtに行われているものとします。<br>
+----ここから----
 <span class="code">
-sakura.bindoption.group,�X�q
-sakura.bindgroup110.name,�X�q,�n�b�g,�X�q�T���l�C��.png
-sakura.bindoption.group,�{�f�B,mustselect
-sakura.bindgroup100.name,�{�f�B,�{�f�B,
-sakura.bindgroup101.name,�{�f�B,�ԃ{�f�B,
-sakura.bindgroup102.name,�{�f�B,�΃{�f�B,
+sakura.bindoption.group,帽子
+sakura.bindgroup110.name,帽子,ハット,帽子サムネイル.png
+sakura.bindoption.group,ボディ,mustselect
+sakura.bindgroup100.name,ボディ,青ボディ,
+sakura.bindgroup101.name,ボディ,赤ボディ,
+sakura.bindgroup102.name,ボディ,緑ボディ,
 sakura.bindgroup100.default,1
 
-<span class="delete">sakura.menu,auto</span> // ���̍s���폜
+<span class="delete">sakura.menu,auto</span> // この行を削除
 sakura.menuitem0,110
 sakura.menuitem1,-
 sakura.menuitem2,100
 sakura.menuitem3,101
 sakura.menuitem4,102
 </span>
-----�����܂�----<br>
-�����ւ��A�j���[�V�������A�ǂ̏��ԂŃ��j���[�ɕ\�����邩�́Adescript.txt�ɋL�q���܂��B<br>
-��L�͒����ւ��ƕ\���̏��Ԃ������Ă��܂����A�D���ȏ��ɕύX������A�L�q���Ȃ����ƂŃ��[�U���G��Ȃ��悤�ɂ�����o���܂��B<br>
-<span class="code">sakura.menuitem????</span>�i????�͐����j�����j���[�ł̕\������\���Ă��܂��B<br>
-�E���̐����́Asakura.bindgroup�`�ɓ��͂����ԍ��ł��B<br>
-<img src="animations/bind4.png" alt="descript.txt�̕\�L"><br>
-�����Ƀn�C�t�����L�q����ƁA�S�[�X�g�̒����ւ����j���[�Ɍr�����������Ƃ��o���܂��B<br>
-�i��L�ł�<span class="code">sakura.menuitem1,-</span>�Ƃ����\�L�j<br>
-descript.txt�Ɉȏオ�L�q���Ă���ƁA�S�[�X�g���̕\���͈ȉ��ƂȂ�܂��B<br>
-<img src="animations/bind5.png" alt="�S�[�X�g���j���[�ł̒����ւ��\��"><br>
+----ここまで----<br>
+着せ替えアニメーションを、どの順番でメニューに表示するかは、descript.txtに記述します。<br>
+上記は着せ替えと表示の順番が揃っていますが、好きな順に変更したり、記述しないことでユーザが触れないようにしたり出来ます。<br>
+<span class="code">sakura.menuitem????</span>（????は数字）がメニューでの表示順を表しています。<br>
+右側の数字は、sakura.bindgroup〜に入力した番号です。<br>
+<img src="animations/bind4.png" alt="descript.txtの表記"><br>
+ここにハイフンを記述すると、ゴーストの着せ替えメニューに罫線を引くことが出来ます。<br>
+（上記では<span class="code">sakura.menuitem1,-</span>という表記）<br>
+descript.txtに以上が記述してあると、ゴースト側の表示は以下となります。<br>
+<img src="animations/bind5.png" alt="ゴーストメニューでの着せ替え表示"><br>
 </p>
 </div>
 
-<div class="title" id="bindanimation">�����ւ��̃A�j���[�V����</div>
+<div class="title" id="bindanimation">着せ替えのアニメーション</div>
 <div class="content">
 <p>
-�����ւ��p�[�c�ɁA�A�j���[�V���������邱�Ƃ��o���܂��B<br>
-�����ł́A�T���v���Ƃ��āA�X�q���㉺�ɂӂ�ӂ킵������Ƃ����A�j���[�V������ݒ肵�܂��B<br>
-�i���u<a href="#bindbasic">�����ւ���{</a>�v�ŋL�q�������e���Asurfaces.txt��descript.txt�ɐݒ�ς݂ł���Ƃ��܂��B<br>
-��L�̏�ԂŁA�ȉ���surfaces.txt�ɋL�q����ƁA�X�q�����Ԃ������ɂ����A�A�j���[�V���������s�����悤�ɂȂ�܂��B<br>
-----��������----
+着せ替えパーツに、アニメーションをつけることも出来ます。<br>
+ここでは、サンプルとして、帽子が上下にふわふわし続けるというアニメーションを設定します。<br>
+段落「<a href="#bindbasic">着せ替え基本</a>」で記述した内容が、surfaces.txtとdescript.txtに設定済みであるとします。<br>
+上記の状態で、以下をsurfaces.txtに記述すると、帽子をかぶせた時にだけ、アニメーションが実行されるようになります。<br>
+----ここから----
 <span class="code">
 surface.append0-1
 {
-	// �A�j���[�V����110�� �����ւ��X�q+�A�j���[�V����
-	<span class="delete">animation110.interval,bind</span> // ���̍s���폜
-	<span class="delete">animation110.pattern0,overlay,1040,0,0,0</span> // ���̍s���폜
+	// アニメーション110番 着せ替え帽子+アニメーション
+	<span class="delete">animation110.interval,bind</span> // この行を削除
+	<span class="delete">animation110.pattern0,overlay,1040,0,0,0</span> // この行を削除
 	animation110.interval,<span class="emphasis">bind+always</span>
 	animation110.pattern0,overlay,1040,0,0,0
 	animation110.pattern1,overlay,1040,200,0,1
@@ -566,68 +566,68 @@ surface.append0-1
 	animation110.pattern6,overlay,1040,100,0,0
 }
 </span>
-----�����܂�----<br>
-bind�ɂ́A�u+�v�Ōq���邱�ƂŁA�A�j���[�V�����^�C�~���O���w��ł��܂��B<br>
-always�́A���s���ꑱ����A�j���[�V�����ł��B<br>
-�A�j���[�V�����̍Đ����I���ƁA�����Ƀp�^�[��0����Đ����J�n����܂��B<br>
+----ここまで----<br>
+bindには、「+」で繋げることで、アニメーションタイミングを指定できます。<br>
+alwaysは、実行され続けるアニメーションです。<br>
+アニメーションの再生が終わると、すぐにパターン0から再生が開始されます。<br>
 </p>
-<div class="title innerdiv1">�⑫</div>
+<div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-�u�����ւ����s��ꂽ����1�x�����N����v�Ƃ����̂́A�V�F�����ł͐ݒ�ł��܂���B<br>
-�i�A�j���[�V�����^�C�~���Orunonce�ł̓T�[�t�F�X���ω����邲�ƂɃA�j���[�V�������Đ�����Ă��܂��j<br>
-�������̂́A�S�[�X�g���̎����ŋL�q���邱�Ƃŉ\�ł��B<br>
+「着せ替えが行われた時に1度だけ起こる」というのは、シェル側では設定できません。<br>
+（アニメーションタイミングrunonceではサーフェスが変化するごとにアニメーションが再生されてしまう）<br>
+実装自体は、ゴースト側の辞書で記述することで可能です。<br>
 </p>
 <ol type="1">
-<li>�A�j���[�V�����^�C�~���O��never�̃A�j���[�V����������Ă����i�b��I��100�ԂƂ���j</li>
-<li>�S�[�X�g�̎�����<a href="http://ssp.shillest.net/ukadoc/manual/list_shiori_event.html#OnDressupChanged">OnDressUpChanged</a>�C�x���g���L�q</li>
-<li>��L�����ň����𔻕ʂ��A����̒����ւ��p�[�c���������ꂽ�Ɣ��f������\i[100]���g�[�N�o�͂���</li>
+<li>アニメーションタイミングがneverのアニメーションを作っておく（暫定的に100番とする）</li>
+<li>ゴーストの辞書に<a href="http://ssp.shillest.net/ukadoc/manual/list_shiori_event.html#OnDressupChanged">OnDressUpChanged</a>イベントを記述</li>
+<li>上記内部で引数を判別し、特定の着せ替えパーツが装着されたと判断したら\i[100]をトーク出力する</li>
 </ol>
 <p>
-�ȉ��ɗ��X��YAYA�ŏ������ꍇ�̃T���v�����L�q���܂��B<br>
-�N�����p�[�c���u�n�b�g�v�𑕒�������A���̃L�����N�^�[��\i[100]��\�����܂��B<br>
-���X<br>
-----��������----
+以下に里々とYAYAで書いた場合のサンプルを記述します。<br>
+誰かがパーツ名「ハット」を装着したら、そのキャラクターに\i[100]を表示します。<br>
+里々<br>
+----ここから----
 <span class="code">
-��OnDressupChanged
-�iwhen,�icompare�i�o�C�g�l,1�j�iR1�j�i�o�C�g�l,1�j�n�b�g�j &amp;&amp; �iR2�j == 1,
-	\p[�iR0�j]\i[100]
-�j
+＠OnDressupChanged
+（when,（compare（バイト値,1）（R1）（バイト値,1）ハット） &amp;&amp; （R2） == 1,
+	\p[（R0）]\i[100]
+）
 </span>
-----�����܂�----<br>
+----ここまで----<br>
 YAYA<br>
-----��������----
+----ここから----
 <span class="code">
 OnDressupChanged
 {
-	if ( reference[1] == '�n�b�g' &amp;&amp; reference[2] == '1')
+	if ( reference[1] == 'ハット' &amp;&amp; reference[2] == '1')
 	{
 		'\p['+ reference[1] +']\i[100]'
 	}
 }
 </span>
-----�����܂�----<br>
+----ここまで----<br>
 </p>
 </div>
 </div>
 
-<div class="title" id="sample">�T���v���_�E�����[�h</div>
+<div class="title" id="sample">サンプルダウンロード</div>
 <div class="content">
 <p>
-�����ł́A����̋L�q�Ɏg�����S�v�f�������ꂽ�V�F����surfaces.txt��descript.txt�����J���܂��B<br>
-�|�[�Y���Ⴄ�T�[�t�F�X�ɂ��ݒ肵�Ă���̂ŁA�����̃|�[�Y����������ꍇ�͎Q�l�ɂ��Ă��������B<br>
-�|�[�Y��1�����̏ꍇ�́A�u�������|�[�Y�v�ȍ~�͑S�ĕs�v�ł��B<br>
-<a href="https://dl.dropboxusercontent.com/u/68134572/ghost/pages/etc/shell/animations/bindsample.zip">����쐬�����V�F��</a><br>
+ここでは、今回の記述に使った全要素を取り入れたシェルとsurfaces.txtとdescript.txtを公開します。<br>
+ポーズが違うサーフェスにも設定しているので、複数のポーズ差分がある場合は参考にしてください。<br>
+ポーズが1つだけの場合は、「横向きポーズ」以降は全て不要です。<br>
+<a href="https://dl.dropboxusercontent.com/u/68134572/ghost/pages/etc/shell/animations/bindsample.zip">今回作成したシェル</a><br>
 </p>
 </div>
 
-<div class="title" id="etc">���̑����</div>
+<div class="title" id="etc">その他解説</div>
 <div class="content">
 <p>
-�X�J�[�g�߂������p�N�ȂǁA�u�摜����ɏd�˂�v�A�j���[�V�������Љ�܂������A����ȊO�̕��@������������܂��B<br>
-�����ł́A�u�摜���̂̏㏑���v���s���A�j���[�V�����̃T���v�����L�q���܂��B<br>
-�K���⎨�Ȃǂ��҂傱�҂傱�����A�j���[�V���������ۂɎg���܂��B<br>
-----��������----
+スカートめくりや口パクなど、「画像を上に重ねる」アニメーションを紹介しましたが、それ以外の方法もいくつかあります。<br>
+ここでは、「画像自体の上書き」を行うアニメーションのサンプルを記述します。<br>
+尻尾や耳などがぴょこぴょこ動くアニメーションを作る際に使えます。<br>
+----ここから----
 <span class="code">
 surface0
 {
@@ -636,9 +636,9 @@ surface0
 
 surface.append0
 {
-	// �A�j���[�V����10�� �K�����p�^�p�^����
-	// ���b�A1/5�̊m���ŃA�j���[�V��������������
-	// �A�j���[�V�������́A0.15�b�i150�~���b�j�����ɉ摜���؂�ւ��
+	// アニメーション10番 尻尾をパタパタする
+	// 毎秒、1/5の確率でアニメーションが発動する
+	// アニメーション中は、0.15秒（150ミリ秒）おきに画像が切り替わる
 	animation10.interval,ramdom,5
 	animation10.pattern0,<span class="emphasis">replace</span>,1050,0,0,0
 	animation10.pattern1,<span class="emphasis">replace</span>,1051,150,0,0
@@ -646,43 +646,43 @@ surface.append0
 	animation10.pattern3,<span class="emphasis">replace</span>,-1,150,0,0
 }
 
-// �A�j���[�V�����p�T�[�t�F�X
-// �ȉ���surface0.png�Ɠ����T�C�Y�̓K�؂ȉ摜���p�ӂ���Ă���Ƃ���
+// アニメーション用サーフェス
+// 以下はsurface0.pngと同じサイズの適切な画像が用意されているとする
 surface1050
 {
-	element0,base,�K���A�j��0.png
+	element0,base,尻尾アニメ0.png
 }
 
 surface1051
 {
-	element0,base,�K���A�j��1.png
+	element0,base,尻尾アニメ1.png
 }
 </span>
-----�����܂�----<br>
+----ここまで----<br>
 </p>
 </div>
 
 <div class="content_separation">
 <p>
-2014/04/06 �쐬<br>
-2014/04/27 �����ւ��̃��j���[�\���������ōs�����@�����M<br>
-2014/12/18 ukadoc�����N�C��<br>
-2015/01/05 �뎚�C��<br>
-2015/01/10 html5�̏����G���[���C��<br>
-2015/01/11 �����ւ����ɍĐ�����A�j���[�V������YAYA�̃T���v���ǉ�
+2014/04/06 作成<br>
+2014/04/27 着せ替えのメニュー表示を自動で行う方法を加筆<br>
+2014/12/18 ukadocリンク修正<br>
+2015/01/05 誤字修正<br>
+2015/01/10 html5の書式エラーを修正<br>
+2015/01/11 着せ替え時に再生するアニメーションにYAYAのサンプル追加
 </p>
 </div>
 
 <div class="content_separation">
 <p>
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/2.1/jp/"><img alt="�N���G�C�e�B�u�E�R�����Y�E���C�Z���X" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.1/jp/88x31.png" /></a><br />���� ��i �� <a rel="license" href="http://creativecommons.org/licenses/by-sa/2.1/jp/">�N���G�C�e�B�u�E�R�����Y �\�� - �p�� 2.1 ���{ ���C�Z���X�̉��ɒ񋟂���Ă��܂��B</a><br>
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/2.1/jp/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.1/jp/88x31.png" /></a><br />この 作品 は <a rel="license" href="http://creativecommons.org/licenses/by-sa/2.1/jp/">クリエイティブ・コモンズ 表示 - 継承 2.1 日本 ライセンスの下に提供されています。</a><br>
 </p>
 <p>
-�u�f���v�Ɋւ��鎑���W�Ƃ��Ĉ��p����ꍇ�Ɍ���A���̃������p�u���b�N�h���C���Ƃ��Ĉ����Ă����܂��܂���B
+「伺か」に関する資料集として引用する場合に限り、このメモをパブリックドメインとして扱ってもかまいません。
 </p>
 </div>
 
 </div>
-&copy; 2014 ���[��ł��[
+&copy; 2014 あーるでぃー
 </body>
 </html>
