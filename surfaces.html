@@ -2,6 +2,9 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="author" content="あーるでぃー">
+<meta name="keywords" content="伺か,SSP,シェル,ゴースト">
+<meta name="description" content="SSPで動作するシェルの作り方">
 <link rel="stylesheet" type="text/css" href="rayout.css">
 <style>
 span.code { font-family:monospace; white-space:pre; }
@@ -241,6 +244,15 @@ readme.txtには、必要に応じて好きな情報を記入しておきまし�
 自分で絵を用意する場合は、<a href="http://rakudaya.sakura.tv/sai_pna.html">シェル作成支援文書</a>を参考にしてみてください。<br>
 このメモでは、透過pngを使う前提で記述しています。<br>
 </p>
+<div class="title innerdiv1">補足</div>
+<div class="content innerdiv1">
+<p>
+画像のサイズ（縦横のpixel数）は、キャラクターごとに全て同じサイズにした方がよいです。<br>
+理由は、シェル画像の大きさを基準にバルーン（吹き出し）の表示位置が決まるためです。<br>
+ポーズごとに大きさが違うと、ポーズが変化するたびにバルーンの位置がずれ、文字が読みづらくなります。<br>
+上記のサンプルでは、surface0.pngとsurface1.png、surface10.pngとsurface11.pngのサイズを合わせています。<br>
+</p>
+</div>
 </div>
 </div>
 
@@ -864,6 +876,7 @@ surface1001
 2015/01/05 サンプルを修正<br>
 2015/01/10 html5の書式エラーを修正<br>
 2015/01/13 文字コードをUTF-8に変更<br>
+2015/01/15 画像サイズを統一するのを推奨する旨を追加<br>
 </p>
 </div>
 
