@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="あーるでぃー">
-<meta name="keywords" content="伺か,SSP">
+<meta name="keywords" content="伺か,SSP,シェル,着せ替え">
 <meta name="description" content="SSPで動作する着せ替えの作り方">
 <link rel="stylesheet" type="text/css" href="rayout.css">
 <style>
@@ -37,7 +37,7 @@ span.warning { color:#ff0000; }
 <div class="title" id="summary">概要</div>
 <div class="content">
 <p>
-このメモは、「<a href="http://earlduant.github.io/ukagaka-shell-description/surfaces.html">シェルの作り方</a>」の知識を前提としています。<br>
+このメモは、「<a href="https://dl.dropboxusercontent.com/u/68134572/ghost/pages/etc/shell/surfaces.html">シェルの作り方</a>」の知識を前提としています。<br>
 その上で、着せ替えやアニメーションの設定をサンプルを交えて簡易的に解説します。<br>
 基本的な知識は、<a href="http://ssp.shillest.net/ukadoc/manual/index.html">ukadoc</a>に詳しい説明があります。<br>
 SSPの専用記述を用いるため、このメモの記述を使うと、ゴーストが<span class="emphasis">SSPでしか動作しなくなります</span>。<br>
@@ -62,7 +62,7 @@ SSPの専用記述を用いるため、このメモの記述を使うと、ゴ�
 <p>
 開発者機能は色々便利ですが、自分のゴースト以外で使うと予期しないバグを起こす可能性があることを意識しておいてください。<br>
 例：「スクリプトログ」から過去のスクリプトを実行することにより、本来起こりえない処理が行われ、セーブデータが破損する<br>
-上記の例では、フラグをセットしたりする処理が実行されることがあり、それによって致命的なエラーを引き起こします。<br>
+上記の例では、フラグをセットしたりする処理が実行されることがあり（特に選択肢があるもの）、それによって致命的なエラーを引き起こします。<br>
 </p>
 </div>
 <p>
@@ -605,7 +605,7 @@ OnDressupChanged
 {
 	if ( reference[1] == 'ハット' &amp;&amp; reference[2] == '1' )
 	{
-		'\p[' + reference[1] + ']\i[100]'
+		'\p[' + reference[0] + ']\i[100]'
 	}
 }
 </span>
@@ -674,7 +674,7 @@ surface1051
 2015/01/10 html5の書式エラーを修正<br>
 2015/01/11 着せ替え時に再生するアニメーションにYAYAのサンプル追加<br>
 2015/01/13 文字コードをUTF-8に変更<br>
-2015/03/09 リンク先の変更<br>
+2015/03/20 着せ替え時アニメーション再生のサンプルコードを修正、一部記述修正<br>
 </p>
 </div>
 
