@@ -187,6 +187,32 @@ accept,さくら（追加シェルを作るゴーストの\0側の名前）
 </p>
 </div>
 </div>
+<div class="title innerdiv1">表示位置に関して</div>
+<div class="content innerdiv1">
+<p>
+シェルの位置は、画面下に張り付いて表示され、ドラッグ移動でも左右にしか移動できません。<br>
+移動方法を変更したい場合は以下のいずれかを追加して記述してください。
+<ul>
+<li>画面上に張り付き
+<span class="code">
+sakura.seriko.alignmenttodesktop,top
+</span>
+</li>
+<li>張り付きなしの自由移動
+<span class="code">
+sakura.seriko.alignmenttodesktop,free
+</span>
+</li>
+</ul>
+上記は本体側の設定です。<br>
+相方側の場合、「sakura」を「kero」にして追加してください。<br>
+3人めは「sakura」を「char2」とします。
+</p>
+<p>
+アクティブウインドウの追従はここでは出来ません。
+<a href="http://ukiya.sakura.ne.jp/index.php?%E8%87%AA%E4%BD%9CSAORI">Osuwari.dll</a>というSAORIを使うことで実現できます。
+</p>
+</div>
 </div>
 
 <div class="title" id="surfaces">surfaces.txtについて</div>
@@ -879,6 +905,7 @@ surface1001
 2015/01/15 画像サイズを統一するのを推奨する旨を追加<br>
 2015/01/18 一部表示が崩れていたのを修正<br>
 2015/03/09 タイトルとリンク先の変更<br>
+2015/03/20 表示位置の設定方法を加筆<br>
 </p>
 </div>
 
