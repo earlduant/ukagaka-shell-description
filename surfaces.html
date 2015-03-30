@@ -29,6 +29,7 @@ span.warning { color:#ff0000; }
 <a href="#collision">領域作成</a><br>
 <a href="#animation">アニメーション</a><br>
 <a href="#element">サーフェスの合成</a><br>
+<a href="#addshell">追加シェルとして配布する</a><br>
 <a href="#error">よくあるエラーと原因</a><br>
 <a href="#sample">記述内容全文</a><br>
 </p>
@@ -96,6 +97,39 @@ SSPではsurface0.pngとsurface10.pngがなくても動きますが、伺かの�
 必須ファイルが足りない場合、他サービスを受ける時に不具合が起こる可能性があります。<br>
 </p>
 </div>
+<p>
+ゴーストのデータの構成は以下のようになっており、今回触るのは[ゴーストフォルダ]/shell/masterフォルダです。
+</p>
+<ul>
+<li style="list-style-type: disc">[ゴーストフォルダ]
+	<ul>
+	<li style="list-style-type: disc">ghostフォルダ
+		<ul>
+		<li style="list-style-type: disc">masterフォルダ
+			<ul>
+			<li style="list-style-type: circle">descript.txt</li>
+			<li style="list-style-type: circle">shiori.dll</li>
+			<li style="list-style-type: circle">その他辞書ファイルなど</li>
+			</ul>
+		</li>
+		</ul>
+	</li>
+	<li style="list-style-type: disc">shellフォルダ
+		<ul>
+		<li style="list-style-type: disc">masterフォルダ
+			<ul>
+			<li style="list-style-type: circle">descript.txt</li>
+			<li style="list-style-type: circle">surface0.png</li>
+			<li style="list-style-type: circle">surface10.png</li>
+			</ul>
+		</li>
+		</ul>
+	</li>
+	<li style="list-style-type: circle">install.txt</li>
+	<li style="list-style-type: circle">readme.txt</li>
+	</ul>
+</li>
+</ul>
 </div>
 
 <div class="title" id="descript">descript.txtの書き方</div>
@@ -146,46 +180,11 @@ idとnameが「master」であるのは通例です。<br>
 idは半角の英数字のみ、nameは好きな名前をつけることが出来ます。<br>
 ですが、半角のカンマやスラッシュなどの記号はゴースト側で問題を起こすことがあるので避けた方が無難です。<br>
 idはSSPが内部的に管理するもので、nameがユーザーの目に見えるシェルの名前です。<br>
-例：<br><span class="code">
+例：<span class="code">
 id,addshell
 name,追加シェル
 </span>
 </p>
-<div class="title innerdiv2">追加シェルに関して</div>
-<div class="content innerdiv2">
-<p>
-ゴーストのマスターシェルではなく、追加シェルとして配布する場合は、<a href="http://ssp.shillest.net/ukadoc/manual/descript_install.html">install.txt</a>が必要となります。<br>
-install.txtの書き方の例：<br>
-----ここから----<span class="code">
-charset,Shift_JIS
-type,shell
-name,追加シェル（シェルの名前）
-directory,addshell（インストール時に作られるフォルダ名）
-accept,さくら（追加シェルを作るゴーストの\0側の名前）
-</span>
-----ここまで----<br>
-上記install.txtを、descript.txtと同じフォルダに置きます。<br>
-構成は以下のようになります。
-</p>
-<ul>
-<li>フォルダ
-<ul>
-<li>install.txt</li>
-<li>descript.txt</li>
-<li>readme.txt</li>
-<li>surface0.png</li>
-<li>surface10.png</li>
-<li>surfaces.txt</li>
-</ul>
-</li>
-</ul>
-<p>
-「profile」というフォルダがある場合、フォルダごと削除してください。<br>
-上記をフォルダに格納しzip圧縮すれば、追加シェルとして扱われるファイルの完成です。<br>
-解凍時に、フォルダが入れ子にならないように注意してください。<br>
-拡張子を.narに変えると、伺か関連ファイルと認識されるので、アップ先に拡張子制限がなければ変更しておきましょう。
-</p>
-</div>
 </div>
 <div class="title innerdiv1">表示位置に関して</div>
 <div class="content innerdiv1">
@@ -204,8 +203,8 @@ sakura.seriko.alignmenttodesktop,free
 </span>
 </li>
 </ul>
-上記は本体側の設定です。<br>
-相方側の場合、「sakura」を「kero」にして追加してください。<br>
+上記はメインキャラ側の設定です。<br>
+サブキャラ側の場合、「sakura」を「kero」にして追加してください。<br>
 3人めは「sakura」を「char2」とします。
 </p>
 <p>
@@ -631,6 +630,43 @@ baseとoverlay以外の画像貼り付け方法は、ukadocにまとめられて
 </p>
 </div>
 
+<div class="title" id="addshell">追加シェルとして配布する</div>
+<div class="content">
+<p>
+ゴーストのマスターシェルではなく、追加シェルとして配布する場合は、<a href="http://ssp.shillest.net/ukadoc/manual/descript_install.html">install.txt</a>が必要となります。<br>
+install.txtの書き方の例：<br>
+----ここから----<span class="code">
+charset,Shift_JIS
+type,shell
+name,追加シェル（シェルの名前）
+directory,addshell（インストール時に作られるフォルダ名）
+accept,さくら（追加シェルを作るゴーストの\0側の名前）
+</span>
+----ここまで----<br>
+上記install.txtを、descript.txtと同じフォルダに置きます。<br>
+nameの項目は、descript.txtと合わせてください。<br>
+最低限の構成は以下のようになります。<br>
+</p>
+<ul>
+<li style="list-style-type: disc">[任意の名前のフォルダ]
+	<ul>
+	<li style="list-style-type: circle">descript.txt</li>
+	<li style="list-style-type: circle">install.txt</li>
+	<li style="list-style-type: circle">readme.txt</li>
+	<li style="list-style-type: circle">surface0.png</li>
+	<li style="list-style-type: circle">surface10.png</li>
+	<li style="list-style-type: circle">surfaces.txt</li>
+	</ul>
+</li>
+</ul>
+<p>
+「profile」というフォルダがある場合、フォルダごと削除してください。<br>
+上記をフォルダに格納しzip圧縮すれば、追加シェルとして扱われるファイルの完成です。<br>
+解凍時に、フォルダが入れ子にならないように注意してください。フォルダごと圧縮すれば大抵OKです。<br>
+拡張子を.narに変えると、伺か関連ファイルと認識されるので、アップ先に拡張子制限がなければ変更しておきましょう。
+</p>
+</div>
+
 <div class="title" id="error">よくあるエラーと原因</div>
 <div class="content">
 <p>
@@ -906,6 +942,7 @@ surface1001
 2015/01/18 一部表示が崩れていたのを修正<br>
 2015/03/09 タイトルとリンク先の変更<br>
 2015/03/20 表示位置の設定方法を加筆<br>
+2015/03/30 追加シェルに関するものを別段落に分離、キャラクタースコープを「メインキャラ」「サブキャラ」で統一<br>
 </p>
 </div>
 
