@@ -32,6 +32,7 @@ span.warning { color:#ff0000; }
 <a href="#addshell">追加シェルとして配布する</a><br>
 <a href="#error">よくあるエラーと原因</a><br>
 <a href="#sample">記述内容全文</a><br>
+<a href="#link">外部サイトの紹介</a><br>
 </p>
 </div>
 
@@ -44,9 +45,8 @@ span.warning { color:#ff0000; }
 <p>
 ここでは、「詳しい書き方よりも、ともかく最低限の動作をするシェルを作りたい」という方を対象としています。<br>
 さらに、<a href="http://ssp.shillest.net/">SSP</a>を使うことを想定しており、<span class="emphasis">SSPでのみ実装されている機能を使用します</span>。<br>
-<a href="http://usada.sakura.vg/">materia</a>や<a href="http://crow.aqrs.jp/">C.R.O.W</a>など他ベースウェアでは動作しないこともあります。<br>
-上記ベースウェアの対応も考える場合は、このメモは参考になりません。<br>
-materiaに対応させる場合は、<a href="http://usada.sakura.vg/contents/specification.html">materia本家の仕様書</a>の「Shell」「SERIKO / MAYUNA」を確認してください。<br>
+SSP以外では動作しない可能性が高いです。<br>
+他のものでも動かしたいと考える場合は、このメモは参考になりません。<br>
 また、surfaces.txtの書き方は、古い書き方と新しい書き方（SERIKO/1.xとSERIKO/2.0）がありますが、新しい書き方で記述しています。<br>
 古い書き方は2001年頃、新しい書き方は2002年頃に整備されました。<br>
 別の資料と矛盾が見られた場合は、古い書き方の資料を見ている可能性があります。<br>
@@ -54,9 +54,9 @@ materiaに対応させる場合は、<a href="http://usada.sakura.vg/contents/sp
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-2015年現在では上記のうち開発が続いているのはSSPのみです。<br>
+2015年現在では開発が続いているのはSSPのみです。<br>
 SSPでのみ動作確認したゴーストも多く配布されている点を留意してください。<br>
-（materiaの最終更新は2002年、C.R.O.Wの最終更新は2005年）<br>
+（代表的なものとして、materiaの最終更新は2002年、C.R.O.Wの最終更新は2005年）<br>
 </p>
 </div>
 <p>
@@ -86,7 +86,7 @@ surface0.pngはメインキャラの基本ポーズ、surface10.pngはサブキ�
 また、0と10だけでなく、任意のsurface????.pngを使用出来ます。<br>
 「?」は半角数字なら何桁でも良いですが、頭の0は無視されます。<br>
 例えば<span class="emphasis">surface0000.pngとsurface0.pngは両方ともサーフェス0番に表示される画像となる</span>ので注意してください。<br>
-このようなサーフェス番号が重複するファイルが無いようにしてください。<br>
+上記のような、サーフェス番号が重複するファイルが存在しないようにしてください。<br>
 なお、透過色が適用されるので、<span class="emphasis">pngファイルは半透明の画像なども使用できます</span>。<br>
 </p>
 <div class="title innerdiv1">補足</div>
@@ -121,6 +121,7 @@ SSPではsurface0.pngとsurface10.pngがなくても動きますが、伺かの�
 			<li style="list-style-type: circle">descript.txt</li>
 			<li style="list-style-type: circle">surface0.png</li>
 			<li style="list-style-type: circle">surface10.png</li>
+			<li style="list-style-type: circle">その他画像など</li>
 			</ul>
 		</li>
 		</ul>
@@ -197,6 +198,11 @@ name,追加シェル
 sakura.seriko.alignmenttodesktop,top
 </span>
 </li>
+<li>画面右に張り付き
+<span class="code">
+sakura.seriko.alignmenttodesktop,right
+</span>
+</li>
 <li>張り付きなしの自由移動
 <span class="code">
 sakura.seriko.alignmenttodesktop,free
@@ -206,10 +212,6 @@ sakura.seriko.alignmenttodesktop,free
 上記はメインキャラ側の設定です。<br>
 サブキャラ側の場合、「sakura」を「kero」にして追加してください。<br>
 3人めは「sakura」を「char2」とします。
-</p>
-<p>
-アクティブウインドウの追従はここでは出来ません。
-<a href="http://ukiya.sakura.ne.jp/index.php?%E8%87%AA%E4%BD%9CSAORI">Osuwari.dll</a>というSAORIを使うことで実現できます。
 </p>
 </div>
 </div>
@@ -241,35 +243,27 @@ sakura.seriko.alignmenttodesktop,free
 サンプルとして以下の絵を用意しました。<br>
 元の画像は、<a href="http://catbottle.sakura.ne.jp/">ボトル猫</a>様が公開されているフリーシェルです。<br>
 <img src="surfaces/files.jpg" alt="用意したファイル"><br>
-pngファイルの白い部分は、透過色に設定しています。<br>
+pngファイルの白い部分は、アルファ値を100%（完全な透明）に設定しています。<br>
 main_blink1.pngはまばたき用の半目、main_blink2.pngは目閉じです。<br>
-surface0.pngとsurface10.pngを除く画像ファイルは、名称を好きなようにつけてかまいません。<br>
-surface????.pngという名前のファイルのみが特別な扱いを受けます。<br>
-</p>
+画像ファイルは、名称を好きなようにつけてかまいません。<br>
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-特別な扱いとは、element0指定がない場合に、「element0,base,surface????.png,0,0」が補完されるようになることです。<br>
-（上記の書き方については「領域作成」の段で記述しています）<br>
-element0指定の記述を省略出来ますが、記述しておいた方がよいです。<br>
+「surface????.png」と名前をつけた場合のみ、自動的に画像を設定してくれる効果があります。<br>
+例えば、surface1.pngがあれば、サーフェス1番を指定すると画像が自動的に設定されます。<br>
 </p>
 </div>
+</p>
 <p>
 上記まばたき用ファイルは、目閉じのみを用意したり、半目のパターンを増やしたりすることもできます。<br>
 ですが、ここでは最低限の構成として上記のようにしました。<br>
 また、メインキャラとサブキャラに、差分を1枚ずつ用意しました。<br>
 </p>
 <p>
-readme.txtには、必要に応じて好きな情報を記入しておきましょう。<br>
+readme.txtには、好きな情報を記入しておきましょう。<br>
+大抵は、作者の名前、コンタクト先、シェルの名前などを書くことが多いです。<br>
 フリーシェルを使用した場合は、フリーシェルに同梱されていたreadme.txtをそのまま同梱することが多いです。<br>
 </p>
-<div class="title innerdiv1">補足</div>
-<div class="content innerdiv1">
-<p>
-自分で絵を用意する場合は、<a href="http://rakudaya.sakura.tv/sai_pna.html">シェル作成支援文書</a>を参考にしてみてください。<br>
-このメモでは、透過pngを使う前提で記述しています。<br>
-</p>
-</div>
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
@@ -290,21 +284,6 @@ readme.txtには、必要に応じて好きな情報を記入しておきまし�
 基本的に、<span class="emphasis">部位判定の領域は四角形で表され、左上と右下の座標を指定</span>します。<br>
 楕円や多角形でも指定できますが、ここでは触れません。<br>
 </p>
-<div class="title innerdiv1">補足</div>
-<div class="content innerdiv1">
-<p>
-フリーソフトウェアとして、判定定義の支援ソフトも存在します。<br>
-</p>
-<ul>
-<li><a href="http://www.geocities.jp/poskoma/#content_1_11">Coordin</a></li>
-<li><a href="http://ccm.sherry.jp/koropeta/">ころぺた</a></li>
-<li><a href="http://wikiwiki.jp/satolist/">さとりすと</a>（本来は里々記述支援ソフト）</li>
-</ul>
-<p>
-上記ソフトウェアの使い方などはここでは説明を省きます。<br>
-必要に応じて調べてください。<br>
-</p>
-</div>
 <p>
 ここでは、Windows付属のペイントで座標を取得する方法を示します。<br>
 </p>
@@ -352,7 +331,12 @@ surface11
 }
 </span>
 ----ここまで----<br>
-最初のcharset,Shift_JISとdescript{ version,1 }は、必ずファイルの先頭に書いてください。<br>
+最初の<span class="code">charset,Shift_JIS</span>と<span class="code">descript{ version,1 }</span>は、必ずファイルの先頭に書いてください。<br>
+それぞれのサーフェスは、下の行のように、記述します。先頭の空白はあってもなくても変わりません。見やすいか否かだけです。
+<span class="code">surface0
+{
+	ここにサーフェス0番の設定を記述
+}</span>
 <span class="code">element0,base,????.png,0,0</span>で始まる表記は、表示する画像の指定です。<br>
 1枚の画像を表示するだけの場合は、上記のように記述し、????.pngを使用する画像の名称に置き換えてください。<br>
 これで、サーフェス0、1、10、11が使用可能となりました。<br>
@@ -471,13 +455,15 @@ surface.append0-1
 }
 </span>
 ----ここまで----<br>
-<span class="emphasis">surface.append????</span>という表記は、surface????に追加記述するという意味です。<br>
+<span class="emphasis">surface.append????</span>という表記は、surface????に内容を追加するという意味です。<br>
 そのため、<span class="emphasis">先にsurface????が設定されていない場合は、無効化</span>されます。<br>
 この書き方をすると、既に<span class="emphasis">記述済みのサーフェスに、追加で何かを設定</span>できます。<br>
+上記の<span class="code">surface.append0-1</span>は「サーフェスの0番から1番の、全サーフェスに以下を追加せよ」という意味となり、surface0にはheadとhandの領域が追加され、surface1にも同様に領域が追加されます。<br>
+</p>
+<p>
 上記の例では、surface0と1に、ベースになる画像のみを定義しています。<br>
 その後、領域をまとめて追加しています。<br>
 このように、共通部分だけをまとめて追加するという形にすると、後々、追加や修正が楽になります。<br>
-surface.append0-1と記述すると、surface0とsurface1の両方に追加する記述となります。<br>
 </p>
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
@@ -533,14 +519,14 @@ surfaces.txt末尾に上記を追加してください。<br>
 <div class="content_separation innerdiv1">
 <p>
 <span class="code">animation0.interval,random,2
-</span>上記「animation0.interval,〜」は、「これ以降はアニメーション0番の設定をする」という宣言です。<br>
+</span>上記「animation0.interval,～」は、「これ以降はアニメーション0番の設定をする」という宣言です。<br>
 これ以降の行では、アニメーション0番の動作を指定します。<br>
-「〜,random,2」は、まばたきする頻度を表しています。<br>
+「～,random,2」は、まばたきする頻度を表しています。<br>
 「random,?」と書くと、毎秒?分の1の確率でアニメーションを発動させることができます。<br>
 また、random,2は「sometimes」、random,4は「rarely」と書いても同じ動きをします。<br>
 「periodic,?」と書くと、?秒ごとにアニメーションを発動させることができます。<br>
 必ず一定タイミングでまばたきさせたい場合にはperiodicを使ってください。<br>
-人のまばたき回数は1分に15〜20回と言われるため、random,3かrandom,4、periodic,3かperiodic,4が人に近いです。<br>
+人のまばたき回数は1分に15〜20回と言われるため、periodic,3かperiodic,4が人に近いといえるでしょう。<br>
 まばたきが多いと不安、緊張状態を表すため、random,2にすることで気弱なキャラという表現もできるでしょう。<br>
 </p>
 <div class="title innerdiv2">補足</div>
@@ -548,7 +534,7 @@ surfaces.txt末尾に上記を追加してください。<br>
 アニメーション番号は、同じサーフェス内で重複してはいけませんが、別サーフェスなら重複してもOKです。<br>
 「サーフェス0番の、アニメーション0番」という管理をされているため、両方が重複しなければ問題ありません。<br>
 ただ、surface.appendなどを使用して記述すると、予想外のところで重複することがあるので、注意してください。<br>
-アニメーション0番の設定が全て終わったら、「animation1.interval,〜」として記述をすることで、いくつでもアニメーションを追加できます。<br>
+アニメーション0番の設定が全て終わったら、「animation1.interval,～」として同じように記述を追加していくことで、いくつでもアニメーションを追加できます。<br>
 </div>
 </div>
 <div class="content_separation innerdiv1">
@@ -558,7 +544,7 @@ animation0.pattern1,overlay,1001,50,0,0
 animation0.pattern2,overlay,1000,50,0,0
 animation0.pattern3,overlay,-1,50,0,0
 </span>これは、アニメーションの動作部分です。<br>
-上の行で「animation0.interval,〜」と書いたので、ここでアニメーション0番の実際の動作を記述しています。<br>
+上の行で「animation0.interval,～」と書いたので、ここでアニメーション0番の実際の動作を記述しています。<br>
 animation0.pattern0,overlay,1000,50,0,0は、「アニメーション0番のパターン0でサーフェス1000を0.05秒（50ミリ秒）後に座標0,0に上から重ねて表示する」という意味です。<br>
 座標指定は非常に面倒なので、全く同じサイズの画像を用意したり、今回のように上半身部分のみを切り取った画像を用意すると手軽です。<br>
 こうすることで、座標0,0の指定でピタリと画像を重ねることが出来ます。<br>
@@ -575,7 +561,7 @@ animation0.pattern0,overlay,1000,50,0,0は、「アニメーション0番のパ�
 <div class="content_separation innerdiv1">
 <p>
 アニメーションの時間は、ランダムにすることも出来ます。<br>
-例えば、pattern2を以下のように書くと、目を閉じている時間が0.05秒〜0.2秒の間からランダムとなります。<br>
+例えば、pattern2を以下のように書くと、目を閉じている時間が0.05秒～0.2秒の間からランダムとなります。<br>
 <span class="code">animation0.pattern2,overlay,1000,50-200,0,0</span>
 </p>
 </div>
@@ -621,7 +607,7 @@ surface2が新しく追加した部分です。<br>
 surface.append0-2と記述を変更したことで、サーフェス2には頭と手の判定もついています。<br>
 </p>
 <p>
-element?〜と記述することで、画像を重ねて1枚のサーフェスに出来ます。<br>
+element?～と記述することで、画像を重ねて1枚のサーフェスに出来ます。<br>
 「element0,base,????.png,0,0」という表記は、基本（base）とする下地の画像です。<br>
 「element1,overlay,????.png,0,0」は、基本の画像に被せる（overlay）画像を指定しています。<br>
 baseとoverlay以外の画像貼り付け方法は、ukadocにまとめられています。<br>
@@ -917,6 +903,43 @@ surface1001
 <a href="https://dl.dropboxusercontent.com/u/68134572/ghost/pages/etc/shell/surfaces/master.zip">ファイル一式をダウンロード</a>
 </div>
 
+<div class="title" id="link">外部サイトの紹介</div>
+<div class="content">
+
+ベースウェア（ゴーストを動かすための本体ソフトウェア）
+<ul>
+<li>
+<a href="http://usada.sakura.vg/">materia</a><br />
+元祖とも言えるベースウェア。2002年に開発停止。軽微なバグがある模様。
+</li>
+<li>
+<a href="http://crow.aqrs.jp/">C.R.O.W</a><br />
+独自の機能（シェルに文字を描画するなど）を積んでいる。2005年に開発停止。
+</li>
+<li>
+<a href="https://github.com/Ikagaka">如何か</a><br />
+ブラウザで動くベースウェア。OSにかかわらず、ブラウザさえ動けば動作可能。<br />
+2015年現在開発中だが、narファイルをインストールして動かせる<a href="ikagaka.github.io/Ikagaka.demo/">デモページ</a>あり。
+</li>
+</ul>
+
+判定定義の支援ソフト
+<ul>
+<li><a href="http://www.geocities.jp/poskoma/#content_1_11">Coordin</a></li>
+<li><a href="http://ccm.sherry.jp/koropeta/">ころぺた</a></li>
+<li><a href="http://wikiwiki.jp/satolist/">さとりすと</a>（本来は里々記述支援ソフト）</li>
+</ul>
+
+その他
+<ul>
+<li>
+<a href="http://ukiya.sakura.ne.jp/index.php?%E8%87%AA%E4%BD%9CSAORI">Osuwari.dll</a>
+シェルがアクティブウインドウを追従するように出来る。
+</li>
+</ul>
+
+</div>
+
 <div class="content_separation">
 <p>
 2013/11/14 作成<br>
@@ -943,6 +966,7 @@ surface1001
 2015/03/09 タイトルとリンク先の変更<br>
 2015/03/20 表示位置の設定方法を加筆<br>
 2015/03/30 追加シェルに関するものを別段落に分離、キャラクタースコープを「メインキャラ」「サブキャラ」で統一<br>
+2015/10/14 全面的に、正確さより動くことを重視した記述に変更<br>
 </p>
 </div>
 
