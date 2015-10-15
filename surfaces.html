@@ -40,7 +40,8 @@ span.warning { color:#ff0000; }
 <div class="content">
 <p>
 ゴースト作りたくて絵を用意したけど、設定がよくわからない！という人向けのメモです。<br>
-フォルダ構成や基本的なゴーストの知識は、<a href="http://ssp.shillest.net/ukadoc">ukadoc</a>の「全体の構成」に詳しい説明があります。<br>
+ある程度、伺かを触って動かしている方を対象としています。<br>
+基本的なゴーストの知識は、<a href="http://ssp.shillest.net/ukadoc">ukadoc</a>の「全体の構成」に詳しい説明があります。<br>
 </p>
 <p>
 ここでは、「詳しい書き方よりも、ともかく最低限の動作をするシェルを作りたい」という方を対象としています。<br>
@@ -79,7 +80,7 @@ descript.txtがシェルの情報を記入するファイルで、シェルの�
 surface0.pngはメインキャラの基本ポーズ、surface10.pngはサブキャラの基本ポーズです。<br>
 </p>
 <p>
-これだけでサーフェス0番とサーフェス10番を表示出来るようになります。<br>
+これだけでも、サーフェス0番とサーフェス10番を表示出来るようになります。<br>
 ゴーストのトーク辞書でサーフェス0番を指定するとsurface0.pngが、サーフェス10番を指定するとsurface10.pngが表示されます。<br>
 </p>
 <p>
@@ -153,6 +154,7 @@ seriko.use_self_alpha,1
 </p>
 <p>
 最下段のseriko.use_self_alpha,1という記述は、ファイルのアルファチャンネル（透過情報）を利用するという設定です。<br>
+アルファチャンネルのないpngを使う場合、透明色が設定されないため、記述を削除した方がよいでしょう。<br>
 </p>
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
@@ -331,12 +333,16 @@ surface11
 }
 </span>
 ----ここまで----<br>
+</p>
+<p>
 最初の<span class="code">charset,Shift_JIS</span>と<span class="code">descript{ version,1 }</span>は、必ずファイルの先頭に書いてください。<br>
-それぞれのサーフェスは、下の行のように、記述します。先頭の空白はあってもなくても変わりません。見やすいか否かだけです。
+それぞれのサーフェスは、下の行のように、記述します。先頭の空白はあってもなくても変わりません。見やすいか否かだけです。<br>
 <span class="code">surface0
 {
 	ここにサーフェス0番の設定を記述
-}</span>
+}</span><br>
+</p>
+<p>
 <span class="code">element0,base,????.png,0,0</span>で始まる表記は、表示する画像の指定です。<br>
 1枚の画像を表示するだけの場合は、上記のように記述し、????.pngを使用する画像の名称に置き換えてください。<br>
 これで、サーフェス0、1、10、11が使用可能となりました。<br>
@@ -346,8 +352,10 @@ surface11
 <div class="content innerdiv1">
 <p>
 カーソルの形状は、自由に設定出来ます。<br>
-以下は、hipという部位を作った場合、hipの上では手のひらカーソルを表示する記述です。<br>
-surfaces.txtの任意の場所に記述すると有効になります。<br>
+以下は、hipという部位を作り、hipの上では手のひらカーソルを表示する記述です。<br>
+surfaces.txtに、surface0の例と同じように記述すると有効になります。<br>
+また、位置はどこでもかまいません。ただし<span class="code">surface0{ }</span>の中に入れるなどは駄目です。<br>
+後々見返して分かりづらくないよう、<span class="code">descript{ version,1 }</span>の下の行などがオススメです。<br>
 ----ここから----
 <span class="code">
 sakura.cursor
@@ -359,7 +367,6 @@ sakura.cursor
 ----ここまで----<br>
 mouseup?では、マウスを載せた時のカーソルの形状、mousedown?では、マウスをクリックした時のカーソルの形状を指定します。<br>
 ?は数字で、上記例の通り、mouseupとmousedownで一組です。<br>
-別の部位も変更したい場合は、mouseup1〜とmousedown1〜を記述してください。<br>
 上記は、メインキャラ側でしか適用されません。<br>
 サブキャラでも適用する場合、以下をsurfaces.txtに追加してください。<br>
 ----ここから----
@@ -368,11 +375,14 @@ mouseup?では、マウスを載せた時のカーソルの形状、mousedown?�
 {
 	mouseup0,hip,system:hand
 	mousedown0,hip,system:hand
+
+	mouseup1,hand,system:hand
+	mousedown1,hand,system:hand
 }
 </span>
 ----ここまで----<br>
-sakura、keroはそれぞれchar0、char1と書くこともできます。<br>
-3人目のキャラクターの場合はchar2と記述します。<br>
+このように、1箇所だけでなく複数箇所に設定することも可能です。<br>
+3人目のキャラクターにも設定したい場合はchar2と記述します。<br>
 </p>
 <div class="title innerdiv2">キャラクター</div>
 <div class="content innerdiv2">
@@ -416,14 +426,14 @@ surface0
 {
 	element0,base,surface0.png,0,0
 	collision0,76,60,157,97,head
-	collision1,97,263,127,316,hand
+	<span class="emphasis">collision1,97,263,127,316,hand</span>
 }
 
 surface1
 {
 	element0,base,surface1.png,0,0
 	collision0,76,60,157,97,head
-	collision1,97,263,127,316,hand
+	<span class="emphasis">collision1,97,263,127,316,hand</span>
 }
 </span>
 ----ここまで----<br>
@@ -448,17 +458,17 @@ surface1
 	<span class="delete">collision1,97,263,127,316,hand</span>
 }
 
-surface.append0-1
+<span class="emphasis">surface.append0-1
 {
 	collision0,76,60,157,97,head
 	collision1,97,263,127,316,hand
-}
+}</span>
 </span>
 ----ここまで----<br>
 <span class="emphasis">surface.append????</span>という表記は、surface????に内容を追加するという意味です。<br>
-そのため、<span class="emphasis">先にsurface????が設定されていない場合は、無効化</span>されます。<br>
 この書き方をすると、既に<span class="emphasis">記述済みのサーフェスに、追加で何かを設定</span>できます。<br>
-上記の<span class="code">surface.append0-1</span>は「サーフェスの0番から1番の、全サーフェスに以下を追加せよ」という意味となり、surface0にはheadとhandの領域が追加され、surface1にも同様に領域が追加されます。<br>
+上記の<span class="code">surface.append0-1</span>は「サーフェスの0番から1番の、全サーフェスに以下を追加せよ」という意味となります。<br>
+この記述の結果として、surface0にはheadとhandの領域が追加され、surface1にも同様に領域が追加されます。<br>
 </p>
 <p>
 上記の例では、surface0と1に、ベースになる画像のみを定義しています。<br>
@@ -469,8 +479,29 @@ surface.append0-1
 <div class="content innerdiv1">
 <p>
 surface0-1と記述すると、surface0とsurface1自体を同時に定義する記述となります。<br>
-また、指定範囲に関してはsurface0-2,5-6,8と記述すると、surface0,1,2,5,6,8の6つの定義となります。<br>
+また、指定範囲に関してはsurface0-2,5-6,8と記述すると、surface0,1,2,5,6,8の6つの定義を同時にしたことになります。<br>
 ハイフンで繋ぐとその間の数字を全て含む指定となり、カンマで区切ることで複数の指定が出来ます。<br>
+以下は同じ意味の書き方です。<br>
+記述が同じ内容になるのであれば、1つにまとめた方が後々修正などもしやすくなります。<br>
+<span class="code">surface1
+{
+}
+surface3
+{
+}
+surface4
+{
+}
+surface5
+{
+}</span><br>
+----↓同じ意味↑----<br>
+<span class="code">surface1,3-5
+{
+}</span>
+</p>
+<p>
+なお、surface.append????は、先にsurface????が設定されていない場合は、無効化されるので注意してください。<br>
 </p>
 </div>
 </div>
@@ -485,7 +516,7 @@ surface0-1と記述すると、surface0とsurface1自体を同時に定義する
 <span class="code">
 surface.append0
 {
-	animation0.interval,random,2
+	animation0.interval,random,3
 	animation0.pattern0,overlay,1000,50,0,0
 	animation0.pattern1,overlay,1001,50,0,0
 	animation0.pattern2,overlay,1000,50,0,0
@@ -518,15 +549,15 @@ surfaces.txt末尾に上記を追加してください。<br>
 </div>
 <div class="content_separation innerdiv1">
 <p>
-<span class="code">animation0.interval,random,2
+<span class="code">animation0.interval,random,3
 </span>上記「animation0.interval,～」は、「これ以降はアニメーション0番の設定をする」という宣言です。<br>
 これ以降の行では、アニメーション0番の動作を指定します。<br>
-「～,random,2」は、まばたきする頻度を表しています。<br>
+「～,random,3」は、まばたきする頻度を表しています。<br>
 「random,?」と書くと、毎秒?分の1の確率でアニメーションを発動させることができます。<br>
 また、random,2は「sometimes」、random,4は「rarely」と書いても同じ動きをします。<br>
 「periodic,?」と書くと、?秒ごとにアニメーションを発動させることができます。<br>
 必ず一定タイミングでまばたきさせたい場合にはperiodicを使ってください。<br>
-人のまばたき回数は1分に15〜20回と言われるため、periodic,3かperiodic,4が人に近いといえるでしょう。<br>
+人のまばたき回数は規則的で、なおかつ1分に15～20回と言われるため、periodic,3かperiodic,4が人に近いといえるでしょう。<br>
 まばたきが多いと不安、緊張状態を表すため、random,2にすることで気弱なキャラという表現もできるでしょう。<br>
 </p>
 <div class="title innerdiv2">補足</div>
@@ -771,7 +802,7 @@ surface0
 上記はまったく同じ動きをするアニメーションです。<br>
 修正する場合、旧定義では時間単位が0.01秒単位、新定義では時間単位が0.001秒単位ということも注意してください。<br>
 このような、数字から始まるアニメーション定義がないか探してみてください。<br>
-materiaなど別ベースウェアで動かす場合を除き、SSPのサポートが受けられる新しい書き方をした方がよいでしょう。<br>
+動きは同じなのでどちらでも構いませんが、今後新たなベースウェアが作られる可能性などを考えると、新しい書き方をした方がよいでしょう。<br>
 </p>
 </div>
 <div class="content_separation innerdiv1">
@@ -872,7 +903,7 @@ surface.append0-2
 
 surface.append0
 {
-	animation0.interval,random,2
+	animation0.interval,random,3
 	animation0.pattern0,overlay,1000,50,0,0
 	animation0.pattern1,overlay,1001,50,0,0
 	animation0.pattern2,overlay,1000,50,0,0
@@ -937,7 +968,6 @@ surface1001
 シェルがアクティブウインドウを追従するように出来る。
 </li>
 </ul>
-
 </div>
 
 <div class="content_separation">
@@ -967,6 +997,7 @@ surface1001
 2015/03/20 表示位置の設定方法を加筆<br>
 2015/03/30 追加シェルに関するものを別段落に分離、キャラクタースコープを「メインキャラ」「サブキャラ」で統一<br>
 2015/10/14 全面的に、正確さより動くことを重視した記述に変更<br>
+2015/10/15 透過情報のないpng画像について追加、補足などを一部修正<br>
 </p>
 </div>
 
