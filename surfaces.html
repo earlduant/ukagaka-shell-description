@@ -375,13 +375,9 @@ mouseup?では、マウスを載せた時のカーソルの形状、mousedown?�
 {
 	mouseup0,hip,system:hand
 	mousedown0,hip,system:hand
-
-	mouseup1,hand,system:hand
-	mousedown1,hand,system:hand
 }
 </span>
 ----ここまで----<br>
-このように、1箇所だけでなく複数箇所に設定することも可能です。<br>
 3人目のキャラクターにも設定したい場合はchar2と記述します。<br>
 </p>
 <div class="title innerdiv2">キャラクター</div>
@@ -404,9 +400,13 @@ kero.cursor
 {
 	mouseup0,head,mycursor.cur
 	mousedown0,head,mycursor.cur
+	
+	mouseup1,hand,mycursor.cur
+	mousedown1,hand,mycursor.cur
 }
 </span>
 ----ここまで----<br>
+また、マウスカーソルの変更箇所は、上記のように、1箇所だけでなく複数箇所に設定することも可能です。<br>
 </p>
 <div class="title innerdiv2">特殊な領域名</div>
 <div class="content innerdiv2">
