@@ -88,12 +88,11 @@ surface0.pngはメインキャラの基本ポーズ、surface10.pngはサブキ�
 「?」は半角数字なら何桁でも良いですが、頭の0は無視されます。<br>
 例えば<span class="emphasis">surface0000.pngとsurface0.pngは両方ともサーフェス0番に表示される画像となる</span>ので注意してください。<br>
 上記のような、サーフェス番号が重複するファイルが存在しないようにしてください。<br>
-なお、透過色が適用されるので、<span class="emphasis">pngファイルは半透明の画像なども使用できます</span>。<br>
+なお、pngファイルのアルファチャンネル（透過情報）が適用されるので、<span class="emphasis">pngファイルは半透明の画像なども使用できます</span>。<br>
 </p>
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-必須であるsurface0.pngとsurface10.pngを除き、jpgファイルなども使用することができます。<br>
 SSPではsurface0.pngとsurface10.pngがなくても動きますが、伺かの仕様では必須です。<br>
 必須ファイルが足りない場合、他サービスを受ける時に不具合が起こる可能性があります。<br>
 </p>
@@ -153,7 +152,7 @@ seriko.use_self_alpha,1
 メモ帳などを開き、上記をそのままコピーし、descriptと名前をつけて保存すれば使えます。<br>
 </p>
 <p>
-最下段のseriko.use_self_alpha,1という記述は、画像ファイルのアルファチャンネル（透過情報）を利用するという設定です。<br>
+最下段のseriko.use_self_alpha,1という記述は、画像ファイルのアルファチャンネルを利用するという設定です。<br>
 </p>
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
@@ -161,6 +160,7 @@ seriko.use_self_alpha,1
 seriko.use_self_alpha,1の記述がない場合は、左上のpixelのRGB値が透明色として扱われます。<br>
 ファイルの透過情報は全て無視されます。<br>
 これはmateria（SSPの前身であり、更新の停止した本家）の動作と互換です。<br>
+materiaでは、グレースケールで設定した画像ファイルを拡張子pnaに変更することでアルファチャンネルとして動作していましたが、SSPでは直接アルファチャンネルを反映できるため不要です。<br>
 </p>
 </div>
 <p>
@@ -999,6 +999,7 @@ surface1001
 2015/10/14 全面的に、正確さより動くことを重視した記述に変更<br>
 2015/10/15 透過情報のないpng画像について追加、補足などを一部修正<br>
 2015/11/13 透過情報のないファイルの扱われ方について、謝りのあった記述を削除<br>
+2017/01/13 png以外の形式の画像も使える旨の記述を削除（SSPでは非推奨のため）、アルファチャンネルの説明を修正<br>
 </p>
 </div>
 
