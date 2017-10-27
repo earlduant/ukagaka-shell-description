@@ -28,6 +28,7 @@ span.warning { color:#ff0000; }
 <a href="#bindbasic">着せ替え基本</a><br>
 <a href="#bindcollision">着せ替えパーツの領域設定</a><br>
 <a href="#bindadvance">カテゴリごとの着せ替え設定</a><br>
+<a href="#bindmenu">右クリックメニューの表示設定</a><br>
 <a href="#bindanimation">着せ替えのアニメーション</a><br>
 <a href="#sample">サンプルダウンロード</a><br>
 <a href="#etc">その他解説</a><br>
@@ -284,7 +285,7 @@ descript.txtに追加した上の行の記述の意味は以下です。
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-2人目のキャラは、sakura.〜を全てkero.〜に、3人目はchar2.〜と記述します。<br>
+2人目のキャラは、sakura.を全てkero.～に、3人目はchar2.～と記述します。<br>
 </p>
 </div>
 <p>
@@ -582,12 +583,14 @@ alwaysは、実行され続けるアニメーションです。<br>
 実装自体は、ゴースト側の辞書で記述することで可能です。<br>
 </p>
 <ol type="1">
-<li>アニメーションタイミングがneverのアニメーションを作っておく（暫定的に100番とする）</li>
+<li>アニメーションタイミングがneverのアニメーションを作っておく（暫定的に100番とする）<br>
+（設定方法は段落「<a href="#animation">アニメーション</a>」を参照）</li>
 <li>ゴーストの辞書に<a href="http://ssp.shillest.net/ukadoc/manual/list_shiori_event.html#OnDressupChanged">OnDressUpChanged</a>イベントを記述</li>
 <li>上記内部で引数を判別し、特定の着せ替えパーツが装着されたと判断したら\i[100]をトーク出力する</li>
 </ol>
 <p>
-以下に里々とYAYAで書いた場合のサンプルを記述します。<br>
+以下に「里々」と「YAYA」で書いた場合のサンプルを記述します。<br>
+上記はそれぞれSHIORIと呼ばれる、ゴーストが喋る内容を担当するシステムです。<br>
 誰かがパーツ名「ハット」を装着したら、そのキャラクターに\i[100]を表示します。<br>
 里々<br>
 ----ここから----
@@ -676,6 +679,7 @@ surface1051
 2015/01/13 文字コードをUTF-8に変更<br>
 2015/03/20 着せ替え時アニメーション再生のサンプルコードを修正、一部記述修正<br>
 2015/11/13 古い資料をリンクしていた部分を新しい資料にリンク張り替え<br>
+2017/10/28 目次の修正、一部説明加筆<br>
 </p>
 </div>
 

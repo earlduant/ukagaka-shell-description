@@ -26,6 +26,7 @@ span.warning { color:#ff0000; }
 <a href="#descript">descript.txtの書き方</a><br>
 <a href="#surfaces">surfaces.txtについて</a><br>
 <a href="#image">サンプル画像</a><br>
+<a href="#surfacesbasic">surfaces.txtの基本</a><br>
 <a href="#collision">領域作成</a><br>
 <a href="#animation">アニメーション</a><br>
 <a href="#element">サーフェスの合成</a><br>
@@ -48,16 +49,20 @@ span.warning { color:#ff0000; }
 さらに、<a href="http://ssp.shillest.net/">SSP</a>を使うことを想定しており、<span class="emphasis">SSPでのみ実装されている機能を使用します</span>。<br>
 SSP以外では動作しない可能性が高いです。<br>
 他のものでも動かしたいと考える場合は、このメモは参考になりません。<br>
+</p>
+<div class="title innerdiv1">補足1</div>
+<div class="content innerdiv1">
+<p>
+2017年現在では開発が続いているのはSSPのみです。<br>
+SSPでのみ動作確認したゴーストも多く配布されている点を留意してください。<br>
+（代表的なものとして、materiaの最終更新は2002年、C.R.O.Wの最終更新は2005年）<br>
+</div>
+<div class="title innerdiv1">補足2</div>
+<div class="content innerdiv1">
+<p>
 また、surfaces.txtの書き方は、古い書き方と新しい書き方（SERIKO/1.xとSERIKO/2.0）がありますが、新しい書き方で記述しています。<br>
 古い書き方は2001年頃、新しい書き方は2002年頃に整備されました。<br>
 別の資料と矛盾が見られた場合は、古い書き方の資料を見ている可能性があります。<br>
-</p>
-<div class="title innerdiv1">補足</div>
-<div class="content innerdiv1">
-<p>
-2015年現在では開発が続いているのはSSPのみです。<br>
-SSPでのみ動作確認したゴーストも多く配布されている点を留意してください。<br>
-（代表的なものとして、materiaの最終更新は2002年、C.R.O.Wの最終更新は2005年）<br>
 </p>
 </div>
 <p>
@@ -277,6 +282,62 @@ readme.txtには、好きな情報を記入しておきましょう。<br>
 </div>
 </div>
 
+<div class="title" id="surfacesbasic">surfaces.txtの基本</div>
+<div class="content">
+<p>
+上記段落のサンプル画像を表示するためのsurfaces.txtが以下です。<br>
+ここで行っているのは「どのサーフェスにどの画像を表示するか」ということのみです。<br>
+----ここから----
+<span class="code">
+charset,Shift_JIS
+
+descript
+{
+	version,1
+}
+
+surface0
+{
+	element0,base,surface0.png,0,0
+}
+
+surface1
+{
+	element0,base,surface1.png,0,0
+}
+
+surface10
+{
+	element0,base,surface10.png,0,0
+}
+
+surface11
+{
+	element0,base,surface11.png,0,0
+}
+</span>
+----ここまで----<br>
+</p>
+<p>
+最初の<span class="code">charset,Shift_JIS</span>と<span class="code">descript{ version,1 }</span>は、必ずファイルの先頭に書いてください。<br>
+<span class="code">charset,Shift_JIS</span>は文字コードというものの指定です。windows環境なら、テキストファイルはデフォルトでShift_JISになっています。<br>
+<span class="code">descript{ version,1 }</span>は、概要で述べた「新しい方の記述方式を使う」という意味です。<br>
+</p>
+<p>
+それぞれのサーフェスは、下の行のように記述します。<br>
+先頭の空白はあってもなくても変わりません。見やすいか否かだけです。<br>
+<span class="code">surface0
+{
+	ここにサーフェス0番の設定を記述
+}</span><br>
+</p>
+<p>
+<span class="code">element0,base,????.png,0,0</span>で始まる表記は、表示する画像の指定です。<br>
+1枚の画像を表示するだけの場合は、上記のように記述し、????.pngを使用する画像の名称に置き換えてください。<br>
+これで、サーフェス0、1、10、11が使用可能となりました。<br>
+</p>
+</div>
+
 <div class="title" id="collision">領域作成</div>
 <div class="content">
 <p>
@@ -335,17 +396,7 @@ surface11
 ----ここまで----<br>
 </p>
 <p>
-最初の<span class="code">charset,Shift_JIS</span>と<span class="code">descript{ version,1 }</span>は、必ずファイルの先頭に書いてください。<br>
-それぞれのサーフェスは、下の行のように、記述します。先頭の空白はあってもなくても変わりません。見やすいか否かだけです。<br>
-<span class="code">surface0
-{
-	ここにサーフェス0番の設定を記述
-}</span><br>
-</p>
-<p>
-<span class="code">element0,base,????.png,0,0</span>で始まる表記は、表示する画像の指定です。<br>
-1枚の画像を表示するだけの場合は、上記のように記述し、????.pngを使用する画像の名称に置き換えてください。<br>
-これで、サーフェス0、1、10、11が使用可能となりました。<br>
+collision0,の表記が、今回追加した部分です。
 ゴーストを起動させると、サーフェス0と1が頭部に判定を持っており、カーソルの形状が変わるのを確認出来ます。<br>
 </p>
 <div class="title innerdiv1">補足</div>
@@ -687,7 +738,7 @@ nameの項目は、descript.txtと合わせてください。<br>
 <div class="title" id="error">よくあるエラーと原因</div>
 <div class="content">
 <p>
-ここではsurfaces.txtを作成している時に出してしまいがちなエラーと、その原因を示します。
+ここではsurfaces.txtを作成している時に出してしまいがちなエラーと、その原因を示します。<br>
 </p>
 <div class="content_separation innerdiv1">
 <p>
@@ -714,7 +765,7 @@ patternは原則0から順番に1ずつ増やし、重複してはいけませ�
 <p>
 <span class="code emphasis">[SERIKO]Surface=0/Animation=0 二重定義されています。
 </span>
-サーフェス0のアニメーションの番号指定が間違っています。<br>
+サーフェス0のアニメーションの番号指定が間違っています。
 <span class="code">
 surface.append0
 {
@@ -749,7 +800,6 @@ surface2
 </span>
 element0を2つ指定してしまっています。<br>
 下のelement0をelement1とすることでエラーが出なくなります。<br>
-この例は、surfaceの記述部分とsurface.appendでの追加記述部分に重複していることもあるので、調べてみてください。<br>
 </p>
 </div>
 <div class="content_separation innerdiv1">
@@ -811,14 +861,14 @@ surface0
 </span>
 surfaces.txtの記述が不足しています。<br>
 上記メッセージであれば、surface11.pngがあるのにsurfaces.txtに記述されていません。<br>
-以下を追加することでエラーが出なくなります。<br>
+以下を追加することでエラーが出なくなります。
 <span class="code">
 surface11
 {
 }
 </span>
 または、以下のように書いてもOKです。<br>
-上記は中身が空っぽで後に見返した時に混乱することもあるので、以下の書き方を推奨します。<br>
+上記は中身が空っぽで後に見返した時に混乱することもあるので、以下の書き方を推奨します。
 <span class="code">
 surface11
 {
@@ -834,7 +884,7 @@ surface11
 アニメーションで指定しているサーフェスがありません。<br>
 <span class="code">animation0.pattern0,overlay,1000,50,0,0</span>など、アニメーション0のパターン0でサーフェス1000を指定しています。<br>
 しかし、surface1000がsurfaces.txtに記述されていない、またはsurface1000.pngが存在していません。<br>
-必要な画像（以下の例ではsurface1000.png）を用意し、以下を追加することでエラーが出なくなります。<br>
+必要な画像（以下の例ではsurface1000.png）を用意し、以下を追加することでエラーが出なくなります。
 <span class="code">
 surface1000
 {
@@ -852,6 +902,24 @@ surface1000
 必要な画像（今回の例ではmain_blink1.png）を用意することでエラーが出なくなります。<br>
 </p>
 </div>
+<p>
+これらのエラーはsurface????の記述部分とsurface.append????での追加記述部分に重複していることもあります。<br>
+例えば、以下は重複エラーを起こします。
+<span class="code">
+surface1
+{
+	element0,base,surface1.png,0,0
+}
+
+surface.append0-9
+{
+	element0,overlay,surface100.png,0,0
+}
+</span>
+上記はサーフェス1でelement0を設定しており、さらにsurface.append0-9でまとめてelement0を追加設定しています。<br>
+その結果、サーフェス1でのelement0の設定が2回行われています。<br>
+このような追加部分での重複がないかどうかも調べてみてください。<br>
+</p>
 </div>
 
 <div class="title" id="sample">記述内容全文</div>
@@ -949,8 +1017,13 @@ surface1001
 </li>
 <li>
 <a href="https://github.com/Ikagaka">如何か</a><br />
-ブラウザで動くベースウェア。OSにかかわらず、ブラウザさえ動けば動作可能。<br />
-2015年現在開発中だが、narファイルをインストールして動かせる<a href="http://ikagaka.github.io/Ikagaka.demo/">デモページ</a>あり。
+ブラウザで動くベースウェア。OSにかかわらず、ブラウザさえ動けば動作可能のため、macでもlinuxでも動作可能。<br />
+トークや触り反応が中心のゴーストなら動かせる。<br />
+2017年現在開発中だが、narファイルをインストールして動かせる<a href="http://ikagaka.github.io/Ikagaka.demo/">デモページ</a>あり。
+</li>
+<li>
+<a href="https://play.google.com/store/apps/details?id=com.dendenfactory.ukagakaforandroid&hl=ja">Androidの伺か</a><br />
+Android端末で動かせるベースウェア。<br />
 </li>
 </ul>
 
@@ -965,7 +1038,7 @@ surface1001
 <ul>
 <li>
 <a href="http://ukiya.sakura.ne.jp/index.php?%E8%87%AA%E4%BD%9CSAORI">Osuwari.dll</a>
-シェルがアクティブウインドウを追従するように出来る。
+シェルがアクティブウインドウを追従するように出来る。SAORIの設定が必要なため、使用はやや難しい。
 </li>
 </ul>
 </div>
@@ -1000,6 +1073,7 @@ surface1001
 2015/10/15 透過情報のないpng画像について追加、補足などを一部修正<br>
 2015/11/13 透過情報のないファイルの扱われ方について、謝りのあった記述を削除<br>
 2017/01/13 png以外の形式の画像も使える旨の記述を削除（SSPでは非推奨のため）、アルファチャンネルの説明を修正<br>
+2017/10/28 段落「surfaces.txtの基本」を追加、リンクに「Androidの伺か」追加、段落「よくあるエラーと原因」加筆<br>
 </p>
 </div>
 
