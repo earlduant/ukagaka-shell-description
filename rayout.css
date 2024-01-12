@@ -47,13 +47,11 @@ div.content_title {
 	text-shadow:1px 1px 1px #CCCCCC;
 }
 div.title {
-	width: 250px;
-	padding: 0px;
+	padding: 5px;
 	margin: 0px;
 	border-top: 1px solid #666666;
 	border-right: 1px solid #666666;
 	border-left: 1px solid #666666;
-	text-align: center;
 	background-color: #FFFFFF;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
@@ -61,33 +59,31 @@ div.title {
 	-webkit-border-top-right-radius: 10px;
 	-moz-border-radius-topleft: 10px;
 	-moz-border-radius-topright: 10px;
+	font-weight: bold;
 	/*text-shadow:1px 1px 1px #003366;*/
 }
 div.title_separation {
-	width: 250px;
-	padding: 0px;
+	padding: 5px;
 	margin: 0px 0px 10px 0px;
 	border: 1px solid #666666;
-	text-align: center;
 	background-color: #FFFFFF;
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
+	text-decoration: underline;
 }
 div.content {
 	padding: 5px;
 	margin: 0px 0px 10px 0px;
 	border: 1px solid #666666;
 	background-color: #FFFFFF;
-	border-top-right-radius: 10px;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
-	-webkit-border-top-right-radius: 10px;
 	-webkit-border-bottom-right-radius: 10px;
 	-webkit-border-bottom-left-radius: 10px;
-	-moz-border-radius-topright: 10px;
 	-moz-border-radius-bottomright: 10px;
 	-moz-border-radius-bottomleft: 10px;
+	line-height: 1.75em
 }
 div.content_separation {
 	padding: 5px;
@@ -97,6 +93,7 @@ div.content_separation {
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
+	line-height: 1.75em
 }
 div.innerdiv1 {
 	background-color: #EEFFFF;
@@ -118,4 +115,10 @@ th {
 }
 .cssnowrap {
 	white-space: nowrap;
+}
+.center {
+	text-align:center;
+}
+.cssright {
+	text-align:right;
 }

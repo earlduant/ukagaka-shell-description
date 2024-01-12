@@ -27,7 +27,7 @@ span.warning { color:#ff0000; }
 <a href="#surfaces">surfaces.txtについて</a><br>
 <a href="#image">サンプル画像</a><br>
 <a href="#surfacesbasic">surfaces.txtの基本</a><br>
-<a href="#collision">領域作成</a><br>
+<a href="#collision">領域作成（当たり判定）</a><br>
 <a href="#animation">アニメーション</a><br>
 <a href="#element">サーフェスの合成</a><br>
 <a href="#addshell">追加シェルとして配布する</a><br>
@@ -338,7 +338,7 @@ surface11
 </p>
 </div>
 
-<div class="title" id="collision">領域作成</div>
+<div class="title" id="collision">領域作成（当たり判定）</div>
 <div class="content">
 <p>
 ここでは、部位判定の領域を設定します。<br>
@@ -348,7 +348,17 @@ surface11
 楕円や多角形でも指定できますが、ここでは触れません。<br>
 </p>
 <p>
-ここでは、Windows付属のペイントで座標を取得する方法を示します。<br>
+ここでは、2つの方法を説明します。<br>
+以下のどちらか片方を実装すると、シェルの領域を設定できます。<br>
+<ul>
+<li>Windows付属のペイント等を使い、座標を指定する方法</li>
+<li>領域作成用の画像ファイルを別個用意する方法</li>
+</ul>
+</p>
+<div class="title innerdiv1">座標を指定する方法</div>
+<div class="content innerdiv1">
+<p>
+まずは、Windows付属のペイントで座標を取得する方法を示します。<br>
 </p>
 <ol type="1">
 <li>ペイントで画像を開く</li>
@@ -399,6 +409,87 @@ surface11
 collision0,の表記が、今回追加した部分です。
 ゴーストを起動させると、サーフェス0と1が頭部に判定を持っており、カーソルの形状が変わるのを確認出来ます。<br>
 </p>
+<p>
+上記のheadの設定と同様のことを行えば、色々な部位を設定できます。<br>
+以下に、handという手の部位を設定した例を示します。<br>
+変更の無い部分は省いていますので、上記と照らしあわせて補完してください。<br>
+----ここから----
+<span class="code">
+surface0
+{
+	element0,base,surface0.png,0,0
+	collision0,76,60,157,97,head
+	<span class="emphasis">collision1,97,263,127,316,hand</span>
+}
+
+surface1
+{
+	element0,base,surface1.png,0,0
+	collision0,76,60,157,97,head
+	<span class="emphasis">collision1,97,263,127,316,hand</span>
+}
+</span>
+----ここまで----<br>
+</p>
+</div>
+<div class="title innerdiv1">領域作成用の画像ファイルを用意する方法</div>
+<div class="content innerdiv1">
+<p>
+続いて、画像ファイルを用いて設定する方法を示します。<br>
+</p>
+<ol type="1">
+<li>領域設定したい部分を二値ペンツールなどで単色に塗りつぶす</li>
+<li>別の部分も設定したい場合、手順1と別の色で塗りつぶし、画像を別名保存</li>
+<li>surfaces.txtにファイル名を設定する</li>
+</ol>
+<p>
+例えば、頭と手に判定をつけたい場合、以下のような画像を作成します。<br>
+<img src="surfaces/surface0_collision.png" alt="領域設定例"><br>
+RGB値が0,0,255の部分を頭、255,0,0の部分を手として設定しています。<br>
+この例では四角形ですが、自由な形状にしたり、飛び地にしたりもできます。<br>
+視覚的に見えるようにしたのが以下の画像です。<br>
+<img src="surfaces/surface0_synthesis.png" alt="領域設定合成例"><br>
+この画像を適用するsurfaces.txtの記述を以下に示します。<br>
+上記の画像のファイル名はsurface0_collision.pngにしていますが、自由につけられます。<br>
+----ここから----
+<span class="code">
+charset,Shift_JIS
+
+descript
+{
+	version,1
+}
+
+surface0
+{
+	collisionex0,Hand,region,surface0_collision.png,255,0,0
+	collisionex1,Head,region,surface0_collision.png,0,0,255
+}
+
+surface1
+{
+	collisionex0,Hand,region,surface0_collision.png,255,0,0
+	collisionex1,Head,region,surface0_collision.png,0,0,255
+}
+
+surface10
+{
+	element0,base,surface10.png,0,0
+}
+
+surface11
+{
+	element0,base,surface11.png,0,0
+}
+</span>
+----ここまで----<br>
+</p>
+<p>
+collisionex0,～とcollisionex1,～の表記が、今回追加した部分です。<br>
+ゴーストを起動させると、サーフェス0と1が頭部と手に判定を持っており、カーソルの形状が変わるのを確認出来ます。<br>
+この領域設定の画像ファイルは複数用意できるため、ポーズ差分がある場合などは別の画像を用意すると良いです。<br>
+</p>
+</div>
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
@@ -468,31 +559,10 @@ kero.cursor
 </div>
 </div>
 <p>
-上記のheadの設定と同様のことを行えば、色々な部位を設定できます。<br>
-以下に、handという手の部位を設定した例を示します。<br>
-変更の無い部分は省いていますので、上記と照らしあわせて補完してください。<br>
-----ここから----
-<span class="code">
-surface0
-{
-	element0,base,surface0.png,0,0
-	collision0,76,60,157,97,head
-	<span class="emphasis">collision1,97,263,127,316,hand</span>
-}
-
-surface1
-{
-	element0,base,surface1.png,0,0
-	collision0,76,60,157,97,head
-	<span class="emphasis">collision1,97,263,127,316,hand</span>
-}
-</span>
-----ここまで----<br>
-</p>
-<p>
 今回、画像が2枚なので楽ですが、もしこれが10枚、20枚となったら設定や修正が大変です。<br>
 まとめて複数のサーフェスに一括設定する方法を以下に示します。<br>
 表情のみが違うサーフェスなどにまとめて設定することができます。<br>
+以下は座標指定で領域作成した場合の例です。<br>
 ----ここから----
 <span class="code">
 surface0
@@ -1074,6 +1144,7 @@ Android端末で動かせるベースウェア。<br />
 2015/11/13 透過情報のないファイルの扱われ方について、謝りのあった記述を削除<br>
 2017/01/13 png以外の形式の画像も使える旨の記述を削除（SSPでは非推奨のため）、アルファチャンネルの説明を修正<br>
 2017/10/28 段落「surfaces.txtの基本」を追加、リンクに「Androidの伺か」追加、段落「よくあるエラーと原因」加筆<br>
+2024/01/13 画像での触り判定設定方法追加<br>
 </p>
 </div>
 
