@@ -233,7 +233,7 @@ sakura.seriko.alignmenttodesktop,free
 説明はukadocが詳しいため、ここではサンプルコードの表示と最低限の解説のみを行います。<br>
 </p>
 <p>
-今回、surfaces.txtに書くものを以下に示します。
+今回、surfaces.txtに書くものを以下に示します。<br>
 </p>
 <ul>
 <li>メインキャラの部位、「head」「hand」</li>
@@ -344,8 +344,6 @@ surface11
 ここでは、部位判定の領域を設定します。<br>
 まずは、キャラクターの頭部を設定してみることにします。<br>
 そのためには、どこからどこまでが頭なのかを指定する必要があります。<br>
-基本的に、<span class="emphasis">部位判定の領域は四角形で表され、左上と右下の座標を指定</span>します。<br>
-楕円や多角形でも指定できますが、ここでは触れません。<br>
 </p>
 <p>
 ここでは、2つの方法を説明します。<br>
@@ -359,6 +357,8 @@ surface11
 <div class="content innerdiv1">
 <p>
 まずは、Windows付属のペイントで座標を取得する方法を示します。<br>
+基本的に、<span class="emphasis">部位判定の領域は四角形で表され、左上と右下の座標を指定</span>します。<br>
+楕円や多角形でも指定できますが、ここでは触れません。<br>
 </p>
 <ol type="1">
 <li>ペイントで画像を開く</li>
@@ -445,8 +445,8 @@ surface1
 <p>
 例えば、頭と手に判定をつけたい場合、以下のような画像を作成します。<br>
 <img src="surfaces/surface0_collision.png" alt="領域設定例"><br>
-RGB値が0,0,255の部分を頭、255,0,0の部分を手として設定しています。<br>
-この例では四角形ですが、自由な形状にしたり、飛び地にしたりもできます。<br>
+RGB値が0,0,255の部分を頭、255,0,0の部分を肩として設定しています。<br>
+この例のように、自由な形状にしたり、飛び地にしたりもできます。<br>
 視覚的に見えるようにしたのが以下の画像です。<br>
 <img src="surfaces/surface0_synthesis.png" alt="領域設定合成例"><br>
 この画像を適用するsurfaces.txtの記述を以下に示します。<br>
@@ -462,14 +462,14 @@ descript
 
 surface0
 {
-	collisionex0,Hand,region,surface0_collision.png,255,0,0
-	collisionex1,Head,region,surface0_collision.png,0,0,255
+	collisionex0,Head,region,surface0_collision.png,0,0,255
+	collisionex1,Shoulder,region,surface0_collision.png,255,0,0
 }
 
 surface1
 {
-	collisionex0,Hand,region,surface0_collision.png,255,0,0
-	collisionex1,Head,region,surface0_collision.png,0,0,255
+	collisionex0,Head,region,surface0_collision.png,0,0,255
+	collisionex1,Shoulder,region,surface0_collision.png,255,0,0
 }
 
 surface10
