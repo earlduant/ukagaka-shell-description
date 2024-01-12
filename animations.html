@@ -21,32 +21,32 @@ span.warning { color:#ff0000; }
 <div class="title">目次</div>
 <div class="content">
 <p>
-<a href="#summary">概要</a><br>
-<a href="#init">初期設定</a><br>
-<a href="#animation">アニメーション</a><br>
-<a href="#talk">口パク</a><br>
-<a href="#bindbasic">着せ替え基本</a><br>
-<a href="#bindcollision">着せ替えパーツの領域設定</a><br>
-<a href="#bindadvance">カテゴリごとの着せ替え設定</a><br>
-<a href="#bindmenu">右クリックメニューの表示設定</a><br>
-<a href="#bindanimation">着せ替えのアニメーション</a><br>
-<a href="#sample">サンプルダウンロード</a><br>
-<a href="#etc">その他解説</a><br>
+<a href="#summary">概要</a><br />
+<a href="#init">初期設定</a><br />
+<a href="#animation">アニメーション</a><br />
+<a href="#talk">口パク</a><br />
+<a href="#bindbasic">着せ替え基本</a><br />
+<a href="#bindcollision">着せ替えパーツの領域設定</a><br />
+<a href="#bindadvance">カテゴリごとの着せ替え設定</a><br />
+<a href="#bindmenu">右クリックメニューの表示設定</a><br />
+<a href="#bindanimation">着せ替えのアニメーション</a><br />
+<a href="#sample">サンプルダウンロード</a><br />
+<a href="#etc">その他解説</a><br />
 </p>
 </div>
 
 <div class="title" id="summary">概要</div>
 <div class="content">
 <p>
-このメモは、「<a href="http://earlduant.github.io/ukagaka-shell-description/surfaces.html">シェルの作り方</a>」の知識を前提としています。<br>
-その上で、着せ替えやアニメーションの設定をサンプルを交えて簡易的に解説します。<br>
-基本的な知識は、<a href="http://ssp.shillest.net/ukadoc/manual/index.html">ukadoc</a>に詳しい説明があります。<br>
-SSPの専用記述を用いるため、このメモの記述を使うと、ゴーストが<span class="emphasis">SSPでしか動作しなくなります</span>。<br>
-各種ベースウェア（<a href="http://ninix-aya.sourceforge.jp/">ninix-aya</a>など）で起動できなくなるので注意してください。<br>
+このメモは、「<a href="http://earlduant.github.io/ukagaka-shell-description/surfaces.html">シェルの作り方</a>」の知識を前提としています。<br />
+その上で、着せ替えやアニメーションの設定をサンプルを交えて簡易的に解説します。<br />
+基本的な知識は、<a href="http://ssp.shillest.net/ukadoc/manual/index.html">ukadoc</a>に詳しい説明があります。<br />
+SSPの専用記述を用いるため、このメモの記述を使うと、ゴーストが<span class="emphasis">SSPでしか動作しなくなります</span>。<br />
+各種ベースウェア（<a href="http://ninix-aya.sourceforge.jp/">ninix-aya</a>など）で起動できなくなるので注意してください。<br />
 </p>
 <p>
-今回使う画像は以下です。<br>
-<img src="animations/picture.png" alt="サンプル画像"><br>
+今回使う画像は以下です。<br />
+<img src="animations/picture.png" alt="サンプル画像"><br />
 このメモの下部のリンクから、一式ダウンロードすることができます。
 </p>
 </div>
@@ -54,22 +54,22 @@ SSPの専用記述を用いるため、このメモの記述を使うと、ゴ�
 <div class="title" id="init">初期設定</div>
 <div class="content">
 <p>
-開発を簡易にするため、SSPの開発者用機能を使用します。<br>
-（ゴースト上で右クリック→設定(O)→本体設定...(P)で設定画面表示）<br>
-<img src="animations/developer.png" alt="開発者機能"><br>
+開発を簡易にするため、SSPの開発者用機能を使用します。<br />
+（ゴースト上で右クリック→設定(O)→本体設定...(P)で設定画面表示）<br />
+<img src="animations/developer.png" alt="開発者機能"><br />
 </p>
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-開発者機能は色々便利ですが、自分のゴースト以外で使うと予期しないバグを起こす可能性があることを意識しておいてください。<br>
-例：「スクリプトログ」から過去のスクリプトを実行することにより、本来起こりえない処理が行われ、セーブデータが破損する<br>
-上記の例では、フラグをセットしたりする処理が実行されることがあり（特に選択肢があるもの）、それによって致命的なエラーを引き起こします。<br>
+開発者機能は色々便利ですが、自分のゴースト以外で使うと予期しないバグを起こす可能性があることを意識しておいてください。<br />
+例：「スクリプトログ」から過去のスクリプトを実行することにより、本来起こりえない処理が行われ、セーブデータが破損する<br />
+上記の例では、フラグをセットしたりする処理が実行されることがあり（特に選択肢があるもの）、それによって致命的なエラーを引き起こします。<br />
 </p>
 </div>
 <p>
-surfaces.txtには、以下が記述されている状態とします。<br>
-<span class="emphasis">//</span>から始まる行は読み込まれません。（実際は少し違いますが、慣例として//を頭に付けます）<br>
-メモとして適切に書いておくと、後々修正する時に分かりやすくなります。<br>
+surfaces.txtには、以下が記述されている状態とします。<br />
+<span class="emphasis">//</span>から始まる行は読み込まれません。（実際は少し違いますが、慣例として//を頭に付けます）<br />
+メモとして適切に書いておくと、後々修正する時に分かりやすくなります。<br />
 ----ここから----
 <span class="code">
 charset,Shift_JIS
@@ -124,12 +124,12 @@ surface.append0
 	animation0.pattern3,overlay,-1,50,0,0
 }
 </span>
-----ここまで----<br>
+----ここまで----<br />
 </p>
 <p>
-descript.txtには、以下が記述されている状態とします。<br>
-<span class="emphasis">shell/master/descript.txt</span>です。（masterは作成中のシェルのフォルダ名に読み替え）<br>
-ghost/master/descript.txtではないので注意してください。<br>
+descript.txtには、以下が記述されている状態とします。<br />
+<span class="emphasis">shell/master/descript.txt</span>です。（masterは作成中のシェルのフォルダ名に読み替え）<br />
+ghost/master/descript.txtではないので注意してください。<br />
 ----ここから----
 <span class="code">
 charset,Shift_JIS
@@ -141,23 +141,23 @@ name,テスト用
 type,shell
 seriko.use_self_alpha,1
 </span>
-----ここまで----<br>
+----ここまで----<br />
 </p>
 </div>
 
 <div class="title" id="animation">アニメーション</div>
 <div class="content">
 <p>
-「シェルの作り方」ではまばたきをアニメーションで作りましたが、これは発動タイミングが決まっています。<br>
-ここでは、好きなタイミングで発動できるアニメーションを記述します。<br>
-好きなタイミングで発動したい例としては、スカートめくりがあげられます。<br>
-<img src="animations/animation1.png" alt="アニメーションサンプル"><br>
-上記のような動きをするアニメーションを作ります。<br>
-これは、ユーザーがマウスホイールでアクションを起こした場合のみ発動させたいアニメーションです。<br>
-しかし、「マウスホイールを回転させた」といったユーザのアクションへの反応は、ゴースト側の辞書が担う部分です。<br>
-そのため、シェル側では能動的に発動しないアニメーションを作り、<span class="emphasis">ゴースト側から再生</span>を行います。<br>
-アニメーション再生さくらスクリプトである\i[????]（????は数字）をトークに含めることでアニメーションが再生されます。<br>
-以下のサンプルは、段落「<a href="#init">基本設定</a>」のsurfaces.txtに追加すると正しく動きます。<br>
+「シェルの作り方」ではまばたきをアニメーションで作りましたが、これは発動タイミングが決まっています。<br />
+ここでは、好きなタイミングで発動できるアニメーションを記述します。<br />
+好きなタイミングで発動したい例としては、スカートめくりがあげられます。<br />
+<img src="animations/animation1.png" alt="アニメーションサンプル"><br />
+上記のような動きをするアニメーションを作ります。<br />
+これは、ユーザーがマウスホイールでアクションを起こした場合のみ発動させたいアニメーションです。<br />
+しかし、「マウスホイールを回転させた」といったユーザのアクションへの反応は、ゴースト側の辞書が担う部分です。<br />
+そのため、シェル側では能動的に発動しないアニメーションを作り、<span class="emphasis">ゴースト側から再生</span>を行います。<br />
+アニメーション再生さくらスクリプトである\i[????]（????は数字）をトークに含めることでアニメーションが再生されます。<br />
+以下のサンプルは、段落「<a href="#init">基本設定</a>」のsurfaces.txtに追加すると正しく動きます。<br />
 ----ここから----
 <span class="code">
 surface.append0-1
@@ -182,31 +182,31 @@ surface1021
 	element0,base,fアニメ1.png,0,0
 }
 </span>
-----ここまで----<br>
-上記を記述後、ゴーストを起動し、右クリック→機能(F)→開発用パレット(D)→スクリプト入力、またはCtrl + Sで送信ボックスを開きます。<br>
-ここに、文字をいれるとそのままSSP上で再生されます。<br>
-上記で作ったアニメーションを確認するため、<span class="emphasis">\i[200]</span>と入力してみてください。体がめくれます。<br>
+----ここまで----<br />
+上記を記述後、ゴーストを起動し、右クリック→機能(F)→開発用パレット(D)→スクリプト入力、またはCtrl + Sで送信ボックスを開きます。<br />
+ここに、文字をいれるとそのままSSP上で再生されます。<br />
+上記で作ったアニメーションを確認するため、<span class="emphasis">\i[200]</span>と入力してみてください。体がめくれます。<br />
 </p>
 <p>
-上記アニメーションの再生時、めくれ上がった時間が少し長いことが確認出来るかと思います。<br>
-<img src="animations/animation2.png" alt="スカートめくりの動作"><br>
-アニメーションパターンの設定では、数字がずらずら並ぶため意味が掴みづらいですが、以下の順に記述します。<br>
-<img src="animations/animation3.png" alt="アニメーションパターンの指定"><br>
-サーフェスに-1を指定すると、今までのアニメーション効果を全て消去することができます。<br>
+上記アニメーションの再生時、めくれ上がった時間が少し長いことが確認出来るかと思います。<br />
+<img src="animations/animation2.png" alt="スカートめくりの動作"><br />
+アニメーションパターンの設定では、数字がずらずら並ぶため意味が掴みづらいですが、以下の順に記述します。<br />
+<img src="animations/animation3.png" alt="アニメーションパターンの指定"><br />
+サーフェスに-1を指定すると、今までのアニメーション効果を全て消去することができます。<br />
 </p>
 <p>
-アニメーションタイミングneverは色々な場面で使えます。<br>
-例えば、何か思いついて頭に豆電球が浮かぶ、ため息を吐くなど、漫符<a href="http://ms.shillest.net/" title="まんぷー配布元">（まんぷー配布元、ページ下部）</a>を活用することが考えられます。<br>
-アニメーションで動きを出すことが出来ます。<br>
+アニメーションタイミングneverは色々な場面で使えます。<br />
+例えば、何か思いついて頭に豆電球が浮かぶ、ため息を吐くなど、漫符<a href="http://ms.shillest.net/" title="まんぷー配布元">（まんぷー配布元、ページ下部）</a>を活用することが考えられます。<br />
+アニメーションで動きを出すことが出来ます。<br />
 </p>
 </div>
 
 <div class="title" id="talk">口パク</div>
 <div class="content">
 <p>
-ここでは、ゴーストがトークすると、それに合わせて口をパクパク動かすアニメーションを作る方法を記述します。<br>
-基本的なアニメーションの解説は、段落「<a href="#animation">アニメーション</a>」を参照してください。<br>
-以下のサンプルを段落「<a href="#init">基本設定</a>」のsurfaces.txtに追加すると、バルーンに文字が表示される時に再生するアニメーションとなります。<br>
+ここでは、ゴーストがトークすると、それに合わせて口をパクパク動かすアニメーションを作る方法を記述します。<br />
+基本的なアニメーションの解説は、段落「<a href="#animation">アニメーション</a>」を参照してください。<br />
+以下のサンプルを段落「<a href="#init">基本設定</a>」のsurfaces.txtに追加すると、バルーンに文字が表示される時に再生するアニメーションとなります。<br />
 ----ここから----
 <span class="code">
 surface.append0-1
@@ -230,29 +230,29 @@ surface1011
 	element0,base,f口パク1.png,0,0
 }
 </span>
-----ここまで----<br>
-talkの後ろの数字（ここでは1）は、「バルーンに何文字表示されるごとにアニメーションを再生するか」です。<br>
-トークは、句読点などでウェイトが入ることがあり、また、文字の表示スピードをSSP本体設定でユーザーが変更することが出来ます。<br>
-従って、タイミングをこの数字を調整することで制御することは出来ません。<br>
-口パクアニメーション再生中であれば、アニメーションが終了するまでは上記設定は無視されます。<br>
-そのため、基本的には1固定で問題ありません。<br>
-上記のアニメーション動作は以下画像のようになります。<br>
-<img src="animations/talk1.png" alt="アニメーションパターンの指定"><br>
-サーフェスに-1を指定すると、今までのアニメーション効果を全て消去することができます。<br>
+----ここまで----<br />
+talkの後ろの数字（ここでは1）は、「バルーンに何文字表示されるごとにアニメーションを再生するか」です。<br />
+トークは、句読点などでウェイトが入ることがあり、また、文字の表示スピードをSSP本体設定でユーザーが変更することが出来ます。<br />
+従って、タイミングをこの数字を調整することで制御することは出来ません。<br />
+口パクアニメーション再生中であれば、アニメーションが終了するまでは上記設定は無視されます。<br />
+そのため、基本的には1固定で問題ありません。<br />
+上記のアニメーション動作は以下画像のようになります。<br />
+<img src="animations/talk1.png" alt="アニメーションパターンの指定"><br />
+サーフェスに-1を指定すると、今までのアニメーション効果を全て消去することができます。<br />
 </p>
 </div>
 
 <div class="title" id="bindbasic">着せ替え基本</div>
 <div class="content">
 <p>
-ここでは、右クリックメニューに着せ替えを追加する方法を記述します。<br>
-着せ替えはsurfaces.txtだけでなく、descript.txtへの記述も必要となります。<br>
+ここでは、右クリックメニューに着せ替えを追加する方法を記述します。<br />
+着せ替えはsurfaces.txtだけでなく、descript.txtへの記述も必要となります。<br />
 </p>
 <p>
-サンプルとして着せ替えで帽子を被るようにしてみます。<br>
-実行イメージは以下です。<br>
-<img src="animations/bind1.png" alt="着せ替え実行イメージ"><br>
-以下のサンプルを段落「<a href="#init">基本設定</a>」のsurfaces.txtに追加すると、シェルでの着せ替え設定となります。<br>
+サンプルとして着せ替えで帽子を被るようにしてみます。<br />
+実行イメージは以下です。<br />
+<img src="animations/bind1.png" alt="着せ替え実行イメージ"><br />
+以下のサンプルを段落「<a href="#init">基本設定</a>」のsurfaces.txtに追加すると、シェルでの着せ替え設定となります。<br />
 ----ここから----
 <span class="code">
 surface.append0-1
@@ -268,44 +268,44 @@ surface1040
 	element0,base,f帽子.png,0,0
 }
 </span>
-----ここまで----<br>
-以下のサンプルを段落「<a href="#init">基本設定</a>」のdescript.txtに追加すると、ゴースト側から制御するための着せ替え設定となります。<br>
+----ここまで----<br />
+以下のサンプルを段落「<a href="#init">基本設定</a>」のdescript.txtに追加すると、ゴースト側から制御するための着せ替え設定となります。<br />
 ----ここから----
 <span class="code">
 sakura.bindgroup110.name,帽子,ハット,帽子サムネイル.png
 
 sakura.menu,auto
 </span>
-----ここまで----<br>
+----ここまで----<br />
 上記を設定すると、ゴースト側の着せ替えが使えるようになります。
 descript.txtに追加した上の行の記述の意味は以下です。
-<img src="animations/bind2.png" alt="着せ替え設定"><br>
-上記の通り、surfaces.txtの設定が前提となります。<br>
+<img src="animations/bind2.png" alt="着せ替え設定"><br />
+上記の通り、surfaces.txtの設定が前提となります。<br />
 </p>
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-2人目のキャラは、sakura.を全てkero.～に、3人目はchar2.～と記述します。<br>
+2人目のキャラは、sakura.を全てkero.～に、3人目はchar2.～と記述します。<br />
 </p>
 </div>
 <p>
-descript.txtに追加した下の行については、メニューに着せ替えを表示する指示です。<br>
-これがないと、メニューの「着せ替え」に何も表示されず、着せ替えが出来ません。<br>
-手動で設定する方法については、段落「<a href="#bindmenu">着せ替えのメニュー表示</a>」で説明します。<br>
+descript.txtに追加した下の行については、メニューに着せ替えを表示する指示です。<br />
+これがないと、メニューの「着せ替え」に何も表示されず、着せ替えが出来ません。<br />
+手動で設定する方法については、段落「<a href="#bindmenu">着せ替えのメニュー表示</a>」で説明します。<br />
 </p>
 <p>
-着せ替えはやや特殊です。<br>
-今回の例であれば、帽子を着せ替えで装着すると、「アニメーション110番を装着している」という情報が保持されます。<br>
-その結果、サーフェスを変更しても、アニメーション110番が着せ替え設定であれば、装着状態となります。<br>
-サーフェス0番の時、着せ替えを行って帽子を装着した後、サーフェスが1番に変化しても、サーフェス0番と同じく帽子を装着しています。<br>
-そのため、「特定のサーフェスだけ対応する着せ替えアニメーションが無い」という状況だと、不自然です。<br>
-つまり、<span class="emphasis">全てのサーフェスに着せ替えアニメーションを記述する必要があり、かつそのアニメーション番号を統一する</span>必要があります。<br>
+着せ替えはやや特殊です。<br />
+今回の例であれば、帽子を着せ替えで装着すると、「アニメーション110番を装着している」という情報が保持されます。<br />
+その結果、サーフェスを変更しても、アニメーション110番が着せ替え設定であれば、装着状態となります。<br />
+サーフェス0番の時、着せ替えを行って帽子を装着した後、サーフェスが1番に変化しても、サーフェス0番と同じく帽子を装着しています。<br />
+そのため、「特定のサーフェスだけ対応する着せ替えアニメーションが無い」という状況だと、不自然です。<br />
+つまり、<span class="emphasis">全てのサーフェスに着せ替えアニメーションを記述する必要があり、かつそのアニメーション番号を統一する</span>必要があります。<br />
 </p>
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-メンテナンスすることを考えて、番号をふる時には事前にマイルールを作っておくと、楽になります。<br>
-例：アニメーション100〜199番は着せ替え用にする<br>
+メンテナンスすることを考えて、番号をふる時には事前にマイルールを作っておくと、楽になります。<br />
+例：アニメーション100〜199番は着せ替え用にする<br />
 </p>
 </div>
 </div>
@@ -313,10 +313,10 @@ descript.txtに追加した下の行については、メニューに着せ替�
 <div class="title" id="bindcollision">着せ替えパーツの領域設定</div>
 <div class="content">
 <p>
-例えば、獣耳などが着せ替えとしてつく場合が多くあります。<br>
-そんなとき、せっかくなので領域を定義して、専用の反応をしたいと思うこともありえると思います。<br>
-これを設定する方法を記述します。<br>
-上記段落「<a href="#bindbasic">着せ替え基本</a>」が設定されているとして、帽子に領域を設定してみることにします。<br>
+例えば、獣耳などが着せ替えとしてつく場合が多くあります。<br />
+そんなとき、せっかくなので領域を定義して、専用の反応をしたいと思うこともありえると思います。<br />
+これを設定する方法を記述します。<br />
+上記段落「<a href="#bindbasic">着せ替え基本</a>」が設定されているとして、帽子に領域を設定してみることにします。<br />
 ----ここから----
 <span class="code">
 surface.append0-1
@@ -327,20 +327,20 @@ surface.append0-1
 	<span class="emphasis">animation110.collision100,105,57,208,100,hat</span>
 }
 </span>
-----ここまで----<br>
-領域設定は、「<a href="http://earlduant.github.io/ukagaka-shell-description/surfaces.html">シェルの作り方</a>」で触れたのとほぼ同じです。<br>
-違いは、先頭にアニメーション番号の指定がつくことです。<br>
-このようにすると、アニメーション中のみ有効な触り領域を作成できます。<br>
-上記を記述後、ゴーストを起動し、右クリック→機能(F)→開発用パレット(D)→サーフィステスト、またはCtrl + Tでテストボックスを表示すると、hatという領域が追加されていることが確認できます。<br>
-<img src="animations/bind6.png" alt="領域追加の確認"><br>
-なお、アニメーションで設定した領域は、既存の領域より上にきます。<br>
-例えば、今回は最初に設定済みのheadとhatが一部重なっていますが、重なった部分はhatが優先されます。<br>
+----ここまで----<br />
+領域設定は、「<a href="http://earlduant.github.io/ukagaka-shell-description/surfaces.html">シェルの作り方</a>」で触れたのとほぼ同じです。<br />
+違いは、先頭にアニメーション番号の指定がつくことです。<br />
+このようにすると、アニメーション中のみ有効な触り領域を作成できます。<br />
+上記を記述後、ゴーストを起動し、右クリック→機能(F)→開発用パレット(D)→サーフィステスト、またはCtrl + Tでテストボックスを表示すると、hatという領域が追加されていることが確認できます。<br />
+<img src="animations/bind6.png" alt="領域追加の確認"><br />
+なお、アニメーションで設定した領域は、既存の領域より上にきます。<br />
+例えば、今回は最初に設定済みのheadとhatが一部重なっていますが、重なった部分はhatが優先されます。<br />
 </p>
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-通常の領域設定では、先（ファイルの中で先頭に近い、ファイル内での行番号が小さい）に書いた方が優先されます。<br>
-surfaces.txtに以下を記述することで、優先方法を変更することができます。<br>
+通常の領域設定では、先（ファイルの中で先頭に近い、ファイル内での行番号が小さい）に書いた方が優先されます。<br />
+surfaces.txtに以下を記述することで、優先方法を変更することができます。<br />
 ----ここから----
 <span class="code">
 descript
@@ -352,7 +352,7 @@ descript
 	//collision-sort,descend
 }
 </span>
-----ここまで----<br>
+----ここまで----<br />
 </p>
 </div>
 </div>
@@ -360,10 +360,10 @@ descript
 <div class="title" id="bindadvance">カテゴリごとの着せ替え設定</div>
 <div class="content">
 <p>
-上記段落「<a href="#bindbasic">着せ替え基本</a>」を踏まえて、今度は<span class="emphasis">「複数から選択可能、ただし必ず1つ選択しなくてはならない」という着せ替え</span>を作ります。<br>
-これは、服の着せ替えなどで必要になることが多いです。<br>
-全ての服を外すことが出来てしまうと、表示する画像で問題が出てしまうかもしれません。<br>
-以下のサンプルを段落「<a href="#init">基本設定</a>」のsurfaces.txtに追加および修正を行うと、体の色を着せ替えで設定できるようになります。<br>
+上記段落「<a href="#bindbasic">着せ替え基本</a>」を踏まえて、今度は<span class="emphasis">「複数から選択可能、ただし必ず1つ選択しなくてはならない」という着せ替え</span>を作ります。<br />
+これは、服の着せ替えなどで必要になることが多いです。<br />
+全ての服を外すことが出来てしまうと、表示する画像で問題が出てしまうかもしれません。<br />
+以下のサンプルを段落「<a href="#init">基本設定</a>」のsurfaces.txtに追加および修正を行うと、体の色を着せ替えで設定できるようになります。<br />
 ----ここから----
 <span class="code">
 surface0
@@ -412,8 +412,8 @@ surface1032
 	element0,base,f緑ボディ.png,0,0
 }
 </span>
-----ここまで----<br>
-以下のサンプルを段落「<a href="#init">基本設定</a>」のdescript.txtに追加すると、ゴーストから制御するための着せ替え設定となります。<br>
+----ここまで----<br />
+以下のサンプルを段落「<a href="#init">基本設定</a>」のdescript.txtに追加すると、ゴーストから制御するための着せ替え設定となります。<br />
 ----ここから----
 <span class="code">
 sakura.bindoption.group,ボディ,mustselect
@@ -424,38 +424,38 @@ sakura.bindgroup100.default,1
 
 sakura.menu,auto
 </span>
-----ここまで----<br>
-<img src="animations/bind3.png" alt="必ず1つ選択する着せ替え設定"><br>
+----ここまで----<br />
+<img src="animations/bind3.png" alt="必ず1つ選択する着せ替え設定"><br />
 </p>
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-デフォルトの「カテゴリ内の1つのみ装着可、全て外すことも可」は、行自体を省略可能です。<br>
-しかし、メンテナンスしやすくするため、例えば以下のように記述しておくと良いです。<br>
-<span class="code">sakura.bindoption.group,帽子</span><br>
-このように記述しておくと、「記述忘れでなく、意図があって設定している」ことが分かりやすくなり、維持が楽になります。<br>
+デフォルトの「カテゴリ内の1つのみ装着可、全て外すことも可」は、行自体を省略可能です。<br />
+しかし、メンテナンスしやすくするため、例えば以下のように記述しておくと良いです。<br />
+<span class="code">sakura.bindoption.group,帽子</span><br />
+このように記述しておくと、「記述忘れでなく、意図があって設定している」ことが分かりやすくなり、維持が楽になります。<br />
 </p>
 </div>
 <p>
-上記設定により、体の色を3色から自由に設定出来るようになります。<br>
-体を全て取り外すことはできないので、顔だけが浮遊している状況にはなりません。<br>
+上記設定により、体の色を3色から自由に設定出来るようになります。<br />
+体を全て取り外すことはできないので、顔だけが浮遊している状況にはなりません。<br />
 </p>
 </div>
 
 <div class="title" id="bindmenu">着せ替えのメニュー表示</div>
 <div class="content">
 <p>
-ここでは、着せ替え設定をメニューから選択出来るようにする方法を記述します。<br>
+ここでは、着せ替え設定をメニューから選択出来るようにする方法を記述します。<br />
 </p>
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-descript.txtに「sakura.menu,auto」と書けば自動的にメニューを生成してくれるので、基本的にはこの段落の設定は不要です。<br>
-ただ、順番を入れ替えたり、特定の着せ替えだけ表示したくない場合などに、この設定は有用です。<br>
+descript.txtに「sakura.menu,auto」と書けば自動的にメニューを生成してくれるので、基本的にはこの段落の設定は不要です。<br />
+ただ、順番を入れ替えたり、特定の着せ替えだけ表示したくない場合などに、この設定は有用です。<br />
 </p>
 </div>
 <p>
-以下の修正及び追加が段落「<a href="#init">基本設定</a>」のsurfaces.txtに行われているものとします。<br>
+以下の修正及び追加が段落「<a href="#init">基本設定</a>」のsurfaces.txtに行われているものとします。<br />
 ----ここから----
 <span class="code">
 surface0
@@ -514,8 +514,8 @@ surface1040
 	element0,base,f帽子.png,0,0
 }
 </span>
-----ここまで----<br>
-以下の追加が段落「<a href="#init">基本設定</a>」のdescript.txtに行われているものとします。<br>
+----ここまで----<br />
+以下の追加が段落「<a href="#init">基本設定</a>」のdescript.txtに行われているものとします。<br />
 ----ここから----
 <span class="code">
 sakura.bindoption.group,帽子
@@ -533,26 +533,26 @@ sakura.menuitem2,100
 sakura.menuitem3,101
 sakura.menuitem4,102
 </span>
-----ここまで----<br>
-着せ替えアニメーションを、どの順番でメニューに表示するかは、descript.txtに記述します。<br>
-上記は着せ替えと表示の順番が揃っていますが、好きな順に変更したり、記述しないことでユーザが触れないようにしたり出来ます。<br>
-<span class="code">sakura.menuitem????</span>（????は数字）がメニューでの表示順を表しています。<br>
-右側の数字は、sakura.bindgroup〜に入力した番号です。<br>
-<img src="animations/bind4.png" alt="descript.txtの表記"><br>
-ここにハイフンを記述すると、ゴーストの着せ替えメニューに罫線を引くことが出来ます。<br>
-（上記では<span class="code">sakura.menuitem1,-</span>という表記）<br>
-descript.txtに以上が記述してあると、ゴースト側の表示は以下となります。<br>
-<img src="animations/bind5.png" alt="ゴーストメニューでの着せ替え表示"><br>
+----ここまで----<br />
+着せ替えアニメーションを、どの順番でメニューに表示するかは、descript.txtに記述します。<br />
+上記は着せ替えと表示の順番が揃っていますが、好きな順に変更したり、記述しないことでユーザが触れないようにしたり出来ます。<br />
+<span class="code">sakura.menuitem????</span>（????は数字）がメニューでの表示順を表しています。<br />
+右側の数字は、sakura.bindgroup〜に入力した番号です。<br />
+<img src="animations/bind4.png" alt="descript.txtの表記"><br />
+ここにハイフンを記述すると、ゴーストの着せ替えメニューに罫線を引くことが出来ます。<br />
+（上記では<span class="code">sakura.menuitem1,-</span>という表記）<br />
+descript.txtに以上が記述してあると、ゴースト側の表示は以下となります。<br />
+<img src="animations/bind5.png" alt="ゴーストメニューでの着せ替え表示"><br />
 </p>
 </div>
 
 <div class="title" id="bindanimation">着せ替えのアニメーション</div>
 <div class="content">
 <p>
-着せ替えパーツに、アニメーションをつけることも出来ます。<br>
-ここでは、サンプルとして、帽子が上下にふわふわし続けるというアニメーションを設定します。<br>
-段落「<a href="#bindbasic">着せ替え基本</a>」で記述した内容が、surfaces.txtとdescript.txtに設定済みであるとします。<br>
-上記の状態で、以下をsurfaces.txtに記述すると、帽子をかぶせた時にだけ、アニメーションが実行されるようになります。<br>
+着せ替えパーツに、アニメーションをつけることも出来ます。<br />
+ここでは、サンプルとして、帽子が上下にふわふわし続けるというアニメーションを設定します。<br />
+段落「<a href="#bindbasic">着せ替え基本</a>」で記述した内容が、surfaces.txtとdescript.txtに設定済みであるとします。<br />
+上記の状態で、以下をsurfaces.txtに記述すると、帽子をかぶせた時にだけ、アニメーションが実行されるようになります。<br />
 ----ここから----
 <span class="code">
 surface.append0-1
@@ -570,29 +570,29 @@ surface.append0-1
 	animation110.pattern6,overlay,1040,100,0,0
 }
 </span>
-----ここまで----<br>
-bindには、「+」で繋げることで、アニメーションタイミングを指定できます。<br>
-alwaysは、実行され続けるアニメーションです。<br>
-アニメーションの再生が終わると、すぐにパターン0から再生が開始されます。<br>
+----ここまで----<br />
+bindには、「+」で繋げることで、アニメーションタイミングを指定できます。<br />
+alwaysは、実行され続けるアニメーションです。<br />
+アニメーションの再生が終わると、すぐにパターン0から再生が開始されます。<br />
 </p>
 <div class="title innerdiv1">補足</div>
 <div class="content innerdiv1">
 <p>
-「着せ替えが行われた時に1度だけ起こる」というのは、シェル側では設定できません。<br>
-（アニメーションタイミングrunonceではサーフェスが変化するごとにアニメーションが再生されてしまう）<br>
-実装自体は、ゴースト側の辞書で記述することで可能です。<br>
+「着せ替えが行われた時に1度だけ起こる」というのは、シェル側では設定できません。<br />
+（アニメーションタイミングrunonceではサーフェスが変化するごとにアニメーションが再生されてしまう）<br />
+実装自体は、ゴースト側の辞書で記述することで可能です。<br />
 </p>
 <ol type="1">
-<li>アニメーションタイミングがneverのアニメーションを作っておく（暫定的に100番とする）<br>
+<li>アニメーションタイミングがneverのアニメーションを作っておく（暫定的に100番とする）<br />
 （設定方法は段落「<a href="#animation">アニメーション</a>」を参照）</li>
 <li>ゴーストの辞書に<a href="http://ssp.shillest.net/ukadoc/manual/list_shiori_event.html#OnDressupChanged">OnDressUpChanged</a>イベントを記述</li>
 <li>上記内部で引数を判別し、特定の着せ替えパーツが装着されたと判断したら\i[100]をトーク出力する</li>
 </ol>
 <p>
-以下に「里々」と「YAYA」で書いた場合のサンプルを記述します。<br>
-上記はそれぞれSHIORIと呼ばれる、ゴーストが喋る内容を担当するシステムです。<br>
-誰かがパーツ名「ハット」を装着したら、そのキャラクターに\i[100]を表示します。<br>
-里々<br>
+以下に「里々」と「YAYA」で書いた場合のサンプルを記述します。<br />
+上記はそれぞれSHIORIと呼ばれる、ゴーストが喋る内容を担当するシステムです。<br />
+誰かがパーツ名「ハット」を装着したら、そのキャラクターに\i[100]を表示します。<br />
+里々<br />
 ----ここから----
 <span class="code">
 ＠OnDressupChanged
@@ -600,8 +600,8 @@ alwaysは、実行され続けるアニメーションです。<br>
 	\p[（R0）]\i[100]
 ）
 </span>
-----ここまで----<br>
-YAYA<br>
+----ここまで----<br />
+YAYA<br />
 ----ここから----
 <span class="code">
 OnDressupChanged
@@ -612,7 +612,7 @@ OnDressupChanged
 	}
 }
 </span>
-----ここまで----<br>
+----ここまで----<br />
 </p>
 </div>
 </div>
@@ -620,19 +620,19 @@ OnDressupChanged
 <div class="title" id="sample">サンプルダウンロード</div>
 <div class="content">
 <p>
-ここでは、今回の記述に使った全要素を取り入れたシェルとsurfaces.txtとdescript.txtを公開します。<br>
-ポーズが違うサーフェスにも設定しているので、複数のポーズ差分がある場合は参考にしてください。<br>
-ポーズが1つだけの場合は、「横向きポーズ」以降は全て不要です。<br>
-<a href="https://www.dropbox.com/s/d4inxvggbeuxqta/bindsample.zip?dl=1">今回作成したシェル</a><br>
+ここでは、今回の記述に使った全要素を取り入れたシェルとsurfaces.txtとdescript.txtを公開します。<br />
+ポーズが違うサーフェスにも設定しているので、複数のポーズ差分がある場合は参考にしてください。<br />
+ポーズが1つだけの場合は、「横向きポーズ」以降は全て不要です。<br />
+<a href="https://www.dropbox.com/s/d4inxvggbeuxqta/bindsample.zip?dl=1">今回作成したシェル</a><br />
 </p>
 </div>
 
 <div class="title" id="etc">その他解説</div>
 <div class="content">
 <p>
-スカートめくりや口パクなど、「画像を上に重ねる」アニメーションを紹介しましたが、それ以外の方法もいくつかあります。<br>
-ここでは、「画像自体の上書き」を行うアニメーションのサンプルを記述します。<br>
-尻尾や耳などがぴょこぴょこ動くアニメーションを作る際に使えます。<br>
+スカートめくりや口パクなど、「画像を上に重ねる」アニメーションを紹介しましたが、それ以外の方法もいくつかあります。<br />
+ここでは、「画像自体の上書き」を行うアニメーションのサンプルを記述します。<br />
+尻尾や耳などがぴょこぴょこ動くアニメーションを作る際に使えます。<br />
 ----ここから----
 <span class="code">
 surface0
@@ -664,35 +664,35 @@ surface1051
 	element0,base,尻尾アニメ1.png
 }
 </span>
-----ここまで----<br>
+----ここまで----<br />
 </p>
 </div>
 
 <div class="content_separation">
 <p>
-2014/04/06 作成<br>
-2014/04/27 着せ替えのメニュー表示を自動で行う方法を加筆<br>
-2014/12/18 ukadocリンク修正<br>
-2015/01/05 誤字修正<br>
-2015/01/10 html5の書式エラーを修正<br>
-2015/01/11 着せ替え時に再生するアニメーションにYAYAのサンプル追加<br>
-2015/01/13 文字コードをUTF-8に変更<br>
-2015/03/20 着せ替え時アニメーション再生のサンプルコードを修正、一部記述修正<br>
-2015/11/13 古い資料をリンクしていた部分を新しい資料にリンク張り替え<br>
-2017/10/28 目次の修正、一部説明加筆<br>
+2014/04/06 作成<br />
+2014/04/27 着せ替えのメニュー表示を自動で行う方法を加筆<br />
+2014/12/18 ukadocリンク修正<br />
+2015/01/05 誤字修正<br />
+2015/01/10 html5の書式エラーを修正<br />
+2015/01/11 着せ替え時に再生するアニメーションにYAYAのサンプル追加<br />
+2015/01/13 文字コードをUTF-8に変更<br />
+2015/03/20 着せ替え時アニメーション再生のサンプルコードを修正、一部記述修正<br />
+2015/11/13 古い資料をリンクしていた部分を新しい資料にリンク張り替え<br />
+2017/10/28 目次の修正、一部説明加筆<br />
+2024/01/13 ライセンスを CC BY-SA 2.1からCC BY-SA 4.0に変更<br />
 </p>
 </div>
 
 <div class="content_separation">
 <p>
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/2.1/jp/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.1/jp/88x31.png" /></a><br />この 作品 は <a rel="license" href="http://creativecommons.org/licenses/by-sa/2.1/jp/">クリエイティブ・コモンズ 表示 - 継承 2.1 日本 ライセンスの下に提供されています。</a><br>
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">伺かのシェルの作り方</span> by <span property="cc:attributionName">あーるでぃー</span> is licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
 </p>
 <p>
-「伺か」に関する資料集として引用する場合に限り、このメモをパブリックドメインとして扱ってもかまいません。
+「伺か」に関する資料集として引用する場合に限り、このメモをパブリックドメインとして扱ってもかまいません。<br />
 </p>
 </div>
 
 </div>
-&copy; 2014 あーるでぃー
 </body>
 </html>
