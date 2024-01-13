@@ -53,7 +53,7 @@ SSP以外では動作しない可能性が高いです。<br />
 <div class="title innerdiv1">補足1</div>
 <div class="content innerdiv1">
 <p>
-2017年現在では開発が続いているのはSSPのみです。<br />
+2024年現在では開発が続いているのはSSPのみです。<br />
 SSPでのみ動作確認したゴーストも多く配布されている点を留意してください。<br />
 （代表的なものとして、materiaの最終更新は2002年、C.R.O.Wの最終更新は2005年）<br />
 </div>
@@ -633,16 +633,15 @@ surface5
 <p>
 サーフェス0にまばたきをするアニメーションを記述します。<br />
 ここでは、サンプルにあるmain_blink1.png（半目）とmain_blink2.png（目閉じ）を使用します。<br />
-目を開いている→半目→目閉じ→半目→目を開く、と素早く画像を切り替え、まばたきのように見えるアニメーションを作成します。<br />
+目を開いている→目閉じ→半目→目を開く、と素早く画像を切り替え、まばたきのように見えるアニメーションを作成します。<br />
 ----ここから----
 <span class="code">
 surface.append0
 {
 	animation0.interval,random,3
-	animation0.pattern0,overlay,1000,50,0,0
-	animation0.pattern1,overlay,1001,50,0,0
-	animation0.pattern2,overlay,1000,50,0,0
-	animation0.pattern3,overlay,-1,50,0,0
+	animation0.pattern0,overlay,1001,50,0,0
+	animation0.pattern1,overlay,1000,50,0,0
+	animation0.pattern2,overlay,-1,50,0,0
 }
 
 surface1000
@@ -657,7 +656,9 @@ surface1001
 </span>
 ----ここまで----<br />
 surfaces.txt末尾に上記を追加してください。<br />
-以下の解説は、改変するつもりがないのであれば、読む必要はありません。<br />
+この記述があると、以下のような動作をするようになります。<br />
+<img src="surfaces/blink_pattern.png" alt="まばたきアニメーション例"><br />
+これ以下の解説は、改変するつもりがないのであれば、読む必要はありません。<br />
 </p>
 <div class="content_separation innerdiv1">
 <p>
@@ -692,10 +693,9 @@ surfaces.txt末尾に上記を追加してください。<br />
 </div>
 <div class="content_separation innerdiv1">
 <p>
-<span class="code">animation0.pattern0,overlay,1000,50,0,0
-animation0.pattern1,overlay,1001,50,0,0
-animation0.pattern2,overlay,1000,50,0,0
-animation0.pattern3,overlay,-1,50,0,0
+<span class="code">animation0.pattern0,overlay,1001,50,0,0
+animation0.pattern1,overlay,1000,50,0,0
+animation0.pattern2,overlay,-1,50,0,0
 </span>これは、アニメーションの動作部分です。<br />
 上の行で「animation0.interval,～」と書いたので、ここでアニメーション0番の実際の動作を記述しています。<br />
 animation0.pattern0,overlay,1000,50,0,0は、「アニメーション0番のパターン0でサーフェス1000を0.05秒（50ミリ秒）後に座標0,0に上から重ねて表示する」という意味です。<br />
@@ -1043,10 +1043,9 @@ surface.append0-2
 surface.append0
 {
 	animation0.interval,random,3
-	animation0.pattern0,overlay,1000,50,0,0
-	animation0.pattern1,overlay,1001,50,0,0
-	animation0.pattern2,overlay,1000,50,0,0
-	animation0.pattern3,overlay,-1,50,0,0
+	animation0.pattern0,overlay,1001,50,0,0
+	animation0.pattern1,overlay,1000,50,0,0
+	animation0.pattern2,overlay,-1,50,0,0
 }
 
 surface10
@@ -1145,6 +1144,7 @@ Android端末で動かせるベースウェア。<br />
 2017/01/13 png以外の形式の画像も使える旨の記述を削除（SSPでは非推奨のため）、アルファチャンネルの説明を修正<br />
 2017/10/28 段落「surfaces.txtの基本」を追加、リンクに「Androidの伺か」追加、段落「よくあるエラーと原因」加筆<br />
 2024/01/13 画像での触り判定設定方法追加、ライセンスを CC BY-SA 2.1からCC BY-SA 4.0に変更<br />
+2024/01/13 またばきのアニメーションを、通常→半目→目閉じ→半目→通常としていたのを通常→目閉じ→半目→通常に変更<br />
 </p>
 </div>
 
