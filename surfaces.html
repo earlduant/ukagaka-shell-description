@@ -186,7 +186,7 @@ idとnameが「master」であるのは通例です。<br />
 ゴーストはシェルを複数持つことができますが、メインとなるシェルには「master」とつけることが多いです。<br />
 実際は好きな名前をつけてかまいません。<br />
 idは半角の英数字のみ、nameは好きな名前をつけることが出来ます。<br />
-ですが、半角のカンマやスラッシュなどの記号はゴースト側で問題を起こすことがあるので避けた方が無難です。<br />
+ですが、半角のカンマなどの記号はゴースト側で問題を起こすことがあるので避けた方が無難です。<br />
 idはSSPが内部的に管理するもので、nameがユーザーの目に見えるシェルの名前です。<br />
 例：<span class="code">
 id,addshell
@@ -236,11 +236,11 @@ sakura.seriko.alignmenttodesktop,free
 今回、surfaces.txtに書くものを以下に示します。<br />
 </p>
 <ul>
-<li>メインキャラの部位、「head」「hand」</li>
+<li>メインキャラの部位、「head」「hand」「shoulder」</li>
 <li>メインキャラのまばたきアニメーション</li>
 </ul>
 <p>
-ここでheadはキャラクターの頭部を指定する部位、handは手の部位とします。<br />
+ここでheadはキャラクターの頭部を指定する部位、handは手、shoulderは肩の部位とします。<br />
 </p>
 </div>
 
@@ -248,7 +248,7 @@ sakura.seriko.alignmenttodesktop,free
 <div class="content">
 <p>
 サンプルとして以下の絵を用意しました。<br />
-元の画像は、<a href="http://catbottle.sakura.ne.jp/">ボトル猫</a>様が公開されているフリーシェルです。<br />
+元の画像は、<a href="http://catbottle.sakura.ne.jp/">ボトル猫</a>様が公開されているフリーシェル（伺かのシェル用のイラスト素材）です。<br />
 <img src="surfaces/files.jpg" alt="用意したファイル"><br />
 pngファイルの白い部分は、アルファ値を0%（完全な透明）に設定しています。<br />
 main_blink1.pngはまばたき用の半目、main_blink2.pngは目閉じです。<br />
@@ -369,8 +369,18 @@ surface11
 上記を行うと、選択中に下部ステータスバーに座標が表示されます。<br />
 <img src="surfaces/range.jpg" alt="座標設定操作例"><br />
 この例では、「左上から横75縦29の範囲を選択したところ、横157縦91の位置になった」という情報が表示されています。<br />
-最初の位置に、選択した範囲をそれぞれ加算すれば、右下の位置が取得出来ます。<br />
-上記画像では、左上が83,62、右下が157,91です。<br />
+最初の位置に、選択した範囲をそれぞれ減らせば、左上の位置が取得出来ます。<br />
+上記画像では、左上が83,62、右下が157,90です。<br />
+<div class="title innerdiv2">範囲指定</div>
+<div class="content innerdiv2">
+<p>
+範囲の設定なので、単純な減算では1pxずれます。<br />
+今回は、横157から横75を引くと82ですが、実際には157,156,155...84,83の75個の座標が対象になり開始位置は83となります。<br />
+例えば横157で終わる横2の範囲とした場合、開始位置は155ではなく、156です。<br />
+1pxの誤差は大した問題ではないので気にしなくてもかまいません。<br />
+</p>
+</div>
+
 この範囲をheadと指定するsurfaces.txtを以下に示します。<br />
 ----ここから----
 <span class="code">
@@ -384,13 +394,13 @@ descript
 surface0
 {
 	element0,base,surface0.png,0,0
-	collision0,83,62,157,91,head
+	collision0,83,62,157,90,head
 }
 
 surface1
 {
 	element0,base,surface1.png,0,0
-	collision0,83,62,157,91,head
+	collision0,83,62,157,90,head
 }
 
 surface10
@@ -418,14 +428,14 @@ collision0,の表記が、今回追加した部分です。
 surface0
 {
 	element0,base,surface0.png,0,0
-	collision0,83,62,157,91,head
+	collision0,83,62,157,90,head
 	<span class="emphasis">collision1,97,263,127,316,hand</span>
 }
 
 surface1
 {
 	element0,base,surface1.png,0,0
-	collision0,83,62,157,91,head
+	collision0,83,62,157,90,head
 	<span class="emphasis">collision1,97,263,127,316,hand</span>
 }
 </span>
@@ -569,20 +579,20 @@ kero.cursor
 surface0
 {
 	element0,base,surface0.png,0,0
-	<span class="delete">collision0,83,62,157,91,head</span>
+	<span class="delete">collision0,83,62,157,90,head</span>
 	<span class="delete">collision1,97,263,127,316,hand</span>
 }
 
 surface1
 {
 	element0,base,surface1.png,0,0
-	<span class="delete">collision0,83,62,157,91,head</span>
+	<span class="delete">collision0,83,62,157,90,head</span>
 	<span class="delete">collision1,97,263,127,316,hand</span>
 }
 
 <span class="emphasis">surface.append0-1
 {
-	collision0,83,62,157,91,head
+	collision0,83,62,157,90,head
 	collision1,97,263,127,316,hand
 }</span>
 </span>
@@ -748,7 +758,7 @@ surface1
 
 surface.append0-<span class="warning">2</span>
 {
-	collision0,83,62,157,91,head
+	collision0,83,62,157,90,head
 	collision1,97,263,127,316,hand
 }
 </span>
@@ -811,6 +821,17 @@ nameの項目は、descript.txtと合わせてください。<br />
 <p>
 ここではsurfaces.txtを作成している時に出してしまいがちなエラーと、その原因を示します。<br />
 </p>
+<div class="content_separation innerdiv1">
+<p>
+<span class="code emphasis">文字化けしている
+</span>
+文字コードというものが異なっています。<br />
+descript.txtと、surfaces.txtの先頭、「charset,Shift_JIS」がこの指定です。<br />
+日本語圏のOSならたいてい「Shift_JIS」か「UTF-8」のどちらかです。<br />
+最初の記述が「charset,Shift_JIS」なら、「charset,UTF-8」にすると治ることが多いです。<br />
+テキストエディタ等のソフトウェアを導入すると、現在の文字コードが何か表示してくれるものがあります。<br />
+</p>
+</div>
 <div class="content_separation innerdiv1">
 <p>
 <span class="code emphasis">[SERIKO]Surface=0/Animation=0/Pattern=0 二重定義されています。
@@ -1036,7 +1057,7 @@ surface2
 
 surface.append0-2
 {
-	collision0,83,62,157,91,head
+	collision0,83,62,157,90,head
 	collision1,97,263,127,316,hand
 }
 
